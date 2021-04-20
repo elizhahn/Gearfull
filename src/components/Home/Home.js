@@ -2,8 +2,8 @@ import { React, Component } from "react";
 import { Link } from "react-router-dom";
 
 class Home extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       name: ""
     }
@@ -15,16 +15,17 @@ class Home extends Component {
   }
 
   updateName = (name) => {
-
+    const { displayName } = this.props;
+    displayName(name)
   }
 
   render() {
     console.log(this.state)
     return (
-      <section>
+      <section className="home-container">
         <h1>Cool title here</h1>
         <Link to="/dashboard">
-          <button onClick={() => updateName(this.state.name)}>Get started</button>
+          <button onClick={() => this.updateName(this.state.name)}>Get started</button>
         </Link>
         <input 
         type="text" 
