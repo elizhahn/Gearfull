@@ -18,8 +18,19 @@
   width: 100%; 
 }
 
+.shelf-expand-container {
+  overflow: hidden; 
+}
+
 .form-add-item {
-  display: flex; 
+  display: flex;
+  padding: 10px; 
+  margin-top: -100%;
+  transition: all 1s; 
+}
+
+.form-add-item.expanded {
+  margin-top: 0;
 }
 
 .form-item-label { 
