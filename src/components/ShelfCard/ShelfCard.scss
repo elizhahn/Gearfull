@@ -1,0 +1,19 @@
+.shelf-category-container {
+  display: flex; 
+}
+
+.shelf-category {
+  color: $dark-grey; 
+  flex: 1; 
+}
+
+.shelf-expand-btn {
+  @include removeButtonDefault();
+  width: 6%; 
+}
+
+.shelf-expand-icon {
+  color: $lime-green;
+  height: 100%;
+  width: 100%; 
+}

@@ -1,7 +1,8 @@
 import { React, Component } from "react";
-import { GiRawEgg } from "react-icons/gi";
+import ShelfCard from "../ShelfCard/ShelfCard";
 
-class Categories extends Component {
+
+class Shelves extends Component {
   constructor() {
     super() 
     this.state = {
@@ -25,8 +26,8 @@ class Categories extends Component {
     })
   }
 
-  deleteShelf = () => {
-    fetch("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/sleepsystem", {
+  deleteShelf = (shelfName) => {
+    fetch(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/${shelfName}`, {
       method: "DELETE",
       headers: {"Content-Type": "application/json"},
       redirect:'follow'
@@ -38,13 +39,22 @@ class Categories extends Component {
   }
 
   render() {
+  const shelves = this.state.shelves.map(shelf => {
+    return <ShelfCard shelfName={shelf}/>
+  })
   return (
-    <section className="categories-container">
-      <p className="categories-intro">Here are some shelves to get you started...</p>
-    </section>
+    <main className="shelves">
+      <section className="shelves-container">
+        <p className="shelves-intro">Here are some shelves to get you started...</p>
+        {shelves}
+      </section>
+      <aside>
+        <p>This will be the weight box</p>
+      </aside>
+    </main>
 
   )
 }
 }
 
-export default Categories;
+export default Shelves;

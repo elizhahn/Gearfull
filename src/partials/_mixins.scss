@@ -12,3 +12,8 @@
   font-size: 1.2em;
   color: $textColor;
 }
+
+@mixin removeButtonDefault() {
+  background: none;
+  border: none;
+}

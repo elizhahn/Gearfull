@@ -1,6 +1,6 @@
 import { Component } from "react";
 import Home from "../Home/Home";
-import Categories from "../Categories/Categories";
+import Shelves from "../Shelves/Shelves";
 import { Route } from "react-router-dom";
 import { GiMountains } from "react-icons/gi";
 
@@ -16,6 +16,7 @@ class App extends Component {
   }
 
   render() {
+    console.log("test app")
   return (
     <div className="App">
       <Route exact path="/">
@@ -27,7 +28,7 @@ class App extends Component {
           <p className="header-greeting"><span className="header-greeting-green">Welcome </span>{this.state.user}</p>
           <button className="header-mountain-btn"><GiMountains className="header-mountain-icon" /></button>
         </header>
-        <Categories/>
+        <Shelves/>
       </Route>
     </div>
   );
