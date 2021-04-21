@@ -17,3 +17,25 @@
   height: 100%;
   width: 100%; 
 }
+
+.form-add-item {
+  display: flex; 
+}
+
+.form-item-label { 
+  flex: 1; 
+}
+
+.form-item-input {
+  margin: 5px; 
+}
+
+.form-quantity-label {
+  width: 20%; 
+}
+
+.form-quantity-input {
+  margin: 5px; 
+  width: 30%;  
+}
+
