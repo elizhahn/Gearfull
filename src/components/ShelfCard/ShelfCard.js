@@ -1,11 +1,11 @@
 import { React, Component } from "react";
 import { MdExpandMore } from "react-icons/md";
 
+
 class ShelfCard extends Component {
   constructor(props) {
     super(props) 
-    this.state = {
-      items: {}, 
+    this.state = { 
       itemName: '',
       weight: 0,
       amount: 0,
@@ -24,7 +24,6 @@ class ShelfCard extends Component {
   } else {
      this.setState({expanded: "collapsed"})
   }
-   
   }
 
   render() {
@@ -44,7 +43,7 @@ class ShelfCard extends Component {
           </div>
         </div>
         <div className="shelf-expand-container">
-          <form className={`form-add-item ${this.state.expanded}`}>
+          <form className={`form-add-item ${this.state.expanded}`} >
             <label className="form-item-label">gear name
             <input
             className="form-item-input"
