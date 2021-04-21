@@ -1,6 +1,6 @@
 import { React, Component } from "react";
 import { MdExpandMore } from "react-icons/md";
-
+import { MdAdd } from "react-icons/md";
 
 class ShelfCard extends Component {
   constructor(props) {
@@ -71,6 +71,12 @@ class ShelfCard extends Component {
             onChange={this.handleChange}
             /> 
             </label>
+            <button
+            type="submit"
+            className="form-add-item-btn"
+            >
+              <MdAdd className="form-add-item-icon"/>
+            </button>
           </form>
         </div>
       </article>
