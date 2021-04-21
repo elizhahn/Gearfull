@@ -4,11 +4,16 @@
   #{$align}: $alignValue;
 }
 
-@mixin buttonStyle() {
+@mixin buttonStyle($backgroundColor, $textColor) {
   border: none; 
   border-radius: 5px; 
   padding: 10px; 
-  background-color: rgb(54,54,54);
+  background-color: $backgroundColor;
   font-size: 1.2em;
-  color: rgb(252,252,252);
+  color: $textColor;
+}
+
+@mixin removeButtonDefault() {
+  background: none;
+  border: none;
 }

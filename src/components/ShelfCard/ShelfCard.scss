@@ -1,0 +1,75 @@
+.shelf-category-container {
+  display: flex; 
+}
+
+.shelf-category {
+  color: $dark-grey; 
+  flex: 1; 
+  padding-left: 20px; 
+}
+
+.shelf-expand-btn-container {
+  width: 10%; 
+}
+
+.shelf-expand-btn {
+  @include removeButtonDefault();
+  width: 70%; 
+}
+
+.shelf-expand-icon {
+  color: $lime-green;
+  height: 100%;
+  width: 100%; 
+}
+
+.shelf-expand-container {
+  overflow: hidden; 
+}
+
+.form-add-item {
+  display: flex;
+  background-color: rgb(189, 189, 189);
+  padding: 10px; 
+  margin-top: -100%;
+  transition: all .5s; 
+}
+
+.form-add-item.expanded {
+  margin-top: 0;
+}
+
+.form-item-label { 
+  flex: 1; 
+}
+
+.form-item-input {
+  border-radius: 5px; 
+  margin: 5px; 
+}
+
+.form-quantity-label {
+  width: 20%; 
+}
+
+.form-quantity-input {
+  border-radius: 5px; 
+  margin: 5px; 
+  width: 30%;  
+}
+
+.form-add-item-btn {
+  @include removeButtonDefault();
+  width: 5%; 
+}
+
+.form-add-item-icon {
+  color: $dark-grey; 
+  width: 90%;
+  height: 90%; 
+}
+
+.form-add-item-icon:hover {
+  filter:drop-shadow(1px 1px 3px $lime-green); 
+}
+
