@@ -7,9 +7,13 @@
   flex: 1; 
 }
 
+.shelf-expand-btn-container {
+  width: 10%; 
+}
+
 .shelf-expand-btn {
   @include removeButtonDefault();
-  width: 6%; 
+  width: 70%; 
 }
 
 .shelf-expand-icon {
@@ -26,7 +30,7 @@
   display: flex;
   padding: 10px; 
   margin-top: -100%;
-  transition: all 1s; 
+  transition: all .5s; 
 }
 
 .form-add-item.expanded {
