@@ -22,17 +22,21 @@ class Home extends Component {
   render() {
     console.log(this.state)
     return (
-      <section className="home-container">
-        <h1>Cool title here</h1>
-        <Link to="/dashboard">
-          <button onClick={() => this.updateName(this.state.name)}>Get started</button>
-        </Link>
-        <input 
-        type="text" 
-        name="name" 
-        value={this.state.value} 
-        onChange={this.handleChange}
-        aria-label="enter name"/>
+      <section className="home-background">
+        <div className="home-container">
+          <h1>Cool title here</h1>
+          <input 
+          className="home-name-input"
+          type="text" 
+          name="name" 
+          placeholder="Enter your name here"
+          value={this.state.value} 
+          onChange={this.handleChange}
+          aria-label="enter name"/>
+          <Link to="/dashboard">
+            <button className="home-start-btn" onClick={() => this.updateName(this.state.name)}>Get started</button>
+          </Link>
+        </div>
       </section>
     )
   }
