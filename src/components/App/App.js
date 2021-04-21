@@ -1,6 +1,7 @@
 import { Component } from "react";
 import Home from "../Home/Home";
 import { Route } from "react-router-dom";
+import { GiMountains } from "react-icons/gi";
 
 class App extends Component {
   constructor() {
@@ -20,8 +21,11 @@ class App extends Component {
         <Home displayName={this.displayName}/>
       </Route>
       <Route path="/dashboard">
-        <p>Dashboard</p>
-        <p>{this.state.user}</p>
+        <header className="header">
+          <h1 className="header-title">Cool Title Here</h1>
+          <p className="header-greeting"><span className="header-greeting-green">Welcome </span>{this.state.user}</p>
+          <button className="header-mountain-btn"><GiMountains className="header-mountain-icon" /></button>
+        </header>
       </Route>
     </div>
   );

@@ -20,7 +20,6 @@ class Home extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <section className="home-background">
         <div className="home-container">
