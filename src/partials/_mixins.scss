@@ -1,0 +1,14 @@
+@mixin flexStyle($display, $direction, $align, $alignValue) {
+  display: $display;
+  flex-direction: $direction;
+  #{$align}: $alignValue;
+}
+
+@mixin buttonStyle() {
+  border: none; 
+  border-radius: 5px; 
+  padding: 10px; 
+  background-color: rgb(54,54,54);
+  font-size: 1.2em;
+  color: rgb(252,252,252);
+}
