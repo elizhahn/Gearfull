@@ -7,6 +7,7 @@ class Shelves extends Component {
     super() 
     this.state = {
       shelves: ["Big Four", "Cook System", "Clothing", "Hygiene"],
+      items: {}
     }
   }
 
@@ -38,9 +39,31 @@ class Shelves extends Component {
     })
   }
 
+  updateItems = (event, shelfName) => {
+    const itemName = this.state.itemName.toLowerCase()
+    const itemAdded = {
+      itemName: {weight: this.state.weight, amount: this.state.amount}
+    }
+    event.preventDefault();
+    fetch(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/${shelfName}`, {
+      method: "PUT",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({"Zpacks Duplex": "test"}),
+      redirect: "follow"
+    })
+    .then(response => response.text())
+    .then(data => {
+      console.log("data")
+    })
+    .catch(error => console.log(error))
+  }
+
   render() {
   const shelves = this.state.shelves.map(shelf => {
-    return <ShelfCard shelfName={shelf}/>
+    return <ShelfCard 
+    shelfName={shelf}
+    updateItems={this.updateItems}
+    />
   })
   return (
     <main className="shelves">

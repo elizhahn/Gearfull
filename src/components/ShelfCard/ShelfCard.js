@@ -7,8 +7,9 @@ class ShelfCard extends Component {
     super(props) 
     this.state = { 
       itemName: '',
-      weight: 0,
-      amount: 0,
+      weight: '',
+      amount: '',
+      error: '',
       expanded: "collapsed", 
     }
   }
@@ -19,19 +20,12 @@ class ShelfCard extends Component {
   }
 
   handleSubmit = (event, shelfName) => {
-    console.log(shelfName)
-    event.preventDefault();
-    fetch(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/${shelfName}`, {
-      method: "PUT",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({"Zpacks Duplex": "test"}),
-      redirect: "follow"
-    })
-    .then(response => response.text())
-    .then(data => {
-      this.props.updateItems(data)
-    })
-    .catch(error => console.log(error))
+    event.preventDefault()
+    if(!this.state.itemName || !this.state.weight || !this.state.amount) {
+      this.setState({error: "Please fill out all the fields"})
+  } else {
+    this.props.updateItems(shelfName)
+  }
   }
 
   expandShelf = () => {
@@ -59,6 +53,7 @@ class ShelfCard extends Component {
           </div>
         </div>
         <div className="shelf-expand-container">
+          {this.state.error && <p>{this.state.error}</p>}
           <form className={`form-add-item ${this.state.expanded}`} onSubmit={(event) => this.handleSubmit(event, shelfName)}>
             <label className="form-item-label">gear name
             <input
