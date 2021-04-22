@@ -20,3 +20,23 @@ export const getItems = (shelves) => {
   }) 
   return Promise.all(items)
 }
+
+export const addItem = (shelfName, itemAdded) => {
+ return  fetch(`${baseURL}/basket/${shelfName}`, {
+      method: "PUT",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(itemAdded),
+      redirect: "follow"
+    })
+    .then(response => checkForErrors(response))
+}
+
+export const removeItem = (shelfName, updatedItems) => {
+ return fetch(`${baseURL}/basket/${shelfName}`, {
+   method:"POST",
+   headers: {"Content-Type": "application/json"}, 
+   body: JSON.stringify(updatedItems),
+   redirect: "follow"
+ })
+ .then(response => response.text())
+}
