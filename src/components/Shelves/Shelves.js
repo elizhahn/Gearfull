@@ -1,5 +1,6 @@
 import { React, Component } from "react";
 import { getItems, getShelves } from "../../ApiCalls";
+import { calculatePackWeight, createItemList } from "../../utility";
 import ShelfCard from "../ShelfCard/ShelfCard";
 import PackStatistics from "../PackStatistics/PackStatistics";
 
@@ -11,6 +12,7 @@ class Shelves extends Component {
     this.state = {
       shelves: [],
       items: {},
+      totalWeight: 0
     }
   }
 
@@ -21,11 +23,9 @@ class Shelves extends Component {
     })
     .then(() => getItems(this.state.shelves))
     .then(items => {
-      const itemsList = items.reduce((list, item, i) => {
-          list[this.state.shelves[i]] = item
-          return list
-      }, {})
-      this.setState({items: itemsList})
+      const itemsList = createItemList(items, this.state.shelves);
+      const packWeight = calculatePackWeight(itemsList);
+      this.setState({items: itemsList, totalWeight: packWeight})
     })
    .catch(error => console.log(error));
     
@@ -52,7 +52,6 @@ class Shelves extends Component {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data)
       this.setState({
         items: {...this.state.items, [shelfName]: data}
       })
@@ -61,7 +60,7 @@ class Shelves extends Component {
   }
 
   render() {
-  const shelves = this.state.shelves.map((shelf, i) => {
+    const shelves = this.state.shelves.map((shelf, i) => {
     return <ShelfCard
     key={i}
     shelfName={shelf}
@@ -75,7 +74,7 @@ class Shelves extends Component {
         <p className="shelves-intro">Here are some shelves to get you started...</p>
         {shelves}
       </section>
-      <PackStatistics packItems={this.state.items}/>
+      <PackStatistics packWeight={this.state.totalWeight}/>
     </main>
 
   )
