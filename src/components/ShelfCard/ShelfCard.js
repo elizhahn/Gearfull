@@ -42,7 +42,7 @@ class ShelfCard extends Component {
   }
 
   render() {
-    const { shelfName, shelfItems } = this.props;
+    const { shelfName, shelfItems, deleteItem } = this.props;
     return (
       <article className="shelf-card">
         <div className="shelf-category-container">
@@ -94,7 +94,11 @@ class ShelfCard extends Component {
               <MdAdd className="form-add-item-icon"/>
             </button>
           </form>
-          <ShelfItems shelfItems={shelfItems}/>
+          <ShelfItems 
+          shelfName={shelfName}
+          shelfItems={shelfItems}
+          deleteItem={deleteItem}
+          />
         </div>
       </article>
     )

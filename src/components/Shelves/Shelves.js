@@ -58,6 +58,10 @@ class Shelves extends Component {
     .catch(error => console.log(error))
   }
 
+  deleteItem = (shelfName) => {
+    console.log("delete")
+  }
+
   render() {
   console.log(this.state)
   const shelves = this.state.shelves.map((shelf, i) => {
@@ -66,6 +70,7 @@ class Shelves extends Component {
     shelfName={shelf}
     shelfItems={this.state.items[shelf]}
     updateItems={this.updateItems}
+    deleteItem={this.deleteItem}
     />
   })
   return (

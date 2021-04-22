@@ -1,7 +1,7 @@
 import React from "react";
 import { MdClear } from "react-icons/md";
 
-const ShelfItems = ({ shelfItems }) => {
+const ShelfItems = ({ shelfItems, deleteItem, shelfName }) => {
   let itemList;
   if(shelfItems !== undefined) {
     itemList = Object.keys(shelfItems).map((item) => { 
@@ -10,7 +10,12 @@ const ShelfItems = ({ shelfItems }) => {
               <p className="shelf-item-name">{item}</p>
               <p className="shelf-item-quantity">weight: {shelfItems[item].weight}</p>
               <p className="shelf-item-quantity">amount: {shelfItems[item].amount}</p>
-              <button className="shelf-item-remove-btn"><MdClear className="shelf-item-remove-icon"/></button>
+              <button 
+              className="shelf-item-remove-btn"
+              onClick={() => deleteItem(shelfName)}
+              >
+                <MdClear className="shelf-item-remove-icon"/>
+              </button>
             </li>
             )    
     }); 
