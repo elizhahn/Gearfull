@@ -20,11 +20,15 @@ class ShelfCard extends Component {
   }
 
   handleSubmit = (event, shelfName) => {
+    const itemName = this.state.itemName.toLowerCase()
+    const itemAdded = {
+      [itemName]: {weight: this.state.weight, amount: this.state.amount}
+    }
     event.preventDefault()
     if(!this.state.itemName || !this.state.weight || !this.state.amount) {
       this.setState({error: "Please fill out all the fields"})
   } else {
-    this.props.updateItems(shelfName)
+    this.props.updateItems(shelfName, itemAdded)
   }
   }
 

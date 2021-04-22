@@ -6,24 +6,20 @@ class Shelves extends Component {
   constructor() {
     super() 
     this.state = {
-      shelves: ["Big Four", "Cook System", "Clothing", "Hygiene"],
+      shelves: [],
       items: {}
     }
   }
 
   componentDidMount() {
-    const categories = this.state.shelves
-    categories.forEach(category => {
-      fetch(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/${category}`, {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: "",
-        redirect:'follow'
-      })
-      .then(response => response.text())
-      .then(response => {
-        console.log(response)
-      })
+    fetch("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {
+      method: "GET",
+      headers: {"Content-Type": "application/json"},
+      redirect:'follow'
+    })
+    .then(response => response.json())
+    .then(shelves => {
+      this.setState({shelves: [...this.state.shelves, ...shelves.baskets]})
     })
   }
 
@@ -39,26 +35,24 @@ class Shelves extends Component {
     })
   }
 
-  updateItems = (event, shelfName) => {
-    const itemName = this.state.itemName.toLowerCase()
-    const itemAdded = {
-      itemName: {weight: this.state.weight, amount: this.state.amount}
-    }
-    event.preventDefault();
+  updateItems = (shelfName, itemAdded) => {
     fetch(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/${shelfName}`, {
       method: "PUT",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({"Zpacks Duplex": "test"}),
+      body: JSON.stringify(itemAdded),
       redirect: "follow"
     })
     .then(response => response.text())
     .then(data => {
-      console.log("data")
+      this.setState({
+        items: {[shelfName]: [...this.state.items[shelfName], data]}
+      })
     })
     .catch(error => console.log(error))
   }
 
   render() {
+  console.log(this.state)
   const shelves = this.state.shelves.map(shelf => {
     return <ShelfCard 
     shelfName={shelf}
