@@ -11,7 +11,6 @@ class Shelves extends Component {
     this.state = {
       shelves: [],
       items: {},
-      totalWeight: 0,
     }
   }
 
@@ -53,6 +52,7 @@ class Shelves extends Component {
     })
     .then(response => response.json())
     .then(data => {
+      console.log(data)
       this.setState({
         items: {...this.state.items, [shelfName]: data}
       })
@@ -61,7 +61,6 @@ class Shelves extends Component {
   }
 
   render() {
-  console.log(this.state)
   const shelves = this.state.shelves.map((shelf, i) => {
     return <ShelfCard
     key={i}
@@ -76,9 +75,7 @@ class Shelves extends Component {
         <p className="shelves-intro">Here are some shelves to get you started...</p>
         {shelves}
       </section>
-      <aside className="statistics-container">
-        <PackStatistics/>
-      </aside>
+      <PackStatistics packItems={this.state.items}/>
     </main>
 
   )
