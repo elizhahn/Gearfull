@@ -52,7 +52,7 @@ class Shelves extends Component {
     .then(response => response.json())
     .then(data => {
       this.setState({
-        items: {...this.state.items, [shelfName]: [data]}
+        items: {...this.state.items, [shelfName]: data}
       })
     })
     .catch(error => console.log(error))
