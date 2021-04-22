@@ -23,7 +23,7 @@ class ShelfCard extends Component {
   handleSubmit = (event, shelfName) => {
     const itemName = this.state.itemName.toLowerCase()
     const itemAdded = {
-      [itemName]: {weight: this.state.weight, amount: this.state.amount}
+      [itemName]: {id: Date.now(), weight: this.state.weight, amount: this.state.amount}
     }
     event.preventDefault()
     if(!this.state.itemName || !this.state.weight || !this.state.amount) {

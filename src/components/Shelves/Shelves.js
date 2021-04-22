@@ -20,7 +20,6 @@ class Shelves extends Component {
     })
     .then(() => getItems(this.state.shelves))
     .then(items => {
-      console.log(items)
       const itemsList = items.reduce((list, item, i) => {
           list[this.state.shelves[i]] = item
           return list
@@ -39,7 +38,7 @@ class Shelves extends Component {
     })
     .then(response => response.text())
     .then(response => {
-      // console.log(response)
+      console.log(response)
     })
   }
 
@@ -61,8 +60,9 @@ class Shelves extends Component {
 
   render() {
   console.log(this.state)
-  const shelves = this.state.shelves.map(shelf => {
-    return <ShelfCard 
+  const shelves = this.state.shelves.map((shelf, i) => {
+    return <ShelfCard
+    key={i}
     shelfName={shelf}
     shelfItems={this.state.items[shelf]}
     updateItems={this.updateItems}

@@ -4,9 +4,9 @@ import { MdClear } from "react-icons/md";
 const ShelfItems = ({ shelfItems }) => {
   let itemList;
   if(shelfItems !== undefined) {
-    itemList = Object.keys(shelfItems).map(item => { 
+    itemList = Object.keys(shelfItems).map((item, i) => { 
        return (
-             <li className="shelf-item">
+             <li key={i} className="shelf-item">
                 <p className="shelf-item-name">{item}</p>
                 <p className="shelf-item-quantity">weight: {shelfItems[item].weight}</p>
                 <p className="shelf-item-quantity">amount: {shelfItems[item].amount}</p>
