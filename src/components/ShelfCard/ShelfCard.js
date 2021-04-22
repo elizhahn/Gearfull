@@ -29,7 +29,7 @@ class ShelfCard extends Component {
     if(!this.state.itemName || !this.state.weight || !this.state.amount) {
       this.setState({error: "Please fill out all the fields"})
   } else {
-    this.props.updateItems(shelfName, itemAdded)
+    this.props.updateItems(shelfName, itemAdded, this.state.itemName)
   }
   }
 

@@ -43,7 +43,8 @@ class Shelves extends Component {
     })
   }
 
-  updateItems = (shelfName, itemAdded) => {
+  updateItems = (shelfName, itemAdded, itemName) => {
+    console.log(Number(itemAdded[itemName].weight))
     fetch(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/${shelfName}`, {
       method: "PUT",
       headers: {"Content-Type": "application/json"},
@@ -53,7 +54,7 @@ class Shelves extends Component {
     .then(response => response.json())
     .then(data => {
       this.setState({
-        items: {...this.state.items, [shelfName]: data}
+        items: {...this.state.items, [shelfName]: data, totalWeight: (this.state.totalWeight + Number(itemAdded[itemName].weight))}
       })
     })
     .catch(error => console.log(error))
