@@ -14,7 +14,7 @@ export const getShelves = () => {
 }
 
 export const getItems = (shelves) => {
-  console.log(shelves)
+  // console.log(shelves)
   const items = shelves.map(shelf => {
     return fetch(`${baseURL}/basket/${shelf}`)
    .then(response => checkForErrors(response))

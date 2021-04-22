@@ -1,4 +1,5 @@
 import { React, Component } from "react";
+import ShelfItems from "../ShelfItems/ShelfItems";
 import { MdExpandMore } from "react-icons/md";
 import { MdAdd } from "react-icons/md";
 
@@ -41,7 +42,7 @@ class ShelfCard extends Component {
   }
 
   render() {
-    const { shelfName } = this.props;
+    const { shelfName, shelfItems } = this.props;
     return (
       <article className="shelf-card">
         <div className="shelf-category-container">
@@ -93,6 +94,7 @@ class ShelfCard extends Component {
               <MdAdd className="form-add-item-icon"/>
             </button>
           </form>
+          <ShelfItems shelfItems={shelfItems}/>
         </div>
       </article>
     )

@@ -3,6 +3,7 @@ import { getItems, getShelves } from "../../ApiCalls";
 import ShelfCard from "../ShelfCard/ShelfCard";
 
 
+
 class Shelves extends Component {
   constructor() {
     super() 
@@ -19,6 +20,7 @@ class Shelves extends Component {
     })
     .then(() => getItems(this.state.shelves))
     .then(items => {
+      console.log(items)
       const itemsList = items.reduce((list, item, i) => {
           list[this.state.shelves[i]] = item
           return list
@@ -37,7 +39,7 @@ class Shelves extends Component {
     })
     .then(response => response.text())
     .then(response => {
-      console.log(response)
+      // console.log(response)
     })
   }
 
@@ -50,9 +52,8 @@ class Shelves extends Component {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data)
       this.setState({
-        items: {[shelfName]: [data]}
+        items: {...this.state.items, [shelfName]: [data]}
       })
     })
     .catch(error => console.log(error))
@@ -63,6 +64,7 @@ class Shelves extends Component {
   const shelves = this.state.shelves.map(shelf => {
     return <ShelfCard 
     shelfName={shelf}
+    shelfItems={this.state.items[shelf]}
     updateItems={this.updateItems}
     />
   })
@@ -72,7 +74,7 @@ class Shelves extends Component {
         <p className="shelves-intro">Here are some shelves to get you started...</p>
         {shelves}
       </section>
-      <aside>
+      <aside className="statistics-container">
         <p>This will be the weight box</p>
       </aside>
     </main>
