@@ -10,7 +10,8 @@ class Shelves extends Component {
     super() 
     this.state = {
       shelves: [],
-      items: {}
+      items: {},
+      totalWeight: 0,
     }
   }
 
@@ -75,7 +76,9 @@ class Shelves extends Component {
         <p className="shelves-intro">Here are some shelves to get you started...</p>
         {shelves}
       </section>
-      <PackStatistics/>
+      <aside className="statistics-container">
+        <PackStatistics/>
+      </aside>
     </main>
 
   )
