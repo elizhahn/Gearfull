@@ -1,3 +1,5 @@
+import { getShelfItems } from "./utility";
+
 const baseURL = "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d"
 
 const checkForErrors = (response) => {
@@ -19,4 +21,25 @@ export const getItems = (shelves) => {
    .then(response => checkForErrors(response))
   }) 
   return Promise.all(items)
+}
+
+export const addItem = (shelfName, itemAdded) => {
+ return  fetch(`${baseURL}/basket/${shelfName}`, {
+      method: "PUT",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(itemAdded),
+      redirect: "follow"
+    })
+    .then(response => checkForErrors(response))
+}
+
+export const removeItem = (shelfName, updatedItems) => {
+//  const updatedItems = getShelfItems(shelfName, itemId, itemList);
+ return fetch(`${baseURL}/basket/${shelfName}`, {
+   method:"POST",
+   headers: {"Content-Type": "application/json"}, 
+   body: JSON.stringify(updatedItems),
+   redirect: "follow"
+ })
+ .then(response => response.text())
 }

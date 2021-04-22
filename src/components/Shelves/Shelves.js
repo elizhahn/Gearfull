@@ -1,5 +1,6 @@
 import { React, Component } from "react";
-import { getItems, getShelves } from "../../ApiCalls";
+import { addItem, getItems, getShelves, removeItem } from "../../ApiCalls";
+import { getShelfItems } from "../../utility";
 import ShelfCard from "../ShelfCard/ShelfCard";
 
 
@@ -43,13 +44,7 @@ class Shelves extends Component {
   }
 
   updateItems = (shelfName, itemAdded) => {
-    fetch(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/${shelfName}`, {
-      method: "PUT",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(itemAdded),
-      redirect: "follow"
-    })
-    .then(response => response.json())
+    addItem(shelfName, itemAdded)
     .then(data => {
       this.setState({
         items: {...this.state.items, [shelfName]: data}
@@ -58,8 +53,13 @@ class Shelves extends Component {
     .catch(error => console.log(error))
   }
 
-  deleteItem = (shelfName) => {
-    console.log("delete")
+  deleteItem = (shelfName, itemId) => {
+    const updatedItems = getShelfItems(shelfName, itemId, this.state.items);
+    removeItem(shelfName, updatedItems)
+    .then(data => {
+       this.setState({items: {...this.state.items, [shelfName]: updatedItems}})
+    })
+    .catch(error => console.log(error))
   }
 
   render() {

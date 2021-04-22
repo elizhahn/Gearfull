@@ -12,7 +12,7 @@ const ShelfItems = ({ shelfItems, deleteItem, shelfName }) => {
               <p className="shelf-item-quantity">amount: {shelfItems[item].amount}</p>
               <button 
               className="shelf-item-remove-btn"
-              onClick={() => deleteItem(shelfName)}
+              onClick={() => deleteItem(shelfName, shelfItems[item].id)}
               >
                 <MdClear className="shelf-item-remove-icon"/>
               </button>
