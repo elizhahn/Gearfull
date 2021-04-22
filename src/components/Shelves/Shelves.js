@@ -1,7 +1,7 @@
 import { React, Component } from "react";
-import { addItem, getItems, getShelves, removeItem } from "../../ApiCalls";
-import { getShelfItems } from "../../utility";
+import { getItems, getShelves } from "../../ApiCalls";
 import ShelfCard from "../ShelfCard/ShelfCard";
+import PackStatistics from "../PackStatistics/PackStatistics";
 
 
 
@@ -10,8 +10,7 @@ class Shelves extends Component {
     super() 
     this.state = {
       shelves: [],
-      items: {},
-      error: ""
+      items: {}
     }
   }
 
@@ -28,12 +27,10 @@ class Shelves extends Component {
       }, {})
       this.setState({items: itemsList})
     })
-   .catch(error => {
-     this.setState({error: "There was a problem loading your items"})
-   });
+   .catch(error => console.log(error));
     
   }
-//For later development
+
   deleteShelf = (shelfName) => {
     fetch(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/${shelfName}`, {
       method: "DELETE",
@@ -47,26 +44,19 @@ class Shelves extends Component {
   }
 
   updateItems = (shelfName, itemAdded) => {
-    addItem(shelfName, itemAdded)
+    fetch(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/${shelfName}`, {
+      method: "PUT",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(itemAdded),
+      redirect: "follow"
+    })
+    .then(response => response.json())
     .then(data => {
       this.setState({
         items: {...this.state.items, [shelfName]: data}
       })
     })
-    .catch(error => {
-      this.setState({error: "We're sorry, that item cannot be added, please try something else"})
-    })
-  }
-
-  deleteItem = (shelfName, itemId) => {
-    const updatedItems = getShelfItems(shelfName, itemId, this.state.items);
-    removeItem(shelfName, updatedItems)
-    .then(data => {
-       this.setState({items: {...this.state.items, [shelfName]: updatedItems}})
-    })
-    .catch(error => {
-      this.setState({error: "We're sorry, we cannot remove this item right now, please try again later"})
-    })
+    .catch(error => console.log(error))
   }
 
   render() {
@@ -77,19 +67,15 @@ class Shelves extends Component {
     shelfName={shelf}
     shelfItems={this.state.items[shelf]}
     updateItems={this.updateItems}
-    deleteItem={this.deleteItem}
     />
   })
   return (
     <main className="shelves">
       <section className="shelves-container">
         <p className="shelves-intro">Here are some shelves to get you started...</p>
-        {this.state.error && <p>{this.state.error}</p>}
         {shelves}
       </section>
-      <aside className="statistics-container">
-        <p>This will be the weight box</p>
-      </aside>
+      <PackStatistics/>
     </main>
 
   )
