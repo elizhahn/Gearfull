@@ -2,6 +2,10 @@
   display: flex; 
 }
 
+.shelf-category-container:hover {
+  box-shadow: 1px 4px 8px 0 rgba(0,0,0,0.2);
+}
+
 .shelf-category {
   color: $dark-grey; 
   flex: 1; 
@@ -19,8 +23,8 @@
 
 .shelf-expand-icon {
   color: $lime-green;
-  height: 100%;
-  width: 100%; 
+  height: 90%;
+  width: 85%; 
 }
 
 .shelf-expand-container {
@@ -29,17 +33,19 @@
 
 .form-add-item {
   display: flex;
-  background-color: rgb(189, 189, 189);
-  padding: 10px; 
+  align-items: center; 
+  background-color: $dark-grey;
+  padding: 10px 0px 10px 30px; 
   margin-top: -100%;
-  transition: all .5s; 
+  transition: all 1s; 
 }
 
 .form-add-item.expanded {
   margin-top: 0;
 }
 
-.form-item-label { 
+.form-item-label {
+  color: aliceblue; 
   flex: 1; 
 }
 
@@ -49,7 +55,7 @@
 }
 
 .form-quantity-label {
-  width: 20%; 
+  color: aliceblue;
 }
 
 .form-quantity-input {
@@ -64,12 +70,12 @@
 }
 
 .form-add-item-icon {
-  color: $dark-grey; 
+  color: aliceblue; 
   width: 90%;
   height: 90%; 
 }
 
 .form-add-item-icon:hover {
-  filter:drop-shadow(1px 1px 3px $lime-green); 
+  filter:drop-shadow(1px 1px 5px $lime-green); 
 }
 

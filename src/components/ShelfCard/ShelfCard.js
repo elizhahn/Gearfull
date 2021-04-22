@@ -1,14 +1,16 @@
 import { React, Component } from "react";
+import ShelfItems from "../ShelfItems/ShelfItems";
 import { MdExpandMore } from "react-icons/md";
-
+import { MdAdd } from "react-icons/md";
 
 class ShelfCard extends Component {
   constructor(props) {
     super(props) 
     this.state = { 
       itemName: '',
-      weight: 0,
-      amount: 0,
+      weight: '',
+      amount: '',
+      error: '',
       expanded: "collapsed", 
     }
   }
@@ -16,6 +18,19 @@ class ShelfCard extends Component {
   handleChange = (event) => {
     const { name, value } = event.target
     this.setState({ [name]: value })
+  }
+
+  handleSubmit = (event, shelfName) => {
+    const itemName = this.state.itemName.toLowerCase()
+    const itemAdded = {
+      [itemName]: {id: Date.now(), weight: this.state.weight, amount: this.state.amount}
+    }
+    event.preventDefault()
+    if(!this.state.itemName || !this.state.weight || !this.state.amount) {
+      this.setState({error: "Please fill out all the fields"})
+  } else {
+    this.props.updateItems(shelfName, itemAdded)
+  }
   }
 
   expandShelf = () => {
@@ -27,7 +42,7 @@ class ShelfCard extends Component {
   }
 
   render() {
-    const { shelfName } = this.props;
+    const { shelfName, shelfItems } = this.props;
     return (
       <article className="shelf-card">
         <div className="shelf-category-container">
@@ -43,7 +58,8 @@ class ShelfCard extends Component {
           </div>
         </div>
         <div className="shelf-expand-container">
-          <form className={`form-add-item ${this.state.expanded}`} >
+          {this.state.error && <p>{this.state.error}</p>}
+          <form className={`form-add-item ${this.state.expanded}`} onSubmit={(event) => this.handleSubmit(event, shelfName)}>
             <label className="form-item-label">gear name
             <input
             className="form-item-input"
@@ -71,7 +87,14 @@ class ShelfCard extends Component {
             onChange={this.handleChange}
             /> 
             </label>
+            <button
+            type="submit"
+            className="form-add-item-btn"
+            >
+              <MdAdd className="form-add-item-icon"/>
+            </button>
           </form>
+          <ShelfItems shelfItems={shelfItems}/>
         </div>
       </article>
     )

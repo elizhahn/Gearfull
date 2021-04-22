@@ -1,29 +1,33 @@
 import { React, Component } from "react";
+import { getItems, getShelves } from "../../ApiCalls";
 import ShelfCard from "../ShelfCard/ShelfCard";
+
 
 
 class Shelves extends Component {
   constructor() {
     super() 
     this.state = {
-      shelves: ["Big Four", "Cook System", "Clothing", "Hygiene"],
+      shelves: [],
+      items: {}
     }
   }
 
   componentDidMount() {
-    const categories = this.state.shelves
-    categories.forEach(category => {
-      fetch(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/${category}`, {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: "",
-        redirect:'follow'
-      })
-      .then(response => response.text())
-      .then(response => {
-        console.log(response)
-      })
+    getShelves()
+    .then(shelves => {
+      this.setState({shelves: [...this.state.shelves, ...shelves.baskets]})
     })
+    .then(() => getItems(this.state.shelves))
+    .then(items => {
+      const itemsList = items.reduce((list, item, i) => {
+          list[this.state.shelves[i]] = item
+          return list
+      }, {})
+      this.setState({items: itemsList})
+    })
+   .catch(error => console.log(error));
+    
   }
 
   deleteShelf = (shelfName) => {
@@ -38,9 +42,31 @@ class Shelves extends Component {
     })
   }
 
+  updateItems = (shelfName, itemAdded) => {
+    fetch(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/${shelfName}`, {
+      method: "PUT",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(itemAdded),
+      redirect: "follow"
+    })
+    .then(response => response.json())
+    .then(data => {
+      this.setState({
+        items: {...this.state.items, [shelfName]: data}
+      })
+    })
+    .catch(error => console.log(error))
+  }
+
   render() {
-  const shelves = this.state.shelves.map(shelf => {
-    return <ShelfCard shelfName={shelf}/>
+  console.log(this.state)
+  const shelves = this.state.shelves.map((shelf, i) => {
+    return <ShelfCard
+    key={i}
+    shelfName={shelf}
+    shelfItems={this.state.items[shelf]}
+    updateItems={this.updateItems}
+    />
   })
   return (
     <main className="shelves">
@@ -48,7 +74,7 @@ class Shelves extends Component {
         <p className="shelves-intro">Here are some shelves to get you started...</p>
         {shelves}
       </section>
-      <aside>
+      <aside className="statistics-container">
         <p>This will be the weight box</p>
       </aside>
     </main>

@@ -1,0 +1,36 @@
+.shelf-item-list {
+  margin: 0; 
+}
+
+.shelf-item {
+  border-bottom: thin solid $lime-green; 
+}
+
+.shelf-item::marker{
+  color: $lime-green;
+  font-size: 1.2em;  
+}
+
+.shelf-item-name {
+  display: inline-block;
+  width: 66%;
+  font-weight: 600; 
+  font-size: 1.2em;  
+}
+
+.shelf-item-quantity {
+  display: inline-block; 
+  width: 15%; 
+}
+
+.shelf-item-remove-btn {
+  @include removeButtonDefault();
+  width: 3%;
+  height: 5%;  
+}
+
+.shelf-item-remove-icon {
+  height: 80%; 
+  width: 80%; 
+}
+

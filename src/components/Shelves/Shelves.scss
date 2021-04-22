@@ -1,5 +1,6 @@
 .shelves {
-  display: flex;
+  height: 100%; 
+  display: flex; 
 }
 
 .shelves-container {
@@ -7,6 +8,14 @@
 }
 
 .shelves-intro {
-  font-size: 1.2em; 
+  padding: 20px; 
+  font-size: 1.2em;
+  font-style:italic;
+  font-weight: 600;   
+}
+
+.statistics-container { 
+  width: 25%; 
+  background-color: lavender; 
 }
 
