@@ -1,5 +1,3 @@
-import { getShelfItems } from "./utility";
-
 const baseURL = "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d"
 
 const checkForErrors = (response) => {
@@ -34,7 +32,6 @@ export const addItem = (shelfName, itemAdded) => {
 }
 
 export const removeItem = (shelfName, updatedItems) => {
-//  const updatedItems = getShelfItems(shelfName, itemId, itemList);
  return fetch(`${baseURL}/basket/${shelfName}`, {
    method:"POST",
    headers: {"Content-Type": "application/json"}, 
