@@ -1,6 +1,6 @@
 import { React, Component } from "react";
 import { getItems, getShelves, removeItem } from "../../ApiCalls";
-import { calculatePackWeight, createItemList, getShelfItems } from "../../utility";
+import { calculatePackWeight, createItemList, getShelfItems, calcItemWeight } from "../../utility";
 import ShelfCard from "../ShelfCard/ShelfCard";
 import PackStatistics from "../PackStatistics/PackStatistics";
 
@@ -43,8 +43,8 @@ class Shelves extends Component {
     })
   }
 
-  updateItems = (shelfName, itemAdded, itemName) => {
-    console.log(Number(itemAdded[itemName].weight))
+  updateItems = (shelfName, itemAdded, weight, amount) => {
+    const itemWeight = calcItemWeight(weight, amount)
     fetch(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/${shelfName}`, {
       method: "PUT",
       headers: {"Content-Type": "application/json"},
@@ -54,17 +54,18 @@ class Shelves extends Component {
     .then(response => response.json())
     .then(data => {
       this.setState({
-        items: {...this.state.items, [shelfName]: data, totalWeight: (this.state.totalWeight + Number(itemAdded[itemName].weight))}
+        items: {...this.state.items, [shelfName]: data}, totalWeight: this.state.totalWeight + itemWeight
       })
     })
     .catch(error => console.log(error))
   }
 
-  deleteItem = (shelfName, itemId) => {
+  deleteItem = (shelfName, itemId, weight, amount) => {
+    const itemWeight = calcItemWeight(weight, amount); 
     const updatedItems = getShelfItems(shelfName, itemId, this.state.items);
     removeItem(shelfName, updatedItems)
     .then(data => {
-       this.setState({items: {...this.state.items, [shelfName]: updatedItems}})
+       this.setState({items: {...this.state.items, [shelfName]: updatedItems}, totalWeight: this.state.totalWeight - itemWeight})
     })
     .catch(error => {
       this.setState({error: "We're sorry, we cannot remove this item right now, please try again later"})
@@ -78,6 +79,7 @@ class Shelves extends Component {
     shelfName={shelf}
     shelfItems={this.state.items[shelf]}
     updateItems={this.updateItems}
+    deleteItem={this.deleteItem}
     />
   })
   return (

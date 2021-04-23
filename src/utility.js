@@ -33,3 +33,8 @@ export const calculatePackWeight = (allShelfItems) => {
   return weight
 }
 
+export const calcItemWeight = (weight, amount) => {
+  const weightTotal = Number(weight) * Number(amount); 
+  return weightTotal
+}
+

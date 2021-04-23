@@ -7,10 +7,10 @@ class ShelfCard extends Component {
   constructor(props) {
     super(props) 
     this.state = { 
-      itemName: '',
-      weight: '',
-      amount: '',
-      error: '',
+      itemName: "",
+      weight: "",
+      amount: "",
+      error: "",
       expanded: "collapsed", 
     }
   }
@@ -18,6 +18,10 @@ class ShelfCard extends Component {
   handleChange = (event) => {
     const { name, value } = event.target
     this.setState({ [name]: value })
+  }
+
+  clearInputs = () => {
+    this.setState({itemName: "", weight: "", amount: ""})
   }
 
   handleSubmit = (event, shelfName) => {
@@ -29,7 +33,8 @@ class ShelfCard extends Component {
     if(!this.state.itemName || !this.state.weight || !this.state.amount) {
       this.setState({error: "Please fill out all the fields"})
   } else {
-    this.props.updateItems(shelfName, itemAdded, this.state.itemName)
+    this.props.updateItems(shelfName, itemAdded, this.state.weight, this.state.amount)
+    this.clearInputs(); 
   }
   }
 
@@ -73,6 +78,7 @@ class ShelfCard extends Component {
             <input
             className="form-quantity-input"
             type="number"
+            min="0"
             name="weight"
             value={this.state.weight}
             onChange={this.handleChange}
@@ -82,6 +88,7 @@ class ShelfCard extends Component {
             <input
             className="form-quantity-input"
             type="number"
+            min="0"
             name="amount"
             value={this.state.amount}
             onChange={this.handleChange}
