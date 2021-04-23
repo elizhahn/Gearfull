@@ -33,6 +33,7 @@ class ShelfCard extends Component {
     if(!this.state.itemName || !this.state.weight || !this.state.amount) {
       this.setState({error: "Please fill out all the fields"})
   } else {
+    this.setState({error: ""});
     this.props.updateItems(shelfName, itemAdded, this.state.weight, this.state.amount)
     this.clearInputs(); 
   }
@@ -52,16 +53,16 @@ class ShelfCard extends Component {
       <article className="shelf-card">
         <div className="shelf-category-container">
           <h2 className="shelf-category">{shelfName}</h2>
-            <button 
-            className="shelf-expand-btn" 
-            aria-expanded="false"
-            onClick={this.expandShelf}
-            >
-              <MdExpandMore className={`shelf-expand-icon ${this.state.expanded}`}/>
-            </button>
+          <button 
+          className="shelf-expand-btn" 
+          aria-expanded="false"
+          onClick={this.expandShelf}
+          >
+            <MdExpandMore className={`shelf-expand-icon ${this.state.expanded}`}/>
+          </button>
         </div>
         <div className="shelf-expand-container">
-          {this.state.error && <p>{this.state.error}</p>}
+          {this.state.error && <p className="form-error-msg">{this.state.error}</p>}
           <form className={`form-add-item ${this.state.expanded}`} onSubmit={(event) => this.handleSubmit(event, shelfName)}>
             <label className="form-item-label">gear name
             <input

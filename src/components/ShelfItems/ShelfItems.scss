@@ -1,9 +1,12 @@
 .shelf-item-list {
+  list-style-type: none;
+  padding: 0px; 
   margin: 0; 
 }
 
 .shelf-item {
-  border-bottom: thin solid $lime-green; 
+  border-bottom: thin solid $lime-green;
+  padding-left: 20px;  
 }
 
 .shelf-item::marker{
@@ -21,6 +24,7 @@
 .shelf-item-quantity {
   display: inline-block; 
   width: 15%; 
+  font-size: 1.2em;
 }
 
 .shelf-item-remove-btn {
