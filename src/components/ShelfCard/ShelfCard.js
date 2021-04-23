@@ -48,15 +48,16 @@ class ShelfCard extends Component {
   }
 
   render() {
+    console.log(this.state.weight)
     const { shelfName, shelfItems, deleteItem } = this.props;
     return (
       <article className="shelf-card">
         <div className="shelf-category-container">
           <h2 className="shelf-category">{shelfName}</h2>
           <button 
-          className="shelf-expand-btn" 
-          aria-expanded="false"
-          onClick={this.expandShelf}
+            className="shelf-expand-btn" 
+            aria-expanded="false"
+            onClick={this.expandShelf}
           >
             <MdExpandMore className={`shelf-expand-icon ${this.state.expanded}`}/>
           </button>
@@ -66,44 +67,46 @@ class ShelfCard extends Component {
           <form className={`form-add-item ${this.state.expanded}`} onSubmit={(event) => this.handleSubmit(event, shelfName)}>
             <label className="form-item-label">gear name
             <input
-            className="form-item-input"
-            type="text"
-            name="itemName"
-            value={this.state.itemName}
-            onChange={this.handleChange}
+              className="form-item-input"
+              type="text"
+              name="itemName"
+              value={this.state.itemName}
+              onChange={this.handleChange}
             />
             </label>
             <label className="form-quantity-label"> weight
             <input
-            className="form-quantity-input"
-            type="number"
-            min="0"
-            name="weight"
-            value={this.state.weight}
-            onChange={this.handleChange}
+              className="form-quantity-input"
+              type="number"
+              min="0"
+              step="any"
+              name="weight"
+              value={this.state.weight}
+              onChange={this.handleChange}
             /> oz
             </label>
             <label className="form-quantity-label"> amount
             <input
-            className="form-quantity-input"
-            type="number"
-            min="0"
-            name="amount"
-            value={this.state.amount}
-            onChange={this.handleChange}
+              className="form-quantity-input"
+              type="number"
+              min="0"
+              step="any"
+              name="amount"
+              value={this.state.amount}
+              onChange={this.handleChange}
             /> 
             </label>
             <button
-            type="submit"
-            className="form-add-item-btn"
+              type="submit"
+              className="form-add-item-btn"
             >
               <MdAdd className="form-add-item-icon"/>
             </button>
           </form>
           <ShelfItems 
-          shelfName={shelfName}
-          shelfItems={shelfItems}
-          deleteItem={deleteItem}
+            shelfName={shelfName}
+            shelfItems={shelfItems}
+            deleteItem={deleteItem}
           />
         </div>
       </article>
