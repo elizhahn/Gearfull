@@ -1,10 +1,15 @@
 import  React from "react";
 import  backpackerImg  from "../../assets/pinpng.com-mountain-icon-png-169757.png";
-// import { calcShelfWeights } from "../../utility";
 
-const PackStatistics = ({ packWeight, packItems, shelves }) => {
+
+const PackStatistics = ({ packWeight, shelves }) => {
   const packWeightLbs = (packWeight/ 16).toFixed(2)
-  // const shelfWeights = calcShelfWeights(packItems, shelves)
+  const shelfWeights = shelves.map(shelf => {
+    const shelfWeightInfo = Object.entries(shelf)
+    return (
+      <li>{shelfWeightInfo[0]}: {shelfWeightInfo[1]}</li>
+    )
+  })
   return (
     <aside className="statistics">
       <h1 className="statistics-title">Base Weight</h1>
@@ -17,7 +22,7 @@ const PackStatistics = ({ packWeight, packItems, shelves }) => {
           <img className="statistics-backpacker-img"  src={backpackerImg} alt="backpacker climbing silhouette"/>
         </div>
         <ul className="statistics-category-totals">
-          <li></li>
+          {shelfWeights}
         </ul>
       </article>
     </aside>

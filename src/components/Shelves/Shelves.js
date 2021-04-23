@@ -93,7 +93,6 @@ class Shelves extends Component {
       </section>
       <PackStatistics 
       packWeight={this.state.totalWeight} 
-      packItems={this.state.items} 
       shelves={this.state.shelves}
       />
     </main>
