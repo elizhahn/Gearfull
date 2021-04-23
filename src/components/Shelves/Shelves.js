@@ -1,6 +1,6 @@
 import { React, Component } from "react";
-import { getItems, getShelves, removeItem } from "../../ApiCalls";
-import { calculatePackWeight, createItemList, getShelfItems, calcItemWeight } from "../../utility";
+import { addItem, getItems, getShelves, removeItem } from "../../ApiCalls";
+import { calculatePackWeight, createItemList, getShelfItems, calcItemWeight, calcShelfWeights } from "../../utility";
 import ShelfCard from "../ShelfCard/ShelfCard";
 import PackStatistics from "../PackStatistics/PackStatistics";
 
@@ -19,39 +19,33 @@ class Shelves extends Component {
   componentDidMount() {
     getShelves()
     .then(shelves => {
-      this.setState({shelves: [...this.state.shelves, ...shelves.baskets]})
-    })
-    .then(() => getItems(this.state.shelves))
-    .then(items => {
-      const itemsList = createItemList(items, this.state.shelves);
-      const packWeight = calculatePackWeight(itemsList);
-      this.setState({items: itemsList, totalWeight: packWeight})
-    })
-   .catch(error => console.log(error));
-    
+      getItems(shelves.baskets)
+      .then(items => {
+        const itemsList = createItemList(items, shelves.baskets);
+        const updatedShelves = calcShelfWeights(items, shelves.baskets);
+        const packWeight = calculatePackWeight(itemsList);
+        this.setState({shelves: updatedShelves, items: itemsList, totalWeight: packWeight})
+      })
+     .catch(error => console.log(error));
+    })    
   }
 
-  deleteShelf = (shelfName) => {
-    fetch(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/${shelfName}`, {
-      method: "DELETE",
-      headers: {"Content-Type": "application/json"},
-      redirect:'follow'
-    })
-    .then(response => response.text())
-    .then(response => {
-      console.log(response)
-    })
-  }
+  //future iteration
+  // deleteShelf = (shelfName) => {
+  //   fetch(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/${shelfName}`, {
+  //     method: "DELETE",
+  //     headers: {"Content-Type": "application/json"},
+  //     redirect:'follow'
+  //   })
+  //   .then(response => response.text())
+  //   .then(response => {
+  //     console.log(response)
+  //   })
+  // }
 
   updateItems = (shelfName, itemAdded, weight, amount) => {
     const itemWeight = calcItemWeight(weight, amount)
-    fetch(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/${shelfName}`, {
-      method: "PUT",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(itemAdded),
-      redirect: "follow"
-    })
-    .then(response => response.json())
+    addItem(shelfName, itemAdded)
     .then(data => {
       this.setState({
         items: {...this.state.items, [shelfName]: data}, totalWeight: this.state.totalWeight + itemWeight
@@ -73,9 +67,13 @@ class Shelves extends Component {
   }
 
   render() {
-    const shelves = this.state.shelves.map((shelf, i) => {
+    const shelfNames = this.state.shelves.map(shelf => {
+      return Object.keys(shelf); 
+    })
+    const shelves = shelfNames.map((shelf, i) => {
     return <ShelfCard
     key={i}
+    id={i}
     shelfName={shelf}
     shelfItems={this.state.items[shelf]}
     updateItems={this.updateItems}
@@ -88,7 +86,10 @@ class Shelves extends Component {
         <p className="shelves-intro">Here are some shelves to get you started...</p>
         {shelves}
       </section>
-      <PackStatistics packWeight={this.state.totalWeight}/>
+      <PackStatistics 
+      packWeight={this.state.totalWeight} 
+      shelves={this.state.shelves}
+      />
     </main>
 
   )
