@@ -15,7 +15,7 @@ export const calcShelfWeights = (packItems, shelves) => {
       shelfTotal += Number(item.weight) * Number(item.amount)
     });
     const currentShelf = shelves[i]; 
-    shelfList.push({[currentShelf]: shelfTotal}) 
+    shelfList.push({[currentShelf]: shelfTotal.toFixed(2)}) 
     return shelfList
   }, []);
   
