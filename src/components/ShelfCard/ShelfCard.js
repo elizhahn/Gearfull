@@ -11,7 +11,7 @@ class ShelfCard extends Component {
       weight: "",
       amount: "",
       error: "",
-      expanded: "collapsed", 
+      expanded: "collapsed", // use boolean here
     }
   }
 
