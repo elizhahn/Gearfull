@@ -1,0 +1,52 @@
+.statistics {
+  background-color: $lime-green;
+  height: 100%;
+  width: 25%; 
+}
+
+.statistics-title {
+  background-color: $lime-green;
+  margin: 0px; 
+  padding: 10px; 
+  text-align: center; 
+}
+
+.statistics-container {
+  @include flexStyle(flex, column, justify-content, flex-start);  
+}
+
+.statistics-totals-container {
+  flex: 1; 
+}
+
+.statistics-totals {
+  display: flex; 
+  justify-content: space-evenly; 
+  list-style-type: none;
+  padding: 0px; 
+  margin-bottom: 40px;  
+}
+
+.total {
+   font-weight: 700;
+   font-size: 2em; 
+}
+
+.total-ozs {
+  color :rgb(176, 24, 199);
+}
+
+.total-lbs {
+  color: rgb(255, 89, 0);
+}
+
+.statistics-category-totals {
+  flex: 1; 
+}
+
+.statistics-backpacker-img {
+  margin-left: 75px; 
+  height: 60%;
+  width: 50%; 
+}
+

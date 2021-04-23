@@ -1,7 +1,8 @@
 import { React, Component } from "react";
-import { addItem, getItems, getShelves, removeItem } from "../../ApiCalls";
-import { getShelfItems } from "../../utility";
+import { getItems, getShelves, removeItem } from "../../ApiCalls";
+import { calculatePackWeight, createItemList, getShelfItems, calcItemWeight } from "../../utility";
 import ShelfCard from "../ShelfCard/ShelfCard";
+import PackStatistics from "../PackStatistics/PackStatistics";
 
 
 
@@ -11,7 +12,7 @@ class Shelves extends Component {
     this.state = {
       shelves: [],
       items: {},
-      error: ""
+      totalWeight: 0
     }
   }
 
@@ -22,18 +23,14 @@ class Shelves extends Component {
     })
     .then(() => getItems(this.state.shelves))
     .then(items => {
-      const itemsList = items.reduce((list, item, i) => {
-          list[this.state.shelves[i]] = item
-          return list
-      }, {})
-      this.setState({items: itemsList})
+      const itemsList = createItemList(items, this.state.shelves);
+      const packWeight = calculatePackWeight(itemsList);
+      this.setState({items: itemsList, totalWeight: packWeight})
     })
-   .catch(error => {
-     this.setState({error: "There was a problem loading your items"})
-   });
+   .catch(error => console.log(error));
     
   }
-//For later development
+
   deleteShelf = (shelfName) => {
     fetch(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/${shelfName}`, {
       method: "DELETE",
@@ -46,23 +43,29 @@ class Shelves extends Component {
     })
   }
 
-  updateItems = (shelfName, itemAdded) => {
-    addItem(shelfName, itemAdded)
+  updateItems = (shelfName, itemAdded, weight, amount) => {
+    const itemWeight = calcItemWeight(weight, amount)
+    fetch(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/${shelfName}`, {
+      method: "PUT",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(itemAdded),
+      redirect: "follow"
+    })
+    .then(response => response.json())
     .then(data => {
       this.setState({
-        items: {...this.state.items, [shelfName]: data}
+        items: {...this.state.items, [shelfName]: data}, totalWeight: this.state.totalWeight + itemWeight
       })
     })
-    .catch(error => {
-      this.setState({error: "We're sorry, that item cannot be added, please try something else"})
-    })
+    .catch(error => console.log(error))
   }
 
-  deleteItem = (shelfName, itemId) => {
+  deleteItem = (shelfName, itemId, weight, amount) => {
+    const itemWeight = calcItemWeight(weight, amount); 
     const updatedItems = getShelfItems(shelfName, itemId, this.state.items);
     removeItem(shelfName, updatedItems)
     .then(data => {
-       this.setState({items: {...this.state.items, [shelfName]: updatedItems}})
+       this.setState({items: {...this.state.items, [shelfName]: updatedItems}, totalWeight: this.state.totalWeight - itemWeight})
     })
     .catch(error => {
       this.setState({error: "We're sorry, we cannot remove this item right now, please try again later"})
@@ -70,8 +73,7 @@ class Shelves extends Component {
   }
 
   render() {
-  console.log(this.state)
-  const shelves = this.state.shelves.map((shelf, i) => {
+    const shelves = this.state.shelves.map((shelf, i) => {
     return <ShelfCard
     key={i}
     shelfName={shelf}
@@ -84,12 +86,9 @@ class Shelves extends Component {
     <main className="shelves">
       <section className="shelves-container">
         <p className="shelves-intro">Here are some shelves to get you started...</p>
-        {this.state.error && <p>{this.state.error}</p>}
         {shelves}
       </section>
-      <aside className="statistics-container">
-        <p>This will be the weight box</p>
-      </aside>
+      <PackStatistics packWeight={this.state.totalWeight}/>
     </main>
 
   )
