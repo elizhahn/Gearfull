@@ -1,34 +1,44 @@
 .shelf-category-container {
-  display: flex; 
+  display: flex;
+  align-items: center;  
 }
 
-.shelf-category-container:hover {
+.shelf-category-container:hover { 
   box-shadow: 1px 4px 8px 0 rgba(0,0,0,0.2);
 }
 
 .shelf-category {
-  color: $dark-grey; 
-  flex: 1; 
-  padding-left: 20px; 
-}
-
-.shelf-expand-btn-container {
-  width: 10%; 
+  flex: 1;
+  color: $dark-grey;  
+  padding-left: 20px;
+  font-size: 2.8rem;  
 }
 
 .shelf-expand-btn {
   @include removeButtonDefault();
-  width: 70%; 
+  width: 5%; 
 }
 
 .shelf-expand-icon {
   color: $lime-green;
   height: 90%;
-  width: 85%; 
+  width: 85%;
+  transition: .5s; 
+}
+
+.shelf-expand-icon.expanded {
+  transform: rotate(180deg)
 }
 
 .shelf-expand-container {
   overflow: hidden; 
+}
+
+.form-error-msg {
+  font-size: 1.4rem;
+  font-weight: 600; 
+  padding-left: 20px;
+  text-shadow: 1px 1px 10px rgb(255, 0, 0); 
 }
 
 .form-add-item {
@@ -37,7 +47,7 @@
   background-color: $dark-grey;
   padding: 10px 0px 10px 30px; 
   margin-top: -100%;
-  transition: all 1s; 
+  transition: all .5s; 
 }
 
 .form-add-item.expanded {
@@ -45,8 +55,10 @@
 }
 
 .form-item-label {
-  color: aliceblue; 
+  color: rgb(240, 248, 255); 
   flex: 1; 
+  font-size: 1.6rem;
+  font-weight: 600;  
 }
 
 .form-item-input {
@@ -56,6 +68,8 @@
 
 .form-quantity-label {
   color: aliceblue;
+  font-size: 1.6rem; 
+  font-weight: 600; 
 }
 
 .form-quantity-input {
