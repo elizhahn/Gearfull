@@ -1,6 +1,6 @@
 import { React, Component } from "react";
-import { getItems, getShelves } from "../../ApiCalls";
-import { calculatePackWeight, createItemList } from "../../utility";
+import { getItems, getShelves, removeItem } from "../../ApiCalls";
+import { calculatePackWeight, createItemList, getShelfItems } from "../../utility";
 import ShelfCard from "../ShelfCard/ShelfCard";
 import PackStatistics from "../PackStatistics/PackStatistics";
 
@@ -58,6 +58,17 @@ class Shelves extends Component {
       })
     })
     .catch(error => console.log(error))
+  }
+
+  deleteItem = (shelfName, itemId) => {
+    const updatedItems = getShelfItems(shelfName, itemId, this.state.items);
+    removeItem(shelfName, updatedItems)
+    .then(data => {
+       this.setState({items: {...this.state.items, [shelfName]: updatedItems}})
+    })
+    .catch(error => {
+      this.setState({error: "We're sorry, we cannot remove this item right now, please try again later"})
+    })
   }
 
   render() {
