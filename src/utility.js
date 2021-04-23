@@ -53,20 +53,18 @@ export const calcItemWeight = (weight, amount) => {
   return weightTotal
 }
 
-//looking to refactor this
-// export const calcShelfWeights = (packItems, shelves) => {
-//   const shelfItemList =  Object.values(packItems)
-//   const shelfWeights = shelfItemList.reduce((weightList, shelf, i) => {
-//    let shelfTotal = 0; 
-//    const shelfItems = Object.values(shelf);
-//    shelfItems.forEach(item => {
-//       shelfTotal += Number(item.weight) * Number(item.amount)
-//    });
-//     weightList[shelves[i]] = shelfTotal; 
-//     return weightList
-//   }, {})
-//   return shelfWeights 
-// }
+export const checkShelves = (shelves, shelfName) => {
+  
+  const shelfNames = shelves.map(shelf => {
+    const shelfName =  Object.keys(shelf);
+    return shelfName[0]; 
+  })
+  if(shelfNames.includes(shelfName.toLowerCase())) {
+    return true;
+  }
+  return false; 
+
+}
 
 
 

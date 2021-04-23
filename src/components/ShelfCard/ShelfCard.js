@@ -48,7 +48,6 @@ class ShelfCard extends Component {
   }
 
   render() {
-    console.log(this.state.weight)
     const { shelfName, shelfItems, deleteItem } = this.props;
     return (
       <article className="shelf-card">
