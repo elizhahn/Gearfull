@@ -52,15 +52,13 @@ class ShelfCard extends Component {
       <article className="shelf-card">
         <div className="shelf-category-container">
           <h2 className="shelf-category">{shelfName}</h2>
-          <div className="shelf-expand-btn-container">
             <button 
             className="shelf-expand-btn" 
             aria-expanded="false"
             onClick={this.expandShelf}
             >
-              <MdExpandMore className="shelf-expand-icon"/>
+              <MdExpandMore className={`shelf-expand-icon ${this.state.expanded}`}/>
             </button>
-          </div>
         </div>
         <div className="shelf-expand-container">
           {this.state.error && <p>{this.state.error}</p>}
