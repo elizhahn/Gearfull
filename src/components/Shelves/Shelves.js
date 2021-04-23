@@ -76,6 +76,7 @@ class Shelves extends Component {
     const shelves = this.state.shelves.map((shelf, i) => {
     return <ShelfCard
     key={i}
+    id={i}
     shelfName={shelf}
     shelfItems={this.state.items[shelf]}
     updateItems={this.updateItems}
@@ -88,7 +89,11 @@ class Shelves extends Component {
         <p className="shelves-intro">Here are some shelves to get you started...</p>
         {shelves}
       </section>
-      <PackStatistics packWeight={this.state.totalWeight}/>
+      <PackStatistics 
+      packWeight={this.state.totalWeight} 
+      packItems={this.state.items} 
+      shelves={this.state.shelves}
+      />
     </main>
 
   )

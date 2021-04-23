@@ -16,7 +16,6 @@ class App extends Component {
   }
 
   render() {
-    console.log("test app")
   return (
     <div className="App">
       <Route exact path="/">
