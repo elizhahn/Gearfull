@@ -1,5 +1,5 @@
 import { React, Component } from "react";
-import { getItems, getShelves, removeItem } from "../../ApiCalls";
+import { addItem, getItems, getShelves, removeItem } from "../../ApiCalls";
 import { calculatePackWeight, createItemList, getShelfItems, calcItemWeight, calcShelfWeights } from "../../utility";
 import ShelfCard from "../ShelfCard/ShelfCard";
 import PackStatistics from "../PackStatistics/PackStatistics";
@@ -30,27 +30,22 @@ class Shelves extends Component {
     })    
   }
 
-  deleteShelf = (shelfName) => {
-    fetch(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/${shelfName}`, {
-      method: "DELETE",
-      headers: {"Content-Type": "application/json"},
-      redirect:'follow'
-    })
-    .then(response => response.text())
-    .then(response => {
-      console.log(response)
-    })
-  }
+  //future iteration
+  // deleteShelf = (shelfName) => {
+  //   fetch(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/${shelfName}`, {
+  //     method: "DELETE",
+  //     headers: {"Content-Type": "application/json"},
+  //     redirect:'follow'
+  //   })
+  //   .then(response => response.text())
+  //   .then(response => {
+  //     console.log(response)
+  //   })
+  // }
 
   updateItems = (shelfName, itemAdded, weight, amount) => {
     const itemWeight = calcItemWeight(weight, amount)
-    fetch(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/${shelfName}`, {
-      method: "PUT",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(itemAdded),
-      redirect: "follow"
-    })
-    .then(response => response.json())
+    addItem(shelfName, itemAdded)
     .then(data => {
       this.setState({
         items: {...this.state.items, [shelfName]: data}, totalWeight: this.state.totalWeight + itemWeight
