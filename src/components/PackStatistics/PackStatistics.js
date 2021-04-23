@@ -1,10 +1,10 @@
 import  React from "react";
 import  backpackerImg  from "../../assets/pinpng.com-mountain-icon-png-169757.png";
-import { calcShelfWeights } from "../../utility";
+// import { calcShelfWeights } from "../../utility";
 
 const PackStatistics = ({ packWeight, packItems, shelves }) => {
   const packWeightLbs = (packWeight/ 16).toFixed(2)
-  const shelfWeights = calcShelfWeights(packItems, shelves)
+  // const shelfWeights = calcShelfWeights(packItems, shelves)
   return (
     <aside className="statistics">
       <h1 className="statistics-title">Base Weight</h1>

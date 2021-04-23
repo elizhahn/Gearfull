@@ -1,6 +1,6 @@
 import { React, Component } from "react";
 import { getItems, getShelves, removeItem } from "../../ApiCalls";
-import { calculatePackWeight, createItemList, getShelfItems, calcItemWeight } from "../../utility";
+import { calculatePackWeight, createItemList, getShelfItems, calcItemWeight, calcShelfWeights } from "../../utility";
 import ShelfCard from "../ShelfCard/ShelfCard";
 import PackStatistics from "../PackStatistics/PackStatistics";
 
@@ -19,16 +19,15 @@ class Shelves extends Component {
   componentDidMount() {
     getShelves()
     .then(shelves => {
-      this.setState({shelves: [...this.state.shelves, ...shelves.baskets]})
-    })
-    .then(() => getItems(this.state.shelves))
-    .then(items => {
-      const itemsList = createItemList(items, this.state.shelves);
-      const packWeight = calculatePackWeight(itemsList);
-      this.setState({items: itemsList, totalWeight: packWeight})
-    })
-   .catch(error => console.log(error));
-    
+      getItems(shelves.baskets)
+      .then(items => {
+        const itemsList = createItemList(items, shelves.baskets);
+        const updatedShelves = calcShelfWeights(items, shelves.baskets);
+        const packWeight = calculatePackWeight(itemsList);
+        this.setState({shelves: updatedShelves, items: itemsList, totalWeight: packWeight})
+      })
+     .catch(error => console.log(error));
+    })    
   }
 
   deleteShelf = (shelfName) => {
@@ -73,7 +72,10 @@ class Shelves extends Component {
   }
 
   render() {
-    const shelves = this.state.shelves.map((shelf, i) => {
+    const shelfNames = this.state.shelves.map(shelf => {
+      return Object.keys(shelf); 
+    })
+    const shelves = shelfNames.map((shelf, i) => {
     return <ShelfCard
     key={i}
     id={i}

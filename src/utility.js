@@ -7,6 +7,21 @@ export const createItemList = (packItems, shelves) => {
  return itemsList
 }
 
+export const calcShelfWeights = (packItems, shelves) => {
+  const shelfInfo = packItems.reduce((shelfList, shelf, i) => {
+    let shelfTotal = 0; 
+    const shelfItems = Object.values(shelf);
+    shelfItems.forEach(item => {
+      shelfTotal += Number(item.weight) * Number(item.amount)
+    });
+    const currentShelf = shelves[i]; 
+    shelfList.push({[currentShelf]: shelfTotal}) 
+    return shelfList
+  }, []);
+  
+  return shelfInfo
+}
+
 
 export const getShelfItems = (shelfName, itemId, itemList) => {
   const items = itemList[shelfName]
@@ -39,17 +54,19 @@ export const calcItemWeight = (weight, amount) => {
 }
 
 //looking to refactor this
-export const calcShelfWeights = (packItems, shelves) => {
-  const shelfItemList =  Object.values(packItems)
-  const shelfWeights = shelfItemList.reduce((weightList, shelf, i) => {
-   let shelfTotal = 0; 
-   const shelfItems = Object.values(shelf);
-   shelfItems.forEach(item => {
-      shelfTotal += Number(item.weight) * Number(item.amount)
-   });
-    weightList[shelves[i]] = shelfTotal; 
-    return weightList
-  }, {})
-  return shelfWeights 
-}
+// export const calcShelfWeights = (packItems, shelves) => {
+//   const shelfItemList =  Object.values(packItems)
+//   const shelfWeights = shelfItemList.reduce((weightList, shelf, i) => {
+//    let shelfTotal = 0; 
+//    const shelfItems = Object.values(shelf);
+//    shelfItems.forEach(item => {
+//       shelfTotal += Number(item.weight) * Number(item.amount)
+//    });
+//     weightList[shelves[i]] = shelfTotal; 
+//     return weightList
+//   }, {})
+//   return shelfWeights 
+// }
+
+
 
