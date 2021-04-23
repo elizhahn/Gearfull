@@ -1,10 +1,11 @@
-.shelves {
-  height: 100%; 
-  display: flex; 
+.shelves { 
+  display: flex;
+  align-items: stretch;
+  overflow: scroll;  
 }
 
 .shelves-container {
-  width: 75%; 
+  width: 75%;  
 }
 
 .shelves-intro {
