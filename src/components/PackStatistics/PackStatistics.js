@@ -4,10 +4,10 @@ import  backpackerImg  from "../../assets/pinpng.com-mountain-icon-png-169757.pn
 
 const PackStatistics = ({ packWeight, shelves }) => {
   const packWeightLbs = (packWeight/ 16).toFixed(2)
-  const shelfWeights = shelves.map(shelf => {
+  const shelfWeights = shelves.map((shelf, i) => {
     const shelfWeightInfo = Object.entries(shelf)
     return (
-      <li>{shelfWeightInfo[0]}: {shelfWeightInfo[1]}</li>
+      <li key={i}>{shelfWeightInfo[0]}: {shelfWeightInfo[1]}</li>
     )
   })
   return (
