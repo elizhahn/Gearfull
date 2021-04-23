@@ -24,7 +24,7 @@ export const calculatePackWeight = (allShelfItems) => {
     if(Object.keys(shelfItems).length) {
       const items = Object.values(shelfItems)
         items.forEach(item => {
-          total += Number(item.weight);
+          total += Number(item.weight * item.amount);
       });
     }
     return total
