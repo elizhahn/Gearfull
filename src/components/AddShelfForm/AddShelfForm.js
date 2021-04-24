@@ -8,8 +8,6 @@ class AddShelfForm extends Component {
       newShelf: "",
       error: ""
     }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange = (event) => {
@@ -28,8 +26,7 @@ class AddShelfForm extends Component {
   } else if (!this.state.newShelf) {
       this.setState({error: "Please create a shelf name"})
   } else {
-    this.props.addShelf(this.state.newShelf.toLowerCase())
-    console.log("test")
+    this.props.addShelf(this.state.newShelf)
     this.clearInputs(); 
   } 
   }

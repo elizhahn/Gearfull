@@ -22,8 +22,25 @@ export const calcShelfWeights = (packItems, shelves) => {
   return shelfInfo
 }
 
+export const updateShelfWeight = (shelves, shelfName, weight, amount, action) => {
+  const weightToAdd = parseFloat(weight * amount); 
+  const updatedShelves = shelves.map(shelf => {
+     const currentShelfName = Object.keys(shelf)[0]
+    if(currentShelfName === shelfName && action) {
+       shelf[shelfName] = (parseFloat(shelf[shelfName]) + weightToAdd).toFixed(2)
+       return shelf;
+    } 
+    if(currentShelfName === shelfName && !action) {
+      shelf[shelfName] = (parseFloat(shelf[shelfName]) - weightToAdd).toFixed(2)
+       return shelf;
+    }   
+    return shelf; 
+  })
+  return updatedShelves ;
+}
 
-export const getShelfItems = (shelfName, itemId, itemList) => {
+
+export const updateShelfItems = (shelfName, itemId, itemList) => {
   const items = itemList[shelfName]
   for(const itemName in items) {
     if(items[itemName].id === itemId) {
@@ -33,19 +50,13 @@ export const getShelfItems = (shelfName, itemId, itemList) => {
   return items; 
 }
 
-export const calculatePackWeight = (allShelfItems) => {
-  const packItemsList = Object.values(allShelfItems)
-  const weight = packItemsList.reduce((total, shelfItems) => {
-    if(Object.keys(shelfItems).length) {
-      const items = Object.values(shelfItems)
-        items.forEach(item => {
-          total += Number(item.weight * item.amount);
-      });
-    }
-    return total
+export const calculatePackWeight = (shelves) => {
+  const packWeight = shelves.reduce((totalWeight, shelf) => {
+    const shelfWeight = parseFloat(Object.values(shelf).flat()[0]); 
+    totalWeight += shelfWeight; 
+    return totalWeight
   }, 0);
-  
-  return weight
+  return packWeight; 
 }
 
 export const calcItemWeight = (weight, amount) => {

@@ -50,3 +50,12 @@ export const createShelf = (shelfName) => {
   })
   .then(response => response.text())
 }
+
+export const deleteCurrentShelf = (shelfName) => {
+  return fetch(`${baseURL}/basket/${shelfName}`, {
+    method: "DELETE",
+    headers: {"Content-Type": "application/json"},
+    redirect:'follow'
+  })
+  .then(response => response.text())
+}
