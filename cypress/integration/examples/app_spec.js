@@ -73,7 +73,7 @@ describe("User Dashboard", () => {
     cy.get("[data-cy=shelf-weight-lb]").contains("0.00 Lbs")
   });
 
-  it.only("should let a user add items to their shelf and update the dashboard", () => {
+  it("should let a user add items to their shelf and update the dashboard", () => {
     cy.get("[data-cy=expand-shelf-btn]").first().click();
     cy.get("[data-cy=item-name-input]").first().type("garmin");
     cy.get("[data-cy=item-weight-input]").first().type("40");
@@ -87,4 +87,14 @@ describe("User Dashboard", () => {
     cy.get("[data-cy=shelf-weight-oz]").first().contains("40.00 Oz")
     cy.get("[data-cy=shelf-weight-lb]").first().contains("2.50 Lbs")
   });
+
+  it("should let a user delete an item they added and update the dashboard", () => {
+    cy.get("[data-cy=expand-shelf-btn]").first().click();
+    cy.get("[data-cy=delete-item-btn]").first().click();
+    cy.get("[data-cy=added-item]").should("not.exist");
+    cy.get("[data-cy=statistics-box]").should("contain", "0.00 Oz")
+    .and("contain", "0.00 Lbs");
+    cy.get("[data-cy=shelf-weight-oz]").first().contains("0.00 Oz");
+    cy.get("[data-cy=shelf-weight-lb]").first().contains("0.00 Lbs");
+  })
 });
