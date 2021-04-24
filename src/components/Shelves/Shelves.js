@@ -1,5 +1,5 @@
 import { React, Component } from "react";
-import { addItem, createShelf, getItems, getShelves, removeItem } from "../../ApiCalls";
+import { addItem, createShelf, getItems, getShelves, removeItem, deleteCurrentShelf } from "../../ApiCalls";
 import { calculatePackWeight, createItemList, getShelfItems, calcItemWeight, calcShelfWeights, removeShelf, updateShelfWeight } from "../../utility";
 import ShelfCard from "../ShelfCard/ShelfCard";
 import PackStatistics from "../PackStatistics/PackStatistics";
@@ -41,12 +41,7 @@ class Shelves extends Component {
   }
 
   deleteShelf = (shelfName) => {
-    fetch(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/${shelfName}`, {
-      method: "DELETE",
-      headers: {"Content-Type": "application/json"},
-      redirect:'follow'
-    })
-    .then(response => response.text())
+    deleteCurrentShelf(shelfName)
     .then(data => {
       const newShelfList = removeShelf(shelfName, this.state.shelves);
       this.setState({shelves: newShelfList})
