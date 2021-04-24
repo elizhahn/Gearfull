@@ -15,7 +15,7 @@ export const getShelves = () => {
 
 export const getItems = (shelves) => {
   const items = shelves.map(shelf => {
-    return fetch(`${baseURL}/basket/${shelf}`)
+    return fetch(`${baseURL}/baske/${shelf}`)
    .then(response => checkForErrors(response))
   }) 
   return Promise.all(items)
