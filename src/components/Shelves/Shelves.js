@@ -34,7 +34,9 @@ class Shelves extends Component {
   addShelf = (shelfName) => {
     createShelf(shelfName)
     .then(data => {
-      this.setState({shelves: [...this.state.shelves, {[shelfName]: 0}]})
+      const updatedShelves = [{[shelfName]: 0}].concat(this.state.shelves)
+      console.log(updatedShelves)
+      this.setState({shelves: updatedShelves})
     }) 
     .catch(error => console.log(error))
   }
@@ -77,7 +79,7 @@ class Shelves extends Component {
   }
 
   render() {
-    // this.deleteShelf("shoes")
+    // this.deleteShelf("Water")
     const shelfNames = this.state.shelves.map(shelf => {
       return Object.keys(shelf); 
     })

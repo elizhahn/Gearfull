@@ -16,6 +16,10 @@ class AddShelfForm extends Component {
     this.setState({[name]: value.toLowerCase()})
   }
 
+  clearInputs = () => {
+    this.setState = ({newShelf: "", error: ""})
+  }
+
   handleSubmit = (event) => {
     event.preventDefault();
     if(checkShelves(this.props.shelves, this.state.newShelf)) {
@@ -23,7 +27,8 @@ class AddShelfForm extends Component {
   } else if (!this.state.newShelf) {
       this.setState({error: "Please create a shelf name"})
   } else {
-    this.props.addShelf(this.state.newShelf)
+    this.props.addShelf(this.state.newShelf.toLowerCase())
+    this.clearInputs(); 
   } 
   }
 
