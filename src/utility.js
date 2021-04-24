@@ -40,7 +40,7 @@ export const updateShelfWeight = (shelves, shelfName, weight, amount, action) =>
 }
 
 
-export const getShelfItems = (shelfName, itemId, itemList) => {
+export const updateShelfItems = (shelfName, itemId, itemList) => {
   const items = itemList[shelfName]
   for(const itemName in items) {
     if(items[itemName].id === itemId) {

@@ -1,6 +1,6 @@
 import { React, Component } from "react";
 import { addItem, createShelf, getItems, getShelves, removeItem, deleteCurrentShelf } from "../../ApiCalls";
-import { calculatePackWeight, createItemList, getShelfItems, calcItemWeight, calcShelfWeights, removeShelf, updateShelfWeight } from "../../utility";
+import { calculatePackWeight, createItemList, updateShelfItems, calcItemWeight, calcShelfWeights, removeShelf, updateShelfWeight } from "../../utility";
 import ShelfCard from "../ShelfCard/ShelfCard";
 import PackStatistics from "../PackStatistics/PackStatistics";
 import AddShelfForm from "../AddShelfForm/AddShelfForm";
@@ -64,10 +64,10 @@ class Shelves extends Component {
   deleteItem = (shelfName, itemId, weight, amount) => {
     const updatedShelves = updateShelfWeight(this.state.shelves, shelfName, weight, amount, false); 
     const itemWeight = calcItemWeight(weight, amount); 
-    const updatedItems = getShelfItems(shelfName, itemId, this.state.items);
-    removeItem(shelfName, updatedItems)
+    const updatedItemsList = updateShelfItems(shelfName, itemId, this.state.items);
+    removeItem(shelfName, updatedItemsList)
     .then(data => {
-       this.setState({items: {...this.state.items, [shelfName]: updatedItems}, shelves: updatedShelves,  totalWeight: this.state.totalWeight - itemWeight})
+       this.setState({items: {...this.state.items, [shelfName]: updatedItemsList}, shelves: updatedShelves,  totalWeight: this.state.totalWeight - itemWeight})
     })
     .catch(error => {
       this.setState({error: "We're sorry, we cannot remove this item right now, please try again later"})
