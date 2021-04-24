@@ -1,0 +1,32 @@
+.remove-modal-overlay {
+  @include flexStyle(flex, row, align-items, center); 
+  position: fixed;
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+}
+
+.remove-modal-content {   
+  background-color: #fefefe;
+  text-align: center; 
+  margin: 8% auto; 
+  padding: 20px;
+  border-radius: 5px; 
+  width: 30%; 
+  height:30%;
+  font-size:1.2em;    
+}
+
+.remove-modal-options {
+  @include flexStyle(flex, row, justify-content, space-evenly); 
+}
+
+.remove-modal-btn {
+  @include buttonStyle($dark-grey, $lime-green);
+  margin: 5px;  
+  padding: 5px; 
+}

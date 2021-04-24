@@ -1,7 +1,8 @@
 import { React, Component } from "react";
 import ShelfItems from "../ShelfItems/ShelfItems";
-import { MdAdd, MdRemoveCircle, MdExpandMore } from "react-icons/md";
+import { MdAdd, MdExpandMore } from "react-icons/md";
 import { IoMdRemoveCircle } from "react-icons/io";
+import RemoveModal from "../RemoveModal/RemoveModal";
 
 class ShelfCard extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class ShelfCard extends Component {
       amount: "",
       error: "",
       expanded: "collapsed", // use boolean here
+      modalOpen: false
     }
   }
 
@@ -47,13 +49,18 @@ class ShelfCard extends Component {
   }
   }
 
+  showModal = () => {
+    this.setState({modalOpen: true})
+  }
+
   render() {
     const { shelfName, shelfItems, deleteItem } = this.props;
     return (
       <article className="shelf-card">
         <div className="shelf-category-container">
           <button 
-            className="shelf-remove-category-btn">
+            className="shelf-remove-category-btn"
+            onClick={this.showModal}>
               <IoMdRemoveCircle className="shelf-remove-category-icon"/>
           </button>
           <h2 className="shelf-category">{shelfName}</h2>
@@ -64,6 +71,7 @@ class ShelfCard extends Component {
           >
             <MdExpandMore className={`shelf-expand-icon ${this.state.expanded}`}/>
           </button>
+          {this.state.modalOpen && <RemoveModal/>}
         </div>
         <div className="shelf-expand-container">
           {this.state.error && <p className="form-error-msg">{this.state.error}</p>}
