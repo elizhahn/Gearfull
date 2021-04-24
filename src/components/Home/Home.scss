@@ -26,6 +26,7 @@
 
 .home-start-btn {
   @include buttonStyle( rgb(54,54,54), rgb(252, 252, 252));
+  padding: 10px; 
 }
 
 .home-start-btn:hover {

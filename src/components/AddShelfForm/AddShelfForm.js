@@ -1,5 +1,4 @@
 import  { React, Component } from "react";
-import { MdAdd } from "react-icons/md";
 import { checkShelves } from "../../utility";
 
 class AddShelfForm extends Component {
@@ -34,20 +33,21 @@ class AddShelfForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        {this.state.error && <p>{this.state.error}</p>}
+      <form className="form-add-shelf-container" onSubmit={this.handleSubmit}>
         <button 
-        type="submit"
-        className="shelves-add-category-btn" 
+        className="form-add-shelf-btn"
+        type="submit" 
         >
-          <MdAdd className="shelves-add-category-icon"/>
+          add a shelf
       </button>
       <input
+        className="form-add-shelf-input"
         type="text"
         value={this.state.value}
         name="newShelf"
         onChange={this.handleChange}
       />
+      {this.state.error && <p className="form-add-shelf-error">{this.state.error}</p>}
     </form>
     )
   }

@@ -1,0 +1,23 @@
+.form-add-shelf-container {
+  @include flexStyle(flex, row, justify-content, flex-start);
+  align-items: center; 
+}
+
+.form-add-shelf-btn {
+  @include buttonStyle($dark-grey, $lime-green);
+  margin-left: 20px;
+  padding: 5px 10px; 
+  font-weight: 600;  
+}
+
+.form-add-shelf-input {
+  margin: 0px 20px;
+  width: 30%;
+  height: 20px;   
+}
+
+.form-add-shelf-error {
+  font-weight: 600; 
+  text-shadow: 1px 1px 10px rgb(255, 0, 0); 
+  margin: 0px; 
+}
