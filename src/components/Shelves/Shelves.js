@@ -21,8 +21,10 @@ class Shelves extends Component {
   componentDidMount() {
     getShelves()
     .then(shelves => {
+      console.log(shelves)
       getItems(shelves.baskets)
       .then(items => {
+        console.log(items)
         const itemsList = createItemList(items, shelves.baskets);
         const updatedShelves = calcShelfWeights(items, shelves.baskets);
         const packWeight = calculatePackWeight(updatedShelves);
