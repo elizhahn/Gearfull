@@ -14,6 +14,7 @@ class Shelves extends Component {
       shelves: [],
       items: {},
       totalWeight: 0,
+      error: ""
     }
   }
 
@@ -27,7 +28,9 @@ class Shelves extends Component {
         const packWeight = calculatePackWeight(updatedShelves);
         this.setState({shelves: updatedShelves, items: itemsList, totalWeight: packWeight})
       })
-     .catch(error => console.log(error));
+     .catch(error => {
+       this.setState({error: "We can't load your shelves right now, please try again later"})
+     });
     })    
   }
 
@@ -96,6 +99,8 @@ class Shelves extends Component {
           addShelf={this.addShelf}
           shelves={this.state.shelves}
         />
+        {this.state.error && <p className="shelves-loading-msg">{this.state.error}</p>}
+        {!this.state.error && !this.state.shelves.length && <p className="shelves-loading-msg">Loading shelves...</p>}
         {shelves}
       </section>
       <PackStatistics 
