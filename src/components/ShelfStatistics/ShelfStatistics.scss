@@ -3,6 +3,11 @@
   margin: 10px;   
 }
 
+.statistics-category-title {
+  font-size: 2.8rem; 
+  text-align: center;
+}
+
 .statistics-category-list {
   list-style-type: none;
   padding: 0;
@@ -14,7 +19,15 @@
   padding: 10px;  
 }
 
-.statistics-category-title {
+.statistics-category-name { 
   margin-right: 10px;
-  font-weight: 600;  
+  font-weight: 600;   
+}
+
+.statistics-category-oz {
+  color: rgb(176, 24, 199);
+}
+
+.statistics-category-lbs {
+  color: rgb(255, 89, 0);
 }
