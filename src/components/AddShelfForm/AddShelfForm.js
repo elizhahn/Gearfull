@@ -33,10 +33,11 @@ class AddShelfForm extends Component {
 
   render() {
     return (
-      <form className="form-add-shelf-container" onSubmit={this.handleSubmit}>
+      <form className="form-add-shelf-container" onSubmit={this.handleSubmit} data-cy="add-shelf-form">
         <button 
         className="form-add-shelf-btn"
-        type="submit" 
+        type="submit"
+        data-cy="add-shelf-btn"
         >
           add a shelf
       </button>

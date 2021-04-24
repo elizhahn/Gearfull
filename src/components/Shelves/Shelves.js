@@ -21,10 +21,8 @@ class Shelves extends Component {
   componentDidMount() {
     getShelves()
     .then(shelves => {
-      console.log(shelves)
       getItems(shelves.baskets)
       .then(items => {
-        console.log(items)
         const itemsList = createItemList(items, shelves.baskets);
         const updatedShelves = calcShelfWeights(items, shelves.baskets);
         const packWeight = calculatePackWeight(updatedShelves);
@@ -95,8 +93,8 @@ class Shelves extends Component {
   })
   return (
     <main className="shelves">
-      <section className="shelves-container">
-        <p className="shelves-intro">Here are some shelves to get you started...</p>
+      <section className="shelves-container" data-cy="shelves" >
+        <p className="shelves-intro" data-cy="shelves-intro">Here are some shelves to get you started...</p>
         <AddShelfForm 
           addShelf={this.addShelf}
           shelves={this.state.shelves}

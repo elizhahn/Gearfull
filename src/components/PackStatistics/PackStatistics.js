@@ -7,7 +7,7 @@ const PackStatistics = ({ packWeight, shelves }) => {
   const packWeightOz = packWeight.toFixed(2)
   const packWeightLbs = (packWeight/ 16).toFixed(2)
   return (
-    <aside className="statistics">
+    <aside className="statistics" data-cy="statistics-box">
       <h1 className="statistics-title">Base Weight</h1>
       <article className="statistics-container">
         <div className="statistics-totals-container">

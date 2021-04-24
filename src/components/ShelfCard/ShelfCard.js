@@ -61,7 +61,7 @@ class ShelfCard extends Component {
   render() {
     const { shelfName, shelfItems, deleteItem } = this.props;
     return (
-      <article className="shelf-card">
+      <article className="shelf-card" data-cy="shelf">
         <div className="shelf-category-container">
           <button 
             className="shelf-remove-category-btn"
