@@ -14,6 +14,18 @@
   font-size: 2.8rem;  
 }
 
+.shelf-remove-category-btn {
+  @include removeButtonDefault();
+  margin-left: 20px;
+  width: 3%;
+}
+
+.shelf-remove-category-icon { 
+  color: $dark-grey;
+  width: 90%; 
+  height: 90%; 
+}
+
 .shelf-expand-btn {
   @include removeButtonDefault();
   width: 5%; 
@@ -92,4 +104,6 @@
 .form-add-item-icon:hover {
   filter:drop-shadow(1px 1px 5px $lime-green); 
 }
+
+
 

@@ -1,6 +1,6 @@
 import { React, Component } from "react";
 import { addItem, createShelf, getItems, getShelves, removeItem } from "../../ApiCalls";
-import { calculatePackWeight, createItemList, getShelfItems, calcItemWeight, calcShelfWeights } from "../../utility";
+import { calculatePackWeight, createItemList, getShelfItems, calcItemWeight, calcShelfWeights, removeShelf } from "../../utility";
 import ShelfCard from "../ShelfCard/ShelfCard";
 import PackStatistics from "../PackStatistics/PackStatistics";
 import AddShelfForm from "../AddShelfForm/AddShelfForm";
@@ -35,14 +35,12 @@ class Shelves extends Component {
     createShelf(shelfName)
     .then(data => {
       const updatedShelves = [{[shelfName]: 0}].concat(this.state.shelves)
-      console.log(updatedShelves)
       this.setState({shelves: updatedShelves})
+      console.log("test")
     }) 
     .catch(error => console.log(error))
   }
 
-
-  // future iteration
   deleteShelf = (shelfName) => {
     fetch(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/${shelfName}`, {
       method: "DELETE",
@@ -51,7 +49,8 @@ class Shelves extends Component {
     })
     .then(response => response.text())
     .then(data => {
-      console.log(data)
+      const newShelfList = removeShelf(shelfName, this.state.shelves);
+      this.setState({shelves: newShelfList})
     })
   }
 
@@ -79,11 +78,10 @@ class Shelves extends Component {
   }
 
   render() {
-    // this.deleteShelf("Water")
     const shelfNames = this.state.shelves.map(shelf => {
       return Object.keys(shelf); 
     })
-    const shelves = shelfNames.map((shelf, i) => {
+    const shelves = shelfNames.flat().map((shelf, i) => {
     return <ShelfCard
       key={i}
       id={i}
@@ -91,6 +89,7 @@ class Shelves extends Component {
       shelfItems={this.state.items[shelf]}
       updateItems={this.updateItems}
       deleteItem={this.deleteItem}
+      deleteShelf={this.deleteShelf}
     />
   })
   return (
