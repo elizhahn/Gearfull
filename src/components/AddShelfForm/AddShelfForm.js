@@ -18,7 +18,7 @@ class AddShelfForm extends Component {
   }
 
   clearInputs = () => {
-    this.setState = ({newShelf: "", error: ""})
+    this.setState({newShelf: "", error: ""})
   }
 
   handleSubmit = (event) => {
@@ -29,6 +29,7 @@ class AddShelfForm extends Component {
       this.setState({error: "Please create a shelf name"})
   } else {
     this.props.addShelf(this.state.newShelf.toLowerCase())
+    console.log("test")
     this.clearInputs(); 
   } 
   }
@@ -45,7 +46,7 @@ class AddShelfForm extends Component {
       <input
         className="form-add-shelf-input"
         type="text"
-        value={this.state.value}
+        value={this.state.newShelf}
         name="newShelf"
         onChange={this.handleChange}
       />

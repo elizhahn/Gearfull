@@ -34,9 +34,9 @@ class Shelves extends Component {
   addShelf = (shelfName) => {
     createShelf(shelfName)
     .then(data => {
-      console.log("test")
       const updatedShelves = [{[shelfName]: 0}].concat(this.state.shelves)
       this.setState({shelves: updatedShelves})
+      console.log("test")
     }) 
     .catch(error => console.log(error))
   }
