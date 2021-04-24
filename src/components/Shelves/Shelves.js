@@ -34,7 +34,7 @@ class Shelves extends Component {
   addShelf = (shelfName) => {
     createShelf(shelfName)
     .then(data => {
-      const updatedShelves = [{[shelfName]: 0}].concat(this.state.shelves)
+      const updatedShelves = [{[shelfName]: "0.00"}].concat(this.state.shelves)
       this.setState({shelves: updatedShelves})
     }) 
     .catch(error => console.log(error))
@@ -53,7 +53,6 @@ class Shelves extends Component {
     const itemWeight = calcItemWeight(weight, amount)
     addItem(shelfName, itemAdded)
     .then(data => {
-      console.log(data)
       this.setState({
         items: {...this.state.items, [shelfName]: data}, shelves: updatedShelves,  totalWeight: this.state.totalWeight + itemWeight
       })
