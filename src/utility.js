@@ -22,6 +22,19 @@ export const calcShelfWeights = (packItems, shelves) => {
   return shelfInfo
 }
 
+export const updateShelfWeight = (shelves, shelfName, weight, amount) => {
+  const weightToAdd = parseFloat(weight * amount); 
+  const updatedShelves = shelves.map(shelf => {
+     const currentShelfName = Object.keys(shelf)[0]
+    if(currentShelfName === shelfName) {
+       shelf[shelfName] = (parseFloat(shelf[shelfName]) + weightToAdd).toFixed(2);
+       return shelf;
+    }
+    return shelf; 
+  })
+  return updatedShelves ;
+}
+
 
 export const getShelfItems = (shelfName, itemId, itemList) => {
   const items = itemList[shelfName]

@@ -1,6 +1,6 @@
 import { React, Component } from "react";
 import { addItem, createShelf, getItems, getShelves, removeItem } from "../../ApiCalls";
-import { calculatePackWeight, createItemList, getShelfItems, calcItemWeight, calcShelfWeights, removeShelf } from "../../utility";
+import { calculatePackWeight, createItemList, getShelfItems, calcItemWeight, calcShelfWeights, removeShelf, updateShelfWeight } from "../../utility";
 import ShelfCard from "../ShelfCard/ShelfCard";
 import PackStatistics from "../PackStatistics/PackStatistics";
 import AddShelfForm from "../AddShelfForm/AddShelfForm";
@@ -36,7 +36,6 @@ class Shelves extends Component {
     .then(data => {
       const updatedShelves = [{[shelfName]: 0}].concat(this.state.shelves)
       this.setState({shelves: updatedShelves})
-      console.log("test")
     }) 
     .catch(error => console.log(error))
   }
@@ -55,11 +54,13 @@ class Shelves extends Component {
   }
 
   updateItems = (shelfName, itemAdded, weight, amount) => {
+    const updatedShelves = updateShelfWeight(this.state.shelves, shelfName, weight, amount); 
     const itemWeight = calcItemWeight(weight, amount)
     addItem(shelfName, itemAdded)
     .then(data => {
+      console.log(data)
       this.setState({
-        items: {...this.state.items, [shelfName]: data}, totalWeight: this.state.totalWeight + itemWeight
+        items: {...this.state.items, [shelfName]: data}, shelves: updatedShelves,  totalWeight: this.state.totalWeight + itemWeight
       })
     })
     .catch(error => console.log(error))
