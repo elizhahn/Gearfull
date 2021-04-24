@@ -73,6 +73,7 @@ class ShelfCard extends Component {
             className="shelf-expand-btn" 
             aria-expanded="false"
             onClick={this.expandShelf}
+            data-cy="expand-shelf-btn"
           >
             <MdExpandMore className={`shelf-expand-icon ${this.state.expanded}`}/>
           </button>
@@ -93,6 +94,7 @@ class ShelfCard extends Component {
               name="itemName"
               value={this.state.itemName}
               onChange={this.handleChange}
+              data-cy="item-name-input"
             />
             </label>
             <label className="form-quantity-label"> weight
@@ -104,6 +106,7 @@ class ShelfCard extends Component {
               name="weight"
               value={this.state.weight}
               onChange={this.handleChange}
+              data-cy="item-weight-input"
             /> oz
             </label>
             <label className="form-quantity-label"> amount
@@ -115,11 +118,13 @@ class ShelfCard extends Component {
               name="amount"
               value={this.state.amount}
               onChange={this.handleChange}
+              data-cy="item-amount-input"
             /> 
             </label>
             <button
               type="submit"
               className="form-add-item-btn"
+              data-cy="item-add-btn"
             >
               <MdAdd className="form-add-item-icon"/>
             </button>

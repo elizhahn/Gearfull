@@ -71,7 +71,20 @@ describe("User Dashboard", () => {
       .and("contain", "cook system");
     cy.get("[data-cy=shelf-weight-oz]").contains("0.00 Oz")
     cy.get("[data-cy=shelf-weight-lb]").contains("0.00 Lbs")
-    
+  });
 
-  })
-})
+  it.only("should let a user add items to their shelf and update the dashboard", () => {
+    cy.get("[data-cy=expand-shelf-btn]").first().click();
+    cy.get("[data-cy=item-name-input]").first().type("garmin");
+    cy.get("[data-cy=item-weight-input]").first().type("40");
+    cy.get("[data-cy=item-amount-input]").first().type("1");
+    cy.get("[data-cy=item-add-btn]").first().click();
+    cy.get("[data-cy=added-item]").should("contain", "garmin")
+    .and("contain", "weight: 40")
+    .and("contain", "amount: 1");
+    cy.get("[data-cy=statistics-box]").should("contain", "40.00 Oz")
+    .and("contain", "2.50 Lbs");
+    cy.get("[data-cy=shelf-weight-oz]").first().contains("40.00 Oz")
+    cy.get("[data-cy=shelf-weight-lb]").first().contains("2.50 Lbs")
+  });
+});

@@ -6,7 +6,7 @@ const ShelfItems = ({ shelfItems, deleteItem, shelfName }) => {
   if(shelfItems !== undefined) {
     itemList = Object.keys(shelfItems).map((item) => { 
       return (
-            <li key={shelfItems[item].id} id={shelfItems[item].id} className="shelf-item">
+            <li key={shelfItems[item].id} id={shelfItems[item].id} className="shelf-item" data-cy="added-item">
               <p className="shelf-item-name">{item}</p>
               <p className="shelf-item-quantity">weight: {shelfItems[item].weight}</p>
               <p className="shelf-item-quantity">amount: {shelfItems[item].amount}</p>
