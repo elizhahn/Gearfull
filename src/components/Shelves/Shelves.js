@@ -54,7 +54,7 @@ class Shelves extends Component {
   }
 
   updateItems = (shelfName, itemAdded, weight, amount) => {
-    const updatedShelves = updateShelfWeight(this.state.shelves, shelfName, weight, amount); 
+    const updatedShelves = updateShelfWeight(this.state.shelves, shelfName, weight, amount, true); 
     const itemWeight = calcItemWeight(weight, amount)
     addItem(shelfName, itemAdded)
     .then(data => {
@@ -67,11 +67,12 @@ class Shelves extends Component {
   }
 
   deleteItem = (shelfName, itemId, weight, amount) => {
+    const updatedShelves = updateShelfWeight(this.state.shelves, shelfName, weight, amount, false); 
     const itemWeight = calcItemWeight(weight, amount); 
     const updatedItems = getShelfItems(shelfName, itemId, this.state.items);
     removeItem(shelfName, updatedItems)
     .then(data => {
-       this.setState({items: {...this.state.items, [shelfName]: updatedItems}, totalWeight: this.state.totalWeight - itemWeight})
+       this.setState({items: {...this.state.items, [shelfName]: updatedItems}, shelves: updatedShelves,  totalWeight: this.state.totalWeight - itemWeight})
     })
     .catch(error => {
       this.setState({error: "We're sorry, we cannot remove this item right now, please try again later"})
