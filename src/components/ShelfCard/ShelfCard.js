@@ -1,7 +1,7 @@
 import { React, Component } from "react";
 import ShelfItems from "../ShelfItems/ShelfItems";
-import { MdExpandMore } from "react-icons/md";
-import { MdAdd } from "react-icons/md";
+import { MdAdd, MdRemoveCircle, MdExpandMore } from "react-icons/md";
+import { IoMdRemoveCircle } from "react-icons/io";
 
 class ShelfCard extends Component {
   constructor(props) {
@@ -52,6 +52,10 @@ class ShelfCard extends Component {
     return (
       <article className="shelf-card">
         <div className="shelf-category-container">
+          <button 
+            className="shelf-remove-category-btn">
+              <IoMdRemoveCircle className="shelf-remove-category-icon"/>
+          </button>
           <h2 className="shelf-category">{shelfName}</h2>
           <button 
             className="shelf-expand-btn" 

@@ -79,7 +79,6 @@ class Shelves extends Component {
   }
 
   render() {
-    // this.deleteShelf("Water")
     const shelfNames = this.state.shelves.map(shelf => {
       return Object.keys(shelf); 
     })
