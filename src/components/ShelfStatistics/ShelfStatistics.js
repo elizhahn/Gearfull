@@ -11,7 +11,7 @@ const ShelfStatistics = ({ shelves }) => {
       >
           <span className="statistics-category-name">{shelfWeightInfoOz[0]}:</span>
           <span className="statistics-category-oz">{shelfWeightInfoOz[1]} Oz</span> | 
-          <span className="statistics-category-lbs">{shelfWeightInfoLbs} Lbs </span>
+          <span className="statistics-category-lbs">  {shelfWeightInfoLbs} Lbs </span>
       </li>
     )
   })
