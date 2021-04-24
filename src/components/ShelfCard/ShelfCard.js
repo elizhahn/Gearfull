@@ -49,8 +49,13 @@ class ShelfCard extends Component {
   }
   }
 
-  showModal = () => {
-    this.setState({modalOpen: true})
+  handleModal = () => {
+    this.state.modalOpen ? this.setState({modalOpen: false}) : this.setState({modalOpen: true})
+  }
+
+  handleRemoveShelf = (shelfName) => {
+   this.props.deleteShelf(shelfName)
+   this.handleModal();
   }
 
   render() {
@@ -60,7 +65,7 @@ class ShelfCard extends Component {
         <div className="shelf-category-container">
           <button 
             className="shelf-remove-category-btn"
-            onClick={this.showModal}>
+            onClick={this.handleModal}>
               <IoMdRemoveCircle className="shelf-remove-category-icon"/>
           </button>
           <h2 className="shelf-category">{shelfName}</h2>
@@ -71,7 +76,12 @@ class ShelfCard extends Component {
           >
             <MdExpandMore className={`shelf-expand-icon ${this.state.expanded}`}/>
           </button>
-          {this.state.modalOpen && <RemoveModal/>}
+          {this.state.modalOpen && 
+          <RemoveModal 
+            shelfName={shelfName}
+            handleModal={this.handleModal}
+            handleRemoveShelf={this.handleRemoveShelf}
+          />}
         </div>
         <div className="shelf-expand-container">
           {this.state.error && <p className="form-error-msg">{this.state.error}</p>}

@@ -54,7 +54,6 @@ export const calcItemWeight = (weight, amount) => {
 }
 
 export const checkShelves = (shelves, shelfName) => {
-  
   const shelfNames = shelves.map(shelf => {
     const shelfName =  Object.keys(shelf);
     return shelfName[0]; 
@@ -64,6 +63,15 @@ export const checkShelves = (shelves, shelfName) => {
   }
   return false; 
 
+}
+
+export const removeShelf = (shelfName, shelves) => {
+  const removedShelfIndex = shelves.findIndex(shelf => {
+    const currentShelfName =  Object.keys(shelf)[0]
+    return currentShelfName === shelfName
+  });
+  shelves.splice(removedShelfIndex, 1)
+  return shelves; 
 }
 
 
