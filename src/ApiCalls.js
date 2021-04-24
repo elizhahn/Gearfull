@@ -40,3 +40,13 @@ export const removeItem = (shelfName, updatedItems) => {
  })
  .then(response => response.text())
 }
+
+export const createShelf = (shelfName) => {
+  return fetch(`${baseURL}/basket/${shelfName}`, {
+   method:"POST",
+   headers: {"Content-Type": "application/json"}, 
+   body:"",
+   redirect: "follow"
+  })
+  .then(response => response.text())
+}
