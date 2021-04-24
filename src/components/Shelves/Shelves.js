@@ -24,7 +24,7 @@ class Shelves extends Component {
       .then(items => {
         const itemsList = createItemList(items, shelves.baskets);
         const updatedShelves = calcShelfWeights(items, shelves.baskets);
-        const packWeight = calculatePackWeight(itemsList);
+        const packWeight = calculatePackWeight(updatedShelves);
         this.setState({shelves: updatedShelves, items: itemsList, totalWeight: packWeight})
       })
      .catch(error => console.log(error));
