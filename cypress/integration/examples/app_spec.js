@@ -5,7 +5,7 @@ describe ("Landing Page", () => {
     cy.visit("http://localhost:3000/");
   })
   it("should display a user form to access dashboard", () => {
-    cy.get("[data-cy=user-portal]").should("contain", "Cool title here")
+    cy.get("[data-cy=user-portal]").should("contain", "Gearfull")
     cy.get("[data-cy=user-portal]").type("Elizabeth");
     cy.get("[data-cy=user-portal-btn]").click();
     cy.url().should('include', '/dashboard');
@@ -129,33 +129,40 @@ describe("Removing an item", () => {
 describe("Adding a shelf", () => {
   beforeEach(() => {
     cy.intercept(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation`, {fixture: "item1.json"})
-    cy.intercept("POST", "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/cook system", {fixture: "item3.json"})
+    cy.intercept("POST", "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/cooking", {fixture: "item3.json"})
     cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"})  
     cy.visit("http://localhost:3000/dashboard");
   });
 
-  it.only("Lets a user add a shelf and displays helpful messages", () => {
+  it("Lets a user add a shelf and displays helpful messages", () => {
     cy.get("[data-cy=add-shelf-btn]").click();
     cy.get("[data-cy=add-shelf-msg]").contains("Please create a shelf name");
     cy.get("[data-cy=add-shelf-input]").type("navigation");
     cy.get("[data-cy=add-shelf-btn]").click();
     cy.get("[data-cy=add-shelf-msg]").contains("This shelf already exists");
-    cy.get("[data-cy=add-shelf-input]").clear().type("cook system");
+    cy.get("[data-cy=add-shelf-input]").clear().type("cooking");
     cy.get("[data-cy=add-shelf-btn]").click();
-    cy.get("[data-cy=shelves]").contains("cook system");
-    cy.get("[data-cy=statistics-box]").should("contain", "cook system");
+    cy.get("[data-cy=shelves]").contains("cooking");
+    cy.get("[data-cy=statistics-box]").should("contain", "cooking");
     cy.get("[data-cy=shelf-weight-oz]").eq(0).contains("0.00 Oz");
     cy.get("[data-cy=shelf-weight-lb]").eq(0).contains("0.00 Lbs");
   });  
 });
 
-describe("Deleting a shelf", () => {
+describe.only("Deleting a shelf", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/dashboard")
+   
+    cy.intercept("DELETE", "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/cooking", {fixture: ""});
+    cy.intercept(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation`, {fixture: "item1.json"})
+    cy.intercept("POST", "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/cooking", {fixture: "item3.json"})
+    cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"})  
+    cy.visit("http://localhost:3000/dashboard");
   });
 
   it("Displays a modal when delete button is clicked", () => {
-    cy.get("[data-cy=remove-category]").eq(2).click();
+    cy.get("[data-cy=add-shelf-input]").type("cooking");
+    cy.get("[data-cy=add-shelf-btn]").click();
+    cy.get("[data-cy=remove-category]").eq(0).click();
     cy.get("[data-cy=modal-warning-msg-1]").contains("Are you sure you want to remove this shelf?");
     cy.get("[data-cy=modal-warning-msg-2]").contains("This will delete the shelf and all it's contents");
     cy.get("[data-cy=modal-remove-btn]").contains("Yes remove please");
@@ -164,17 +171,21 @@ describe("Deleting a shelf", () => {
   }); 
 
   it("Allows a user to go back to the dashbaord if delete button is clicked", () => {
-    cy.get("[data-cy=remove-category]").eq(2).click();
+    cy.get("[data-cy=add-shelf-input]").type("cooking");
+    cy.get("[data-cy=add-shelf-btn]").click();
+    cy.get("[data-cy=remove-category]").eq(0).click();
     cy.get("[data-cy=modal-return-btn]").contains("No take me back").click();
     cy.get("[data-cy=modal]").should("not.exist"); 
   });
 
   it("Allows a user to delete a shelf after being warned", () => {
-    cy.get("[data-cy=remove-category]").eq(2).click();
+    cy.get("[data-cy=add-shelf-input]").type("cooking");
+    cy.get("[data-cy=add-shelf-btn]").click();
+    cy.get("[data-cy=remove-category]").eq(0).click();
     cy.get("[data-cy=modal-remove-btn]").click();
-    cy.get("[data-cy=shelf]").eq(2).should("not.exist"); 
+    cy.get("[data-cy=shelf]").eq(1).should("not.exist"); 
     cy.get("[data-cy=shelves]").should("contain", "navigation")
-      .and("contain", "sleep system"); 
+      .and("not.contain", "cooking"); 
 
   });
 
