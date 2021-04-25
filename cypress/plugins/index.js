@@ -8,6 +8,9 @@
 // You can read more here:
 // https://on.cypress.io/plugins-guide
 // ***********************************************************
+require("@babel/register")({
+  plugins: [ "@babel/plugin-proposal-object-rest-spread" ]
+});
 
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)

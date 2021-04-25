@@ -54,44 +54,58 @@ describe("User Dashboard", () => {
     
 
   })
-  it.only("should display a user's name and main dashboard features upon load", () => {
+  it("should display a user's name and main dashboard features upon load", () => {
     cy.get("[data-cy=dashboard-title]").contains("Gearfull");
     cy.get("[data-cy=greeting]").contains("Welcome Elizabeth");
     cy.get("[data-cy=shelves-intro]").contains("Here are some shelves to get you started...")
 
     cy.get("[data-cy=add-shelf-form]").should("exist");
     cy.get("[data-cy=add-shelf-btn]").contains("add a shelf");
-    cy.get("[data-cy=shelves]").contains("navigation");
     cy.get("[data-cy=statistics-box]").should("contain", "Base Weight")
       .and("contain","The Breakdown");
   });
 
-  it("should display a user's saved gear items on load", () => {
-    cy.get("[data-cy=statistics-box]").should("contain",)
-    cy.get("[data-cy=shelf-weight-oz]").contains("0.00 Oz")
-    cy.get("[data-cy=shelf-weight-lb]").contains("0.00 Lbs")
-  })
+  it("should display a user's saved gear and weight totals on load", () => {
+    cy.get("[data-cy=shelves]").contains("navigation");
+    cy.get("[data-cy=expand-shelf-btn]").first().click();
+    cy.get("[data-cy=added-item]").should("contain", "garmin")
+    .and("contain", "weight: 40")
+    .and("contain", "amount: 1");
+    cy.get("[data-cy=pack-weight-oz]").contains("40.00");
+    cy.get("[data-cy=pack-weight-lbs]").contains("2.50 Lbs");
+    cy.get("[data-cy=shelf-weight-name]").should("contain", "navigation")
+    cy.get("[data-cy=shelf-weight-oz]").contains("40.00 Oz");
+    cy.get("[data-cy=shelf-weight-lb]").contains("2.50 Lbs");
+
+  });
 });
 
 describe("Adding an item", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/dashboard")
+
+    cy.intercept(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation`, {fixture: "item1.json"})
+
+    cy.intercept("PUT", "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation", {fixture: "item2.json"});
+    
+    cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"})
+       
+    cy.visit("http://localhost:3000/dashboard");
   });
 
-  it("should let a user add items to their shelf and update the dashboard", () => {
+  it.only("should let a user add items to their shelf and update the dashboard", () => {
     cy.get("[data-cy=expand-shelf-btn]").first().click();
     cy.get("[data-cy=expand-icon]").should("have.class", "expanded"); 
-    cy.get("[data-cy=item-name-input]").first().type("garmin");
-    cy.get("[data-cy=item-weight-input]").first().type("40");
+    cy.get("[data-cy=item-name-input]").first().type("pocket rocket stove");
+    cy.get("[data-cy=item-weight-input]").first().type("34.6");
     cy.get("[data-cy=item-amount-input]").first().type("1");
     cy.get("[data-cy=item-add-btn]").first().click();
-    cy.get("[data-cy=added-item]").should("contain", "garmin")
-    .and("contain", "weight: 40")
+    cy.get("[data-cy=added-item]").eq(1).should("contain", "pocket rocket stove")
+    .and("contain", "weight: 34.6")
     .and("contain", "amount: 1");
-    cy.get("[data-cy=statistics-box]").should("contain", "40.00 Oz")
-    .and("contain", "2.50 Lbs");
-    cy.get("[data-cy=shelf-weight-oz]").first().contains("40.00 Oz")
-    cy.get("[data-cy=shelf-weight-lb]").first().contains("2.50 Lbs")
+    cy.get("[data-cy=statistics-box]").should("contain", "74.60 Oz")
+    .and("contain", "4.66 Lbs");
+    cy.get("[data-cy=shelf-weight-oz]").first().contains("74.60 Oz")
+    cy.get("[data-cy=shelf-weight-lb]").first().contains("4.66 Lbs")
   });
 });
 

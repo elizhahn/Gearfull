@@ -8,6 +8,7 @@ const ShelfStatistics = ({ shelves }) => {
       <li 
         key={i}
         className="statistics-category"
+        data-cy="shelf-weight-name"
       >
           <span className="statistics-category-name">{shelfWeightInfoOz[0]}:</span>
           <span className="statistics-category-oz" data-cy="shelf-weight-oz">{shelfWeightInfoOz[1]} Oz</span> | 

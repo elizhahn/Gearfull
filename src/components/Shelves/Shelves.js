@@ -52,13 +52,14 @@ class Shelves extends Component {
     })
   }
 
-  updateItems = (shelfName, itemAdded, weight, amount) => {
+  updateItems = (shelfName, itemAdded, itemName, weight, amount) => {
     const updatedShelves = updateShelfWeight(this.state.shelves, shelfName, weight, amount, true); 
     const itemWeight = calcItemWeight(weight, amount)
     addItem(shelfName, itemAdded)
     .then(data => {
+      const newItemList = {...this.state.items[shelfName], ...itemAdded}
       this.setState({
-        items: {...this.state.items, [shelfName]: data}, shelves: updatedShelves,  totalWeight: this.state.totalWeight + itemWeight
+        items: {...this.state.items, [shelfName]: newItemList}, shelves: updatedShelves,  totalWeight: this.state.totalWeight + itemWeight
       })
     })
     .catch(error => console.log(error))
@@ -78,6 +79,7 @@ class Shelves extends Component {
   }
 
   render() {
+  
     const shelfNames = this.state.shelves.map(shelf => {
       return Object.keys(shelf); 
     })

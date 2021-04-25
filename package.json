@@ -42,6 +42,8 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-object-rest-spread": "^7.13.8",
+    "@babel/register": "^7.13.16",
     "cypress": "^7.1.0"
   }
 }
