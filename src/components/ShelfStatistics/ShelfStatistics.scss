@@ -1,33 +1,40 @@
-.statistics-category-container {
+.statistics-shelf-container {
   flex: 1;
   margin: 10px;   
 }
 
-.statistics-category-title {
+.statistics-shelf-title {
   font-size: 2.8rem; 
   text-align: center;
 }
 
-.statistics-category-list {
+.statistics-shelf-list {
   list-style-type: none;
   padding: 0;
   margin: 0; 
 }
 
-.statistics-category {
+.statistics-shelf {
   font-size: 2rem;
   padding: 10px;  
 }
 
-.statistics-category-name { 
+.statistics-shelf-name { 
   margin-right: 10px;
   font-weight: 600;   
 }
 
-.statistics-category-oz {
+.statistics-shelf-oz {
   color: rgb(176, 24, 199);
 }
 
-.statistics-category-lbs {
+.statistics-shelf-lbs {
   color: rgb(255, 89, 0);
+}
+
+@media screen and (max-width: 1000px) {
+
+  .statistics-shelf {
+    margin-left: 100px;   
+  }
 }

@@ -1,6 +1,6 @@
 .statistics {
   background-color: $lime-green;
-  width: 30%;
+  width: 35%;
   min-height: 100%; 
 }
 
@@ -44,5 +44,20 @@
   margin-left: 75px; 
   height: 60%;
   width: 50%; 
+}
+
+@media screen and (max-width: 1000px) {
+
+  .statistics {
+    width: 100%; 
+  }
+
+  .statistics-container {
+    flex-direction: row; 
+  }
+
+  .statistics-title {
+    text-align: center; 
+  }
 }
 
