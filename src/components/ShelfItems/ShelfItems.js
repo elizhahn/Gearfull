@@ -22,7 +22,7 @@ const ShelfItems = ({ shelfItems, deleteItem, shelfName }) => {
     }); 
   }
   return (
-    <ul className="shelf-item-list">
+    <ul className="shelf-item-list" data-cy="item-list">
       {itemList}
     </ul>
   )

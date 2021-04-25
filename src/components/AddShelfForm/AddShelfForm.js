@@ -47,8 +47,9 @@ class AddShelfForm extends Component {
         value={this.state.newShelf}
         name="newShelf"
         onChange={this.handleChange}
+        data-cy="add-shelf-input"
       />
-      {this.state.error && <p className="form-add-shelf-error">{this.state.error}</p>}
+      {this.state.error && <p className="form-add-shelf-error" data-cy="add-shelf-msg">{this.state.error}</p>}
     </form>
     )
   }

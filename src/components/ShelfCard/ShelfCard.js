@@ -75,7 +75,7 @@ class ShelfCard extends Component {
             onClick={this.expandShelf}
             data-cy="expand-shelf-btn"
           >
-            <MdExpandMore className={`shelf-expand-icon ${this.state.expanded}`}/>
+            <MdExpandMore className={`shelf-expand-icon ${this.state.expanded}`} data-cy="expand-icon"/>
           </button>
           {this.state.modalOpen && 
           <RemoveModal 

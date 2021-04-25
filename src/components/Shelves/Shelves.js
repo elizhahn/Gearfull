@@ -99,7 +99,7 @@ class Shelves extends Component {
           addShelf={this.addShelf}
           shelves={this.state.shelves}
         />
-        {this.state.error && <p className="shelves-loading-msg">{this.state.error}</p>}
+        {this.state.error && <p className="shelves-loading-msg" data-cy="loading-msg">{this.state.error}</p>}
         {!this.state.error && !this.state.shelves.length && <p className="shelves-loading-msg">Loading shelves...</p>}
         {shelves}
       </section>
