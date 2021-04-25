@@ -22,8 +22,8 @@ class Home extends Component {
   render() {
     return (
       <section className="home-background">
-        <div className="home-container">
-          <h1>Cool title here</h1>
+        <div className="home-container" data-cy="user-portal">
+          <h1>Gearfull</h1>
           <input 
           className="home-name-input"
           type="text" 
@@ -31,9 +31,16 @@ class Home extends Component {
           placeholder="Enter your name here"
           value={this.state.value} 
           onChange={this.handleChange}
-          aria-label="enter name"/>
+          aria-label="enter name"
+          data-cy="user-portal-input"/>
           <Link to="/dashboard">
-            <button className="home-start-btn" onClick={() => this.updateName(this.state.name)}>Get started</button>
+            <button 
+              className="home-start-btn" 
+              onClick={() => this.updateName(this.state.name)}
+              data-cy="user-portal-btn"
+            >Get started
+            
+            </button>
           </Link>
         </div>
       </section>

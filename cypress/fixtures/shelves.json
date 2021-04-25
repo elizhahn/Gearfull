@@ -1,0 +1,8 @@
+{
+"name": "niche project",
+"description": "defaultDescription",
+"baskets": ["navigation"],
+"errors": [],
+"notifications": true,
+"percentFull": 3
+}

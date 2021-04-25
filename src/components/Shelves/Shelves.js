@@ -46,18 +46,21 @@ class Shelves extends Component {
   deleteShelf = (shelfName) => {
     deleteCurrentShelf(shelfName)
     .then(data => {
+      console.log(data)
       const newShelfList = removeShelf(shelfName, this.state.shelves);
-      this.setState({shelves: newShelfList})
+      const newPackWeight = calculatePackWeight(newShelfList); 
+      this.setState({shelves: newShelfList, totalWeight: newPackWeight})
     })
   }
 
-  updateItems = (shelfName, itemAdded, weight, amount) => {
+  updateItems = (shelfName, itemAdded, itemName, weight, amount) => {
     const updatedShelves = updateShelfWeight(this.state.shelves, shelfName, weight, amount, true); 
     const itemWeight = calcItemWeight(weight, amount)
     addItem(shelfName, itemAdded)
     .then(data => {
+      const newItemList = {...this.state.items[shelfName], ...itemAdded}
       this.setState({
-        items: {...this.state.items, [shelfName]: data}, shelves: updatedShelves,  totalWeight: this.state.totalWeight + itemWeight
+        items: {...this.state.items, [shelfName]: newItemList}, shelves: updatedShelves,  totalWeight: this.state.totalWeight + itemWeight
       })
     })
     .catch(error => console.log(error))
@@ -77,6 +80,7 @@ class Shelves extends Component {
   }
 
   render() {
+  
     const shelfNames = this.state.shelves.map(shelf => {
       return Object.keys(shelf); 
     })
@@ -93,13 +97,13 @@ class Shelves extends Component {
   })
   return (
     <main className="shelves">
-      <section className="shelves-container">
-        <p className="shelves-intro">Here are some shelves to get you started...</p>
+      <section className="shelves-container" data-cy="shelves" >
+        <p className="shelves-intro" data-cy="shelves-intro">Here are some shelves to get you started...</p>
         <AddShelfForm 
           addShelf={this.addShelf}
           shelves={this.state.shelves}
         />
-        {this.state.error && <p className="shelves-loading-msg">{this.state.error}</p>}
+        {this.state.error && <p className="shelves-loading-msg" data-cy="loading-msg">{this.state.error}</p>}
         {!this.state.error && !this.state.shelves.length && <p className="shelves-loading-msg">Loading shelves...</p>}
         {shelves}
       </section>

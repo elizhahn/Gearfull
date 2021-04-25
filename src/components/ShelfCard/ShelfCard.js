@@ -36,7 +36,7 @@ class ShelfCard extends Component {
       this.setState({error: "Please fill out all the fields"})
   } else {
     this.setState({error: ""});
-    this.props.updateItems(shelfName, itemAdded, this.state.weight, this.state.amount)
+    this.props.updateItems(shelfName, itemAdded,this.state.itemName, this.state.weight, this.state.amount)
     this.clearInputs(); 
   }
   }
@@ -61,11 +61,13 @@ class ShelfCard extends Component {
   render() {
     const { shelfName, shelfItems, deleteItem } = this.props;
     return (
-      <article className="shelf-card">
+      <article className="shelf-card" data-cy="shelf">
         <div className="shelf-category-container">
           <button 
             className="shelf-remove-category-btn"
-            onClick={this.handleModal}>
+            onClick={this.handleModal}
+            data-cy="remove-category"
+            >
               <IoMdRemoveCircle className="shelf-remove-category-icon"/>
           </button>
           <h2 className="shelf-category">{shelfName}</h2>
@@ -73,8 +75,9 @@ class ShelfCard extends Component {
             className="shelf-expand-btn" 
             aria-expanded="false"
             onClick={this.expandShelf}
+            data-cy="expand-shelf-btn"
           >
-            <MdExpandMore className={`shelf-expand-icon ${this.state.expanded}`}/>
+            <MdExpandMore className={`shelf-expand-icon ${this.state.expanded}`} data-cy="expand-icon"/>
           </button>
           {this.state.modalOpen && 
           <RemoveModal 
@@ -93,6 +96,7 @@ class ShelfCard extends Component {
               name="itemName"
               value={this.state.itemName}
               onChange={this.handleChange}
+              data-cy="item-name-input"
             />
             </label>
             <label className="form-quantity-label"> weight
@@ -104,6 +108,7 @@ class ShelfCard extends Component {
               name="weight"
               value={this.state.weight}
               onChange={this.handleChange}
+              data-cy="item-weight-input"
             /> oz
             </label>
             <label className="form-quantity-label"> amount
@@ -115,11 +120,13 @@ class ShelfCard extends Component {
               name="amount"
               value={this.state.amount}
               onChange={this.handleChange}
+              data-cy="item-amount-input"
             /> 
             </label>
             <button
               type="submit"
               className="form-add-item-btn"
+              data-cy="item-add-btn"
             >
               <MdAdd className="form-add-item-icon"/>
             </button>
