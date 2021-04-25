@@ -4,46 +4,49 @@
   min-height: 100%; 
 }
 
-.statistics-title {
-  background-color: $lime-green;
-  margin: 0px; 
-  padding: 10px; 
-  text-align: center; 
-}
-
 .statistics-container {
   @include flexStyle(flex, column, justify-content, flex-start);  
 }
 
 .statistics-totals-container {
+  @include flexStyle(flex, column, justify-content, center); 
+  position: relative; 
   flex: 1; 
+  min-height: 400px;   
+  
+  &::before {
+    @extend .statistics-totals-container; 
+    content: "";
+    background-image: url("../../assets/kalen-emsley-Bkci_8qcdvQ-unsplash.jpg");
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.5;
+  }
 }
 
 .statistics-totals {
-  display: flex; 
-  justify-content: space-evenly; 
+  @include flexStyle(flex, row, justify-content, space-evenly);
   list-style-type: none;
-  padding: 0px; 
-  margin-bottom: 40px;  
+  padding: 0px;   
 }
 
 .total {
+   position: relative;
    font-weight: 700;
-   font-size: 2em; 
+   font-size: 3em;
+   text-shadow: 1px 1px 3px $white-blue; 
 }
 
 .total-ozs {
-  color :rgb(176, 24, 199);
+  color :rgb(7, 80, 75);
 }
 
 .total-lbs {
-  color: rgb(255, 89, 0);
-}
-
-.statistics-backpacker-img {
-  margin-left: 75px; 
-  height: 60%;
-  width: 50%; 
+  color: rgb(66, 13, 69);
 }
 
 @media screen and (max-width: 1000px) {
@@ -60,4 +63,7 @@
     text-align: center; 
   }
 }
+
+
+
 

@@ -16,7 +16,7 @@ const ShelfStatistics = ({ shelves }) => {
         <span 
           className="statistics-shelf-oz" data-cy="shelf-weight-oz">
             {shelfWeightInfoOz[1]} Oz
-        </span> | 
+        </span>  
         <span 
           className="statistics-shelf-lbs" data-cy="shelf-weight-lb">  
           {shelfWeightInfoLbs} Lbs 
