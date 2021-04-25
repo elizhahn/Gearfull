@@ -44,3 +44,12 @@
     @include flexStyle(flex, row, justify-content, space-between)  
   }
 }
+
+@media screen and (max-width: 700px) {
+
+  .statistics-shelf-container {
+    max-height: 250px; 
+  }
+}
+
+

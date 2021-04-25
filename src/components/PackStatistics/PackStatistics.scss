@@ -59,11 +59,20 @@
     flex-direction: row; 
   }
 
-  .statistics-title {
-    text-align: center; 
-  }
 }
 
+
+@media screen and (max-width: 700px) {
+
+  .statistics-container {
+    flex-direction: column; 
+  }
+
+  .statistics-totals-container{
+    min-height: 300px; 
+  }
+
+}
 
 
 
