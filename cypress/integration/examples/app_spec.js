@@ -125,6 +125,7 @@ describe("Adding a shelf", () => {
   });
 
   it("Lets a user add a shelf and displays helpful messages", () => {
+    cy.wait(1000);
     cy.get("[data-cy=add-shelf-btn]").click();
     cy.get("[data-cy=add-shelf-msg]").contains("Please create a shelf name");
     cy.get("[data-cy=add-shelf-input]").type("navigation");
@@ -140,4 +141,44 @@ describe("Adding a shelf", () => {
 
 
   });  
+});
+
+describe("Deleting a shelf", () => {
+  beforeEach(() => {
+    cy.visit("http://localhost:3000/dashboard")
+  });
+
+  it("Displays a modal when delete button is clicked", () => {
+    cy.get("[data-cy=remove-category]").eq(2).click();
+    cy.get("[data-cy=modal-warning-msg-1]").contains("Are you sure you want to remove this shelf?");
+    cy.get("[data-cy=modal-warning-msg-2]").contains("This will delete the shelf and all it's contents");
+    cy.get("[data-cy=modal-remove-btn]").contains("Yes remove please");
+    cy.get("[data-cy=modal-return-btn]").contains("No take me back")
+  
+  }); 
+
+  it("Allows a user to go back to the dashbaord if delete button is clicked", () => {
+    cy.get("[data-cy=remove-category]").eq(2).click();
+    cy.get("[data-cy=modal-return-btn]").contains("No take me back").click();
+    cy.get("[data-cy=modal]").should("not.exist"); 
+  });
+
+  it("Allows a user to delete a shelf after being warned", () => {
+    cy.get("[data-cy=remove-category]").eq(2).click();
+    cy.get("[data-cy=modal-remove-btn]").click();
+    cy.get("[data-cy=shelf]").eq(2).should("not.exist"); 
+    cy.get("[data-cy=shelves]").should("contain", "navigation")
+      .and("contain", "sleep system"); 
+
+  });
+
+  it("Will adjust pack weight if deleted shelf contained items", () => {
+    cy.get("[data-cy=remove-category]").eq(0).click();
+    cy.get("[data-cy=modal-remove-btn]").click();
+    cy.get("[pack-weight-oz]").should("contain", "0.00 Oz");
+    cy.get("[pack-weight-lb]").should("contain", "0.00 Lbs")
+    cy.get("[data-cy=statistics-box]").should("not.contain", "navigation"); 
+  });
+  
+  
 });

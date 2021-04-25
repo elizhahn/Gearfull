@@ -65,7 +65,9 @@ class ShelfCard extends Component {
         <div className="shelf-category-container">
           <button 
             className="shelf-remove-category-btn"
-            onClick={this.handleModal}>
+            onClick={this.handleModal}
+            data-cy="remove-category"
+            >
               <IoMdRemoveCircle className="shelf-remove-category-icon"/>
           </button>
           <h2 className="shelf-category">{shelfName}</h2>
