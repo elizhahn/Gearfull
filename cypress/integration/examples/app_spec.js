@@ -1,5 +1,3 @@
-import { getItems } from "../../../src/ApiCalls";
-
 describe ("Landing Page", () => {
   beforeEach(() => {
 
@@ -120,7 +118,7 @@ describe("Adding a shelf", () => {
   });  
 });
 
-describe.only("Deleting a shelf", () => {
+describe("Deleting a shelf", () => {
   beforeEach(() => {
    
     cy.intercept("DELETE", "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/cooking", {fixture: ""});
