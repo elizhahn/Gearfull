@@ -92,7 +92,7 @@ describe("Adding an item", () => {
     cy.visit("http://localhost:3000/dashboard");
   });
 
-  it.only("should let a user add items to their shelf and update the dashboard", () => {
+  it("should let a user add items to their shelf and update the dashboard", () => {
     cy.get("[data-cy=expand-shelf-btn]").first().click();
     cy.get("[data-cy=expand-icon]").should("have.class", "expanded"); 
     cy.get("[data-cy=item-name-input]").first().type("pocket rocket stove");
@@ -111,23 +111,26 @@ describe("Adding an item", () => {
 
 describe("Removing an item", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/dashboard")
+
+    cy.intercept(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation`, {fixture: "item1.json"})
+
+    cy.intercept("POST", "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation", {fixture: "item3.json"})
+
+    cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"})
+       
+    cy.visit("http://localhost:3000/dashboard");
   });
 
-  it("should let a user delete an item they added and update the dashboard", () => {
+  it.only("should let a user delete an item they added and update the dashboard", () => {
 
     cy.get("[data-cy=expand-shelf-btn]").first().click();
-    cy.get("[data-cy=item-name-input]").first().type("map");
-    cy.get("[data-cy=item-weight-input]").first().type("10");
-    cy.get("[data-cy=item-amount-input]").first().type("1");
-    cy.get("[data-cy=item-add-btn]").first().click();
-    cy.wait(1000);
-    cy.get("[data-cy=added-item]").eq(1);
-    cy.get("[data-cy=delete-item-btn]").eq(1).click();
-    cy.get("[data-cy=statistics-box]").should("contain", "40.00 Oz")
-    .and("contain", "2.50 Lbs");
-    cy.get("[data-cy=shelf-weight-oz]").first().contains("40.00 Oz")
-    cy.get("[data-cy=shelf-weight-lb]").first().contains("2.50 Lbs")
+    cy.get("[data-cy=added-item]").eq(0);
+    cy.get("[data-cy=delete-item-btn]").eq(0).click();
+    cy.get("[data-cy=added-item]").should("not.exist");
+    cy.get("[data-cy=statistics-box]").should("contain", "0.00 Oz")
+    .and("contain", "0.00 Lbs");
+    cy.get("[data-cy=shelf-weight-oz]").first().contains("0.00 Oz")
+    cy.get("[data-cy=shelf-weight-lb]").first().contains("0.00 Lbs")
   });
 });
 
