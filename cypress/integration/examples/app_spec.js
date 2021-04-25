@@ -44,7 +44,6 @@ describe("User Dashboard", () => {
     // cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/sleep system", {fixture: "item1.json"})
     // cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/cook system", {fixture: "item2.json"})
     cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"})
-   
     cy.intercept(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation`, {fixture: "item1.json"})
 
     
@@ -58,7 +57,6 @@ describe("User Dashboard", () => {
     cy.get("[data-cy=dashboard-title]").contains("Gearfull");
     cy.get("[data-cy=greeting]").contains("Welcome Elizabeth");
     cy.get("[data-cy=shelves-intro]").contains("Here are some shelves to get you started...")
-
     cy.get("[data-cy=add-shelf-form]").should("exist");
     cy.get("[data-cy=add-shelf-btn]").contains("add a shelf");
     cy.get("[data-cy=statistics-box]").should("contain", "Base Weight")
@@ -84,11 +82,8 @@ describe("Adding an item", () => {
   beforeEach(() => {
 
     cy.intercept(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation`, {fixture: "item1.json"})
-
     cy.intercept("PUT", "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation", {fixture: "item2.json"});
-    
-    cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"})
-       
+    cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"})  
     cy.visit("http://localhost:3000/dashboard");
   });
 
@@ -113,15 +108,12 @@ describe("Removing an item", () => {
   beforeEach(() => {
 
     cy.intercept(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation`, {fixture: "item1.json"})
-
     cy.intercept("POST", "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation", {fixture: "item3.json"})
-
-    cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"})
-       
+    cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"})  
     cy.visit("http://localhost:3000/dashboard");
   });
 
-  it.only("should let a user delete an item they added and update the dashboard", () => {
+  it("should let a user delete an item they added and update the dashboard", () => {
 
     cy.get("[data-cy=expand-shelf-btn]").first().click();
     cy.get("[data-cy=added-item]").eq(0);
@@ -136,25 +128,24 @@ describe("Removing an item", () => {
 
 describe("Adding a shelf", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/dashboard")
+    cy.intercept(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation`, {fixture: "item1.json"})
+    cy.intercept("POST", "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/cook system", {fixture: "item3.json"})
+    cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"})  
+    cy.visit("http://localhost:3000/dashboard");
   });
 
-  it("Lets a user add a shelf and displays helpful messages", () => {
-    cy.wait(1000);
+  it.only("Lets a user add a shelf and displays helpful messages", () => {
     cy.get("[data-cy=add-shelf-btn]").click();
     cy.get("[data-cy=add-shelf-msg]").contains("Please create a shelf name");
     cy.get("[data-cy=add-shelf-input]").type("navigation");
     cy.get("[data-cy=add-shelf-btn]").click();
     cy.get("[data-cy=add-shelf-msg]").contains("This shelf already exists");
-    cy.get("[data-cy=add-shelf-input]").clear().type("sleep system");
+    cy.get("[data-cy=add-shelf-input]").clear().type("cook system");
     cy.get("[data-cy=add-shelf-btn]").click();
-    cy.get("[data-cy=shelves]").contains("sleep system");
-    cy.get("[data-cy=statistics-box]").should("contain", "cook system")
-    cy.get("[data-cy=shelf-weight-oz]").eq(2).contains("0.00 Oz")
-    cy.get("[data-cy=shelf-weight-lb]").eq(2).contains("0.00 Lbs")
-
-
-
+    cy.get("[data-cy=shelves]").contains("cook system");
+    cy.get("[data-cy=statistics-box]").should("contain", "cook system");
+    cy.get("[data-cy=shelf-weight-oz]").eq(0).contains("0.00 Oz");
+    cy.get("[data-cy=shelf-weight-lb]").eq(0).contains("0.00 Lbs");
   });  
 });
 
