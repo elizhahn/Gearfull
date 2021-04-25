@@ -2,6 +2,7 @@ import { getItems } from "../../../src/ApiCalls";
 
 describe ("Landing Page", () => {
   beforeEach(() => {
+
     cy.visit("http://localhost:3000/");
   })
   it("should display a user form to access dashboard", () => {
@@ -15,44 +16,13 @@ describe ("Landing Page", () => {
 describe("User Dashboard", () => {
   beforeEach(() => {
     
-    // cy.fixture("/items.json").then((data) => {
-    //   data.forEach((shelf, i) => {
-    //   cy.intercept(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/${baskets[i]}`, {fixture: "items.json"})
-    //   });
-    // });
-    // cy.intercept({
-    //   method: "POST",
-    //   url: "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/sleep system"
-    // },
-    // {
-    //   statusCode: 201,
-    //   body: {
-    //     message: "You've added sleep system to your baskets"
-    //   }
-    // }) 
-    // cy.intercept({
-    //   method: "POST",
-    //   url: "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/cook system"
-    // },
-    // {
-    //   statusCode: 201,
-    //   body: {
-    //     message: "You've added cook system to your baskets"
-    //   }
-    // })
-
-    // cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/sleep system", {fixture: "item1.json"})
-    // cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/cook system", {fixture: "item2.json"})
     cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"})
     cy.intercept(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation`, {fixture: "item1.json"})
-
-    
     cy.visit("http://localhost:3000/")
     cy.get("[data-cy=user-portal]").type("Elizabeth");
     cy.get("[data-cy=user-portal-btn]").click();
-    
-
-  })
+  
+  });
   it("should display a user's name and main dashboard features upon load", () => {
     cy.get("[data-cy=dashboard-title]").contains("Gearfull");
     cy.get("[data-cy=greeting]").contains("Welcome Elizabeth");
@@ -85,8 +55,8 @@ describe("Adding an item", () => {
     cy.intercept("PUT", "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation", {fixture: "item2.json"});
     cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"})  
     cy.visit("http://localhost:3000/dashboard");
-  });
 
+  });
   it("should let a user add items to their shelf and update the dashboard", () => {
     cy.get("[data-cy=expand-shelf-btn]").first().click();
     cy.get("[data-cy=expand-icon]").should("have.class", "expanded"); 
@@ -128,12 +98,13 @@ describe("Removing an item", () => {
 
 describe("Adding a shelf", () => {
   beforeEach(() => {
+
     cy.intercept(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation`, {fixture: "item1.json"})
     cy.intercept("POST", "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/cooking", {fixture: "item3.json"})
     cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"})  
     cy.visit("http://localhost:3000/dashboard");
-  });
 
+  });
   it("Lets a user add a shelf and displays helpful messages", () => {
     cy.get("[data-cy=add-shelf-btn]").click();
     cy.get("[data-cy=add-shelf-msg]").contains("Please create a shelf name");
@@ -196,6 +167,4 @@ describe.only("Deleting a shelf", () => {
     cy.get("[data-cy=pack-weight-lbs]").should("contain", "0.00 Lbs")
     cy.get("[data-cy=statistics-box]").should("not.contain", "navigation"); 
   });
-  
-  
 });
