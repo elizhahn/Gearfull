@@ -47,7 +47,8 @@ class Shelves extends Component {
     deleteCurrentShelf(shelfName)
     .then(data => {
       const newShelfList = removeShelf(shelfName, this.state.shelves);
-      this.setState({shelves: newShelfList})
+      const newPackWeight = calculatePackWeight(newShelfList); 
+      this.setState({shelves: newShelfList, totalWeight: newPackWeight})
     })
   }
 
