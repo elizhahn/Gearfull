@@ -1,7 +1,7 @@
 {
 "name": "niche project",
 "description": "defaultDescription",
-"baskets": ["sleep system", "cook system"],
+"baskets": ["navigation"],
 "errors": [],
 "notifications": true,
 "percentFull": 3

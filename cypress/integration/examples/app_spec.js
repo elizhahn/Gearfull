@@ -43,36 +43,34 @@ describe("User Dashboard", () => {
 
     // cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/sleep system", {fixture: "item1.json"})
     // cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/cook system", {fixture: "item2.json"})
-    // cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"})
+    cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"})
+   
+    cy.intercept(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation`, {fixture: "item1.json"})
 
-    // const baskets = ["sleep system", "cook system"];
-    // baskets.forEach(basket => {
-    // cy.intercept(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/${basket}`, {fixture: "item1.json"})
-    // });
-
+    
     cy.visit("http://localhost:3000/")
     cy.get("[data-cy=user-portal]").type("Elizabeth");
     cy.get("[data-cy=user-portal-btn]").click();
+    
 
   })
-  it("should display a user's name and main dashboard features upon load", () => {
-    cy.get("[data-cy=dashboard-title]").contains("Cool Title Here");
+  it.only("should display a user's name and main dashboard features upon load", () => {
+    cy.get("[data-cy=dashboard-title]").contains("Gearfull");
     cy.get("[data-cy=greeting]").contains("Welcome Elizabeth");
     cy.get("[data-cy=shelves-intro]").contains("Here are some shelves to get you started...")
 
     cy.get("[data-cy=add-shelf-form]").should("exist");
     cy.get("[data-cy=add-shelf-btn]").contains("add a shelf");
     cy.get("[data-cy=shelves]").contains("navigation");
-    cy.get("[data-cy=shelves]").contains("cook system");
     cy.get("[data-cy=statistics-box]").should("contain", "Base Weight")
-      .and("contain", "0.00 Oz")
-      .and("contain", "0.00 Lbs")
-      .and("contain","The Breakdown")
-      .and("contain", "navigation")
-      .and("contain", "cook system");
+      .and("contain","The Breakdown");
+  });
+
+  it("should display a user's saved gear items on load", () => {
+    cy.get("[data-cy=statistics-box]").should("contain",)
     cy.get("[data-cy=shelf-weight-oz]").contains("0.00 Oz")
     cy.get("[data-cy=shelf-weight-lb]").contains("0.00 Lbs")
-  });
+  })
 });
 
 describe("Adding an item", () => {
@@ -175,8 +173,8 @@ describe("Deleting a shelf", () => {
   it("Will adjust pack weight if deleted shelf contained items", () => {
     cy.get("[data-cy=remove-category]").eq(0).click();
     cy.get("[data-cy=modal-remove-btn]").click();
-    cy.get("[pack-weight-oz]").should("contain", "0.00 Oz");
-    cy.get("[pack-weight-lb]").should("contain", "0.00 Lbs")
+    cy.get("[data-cy=pack-weight-oz]").should("contain", "0.00 Oz");
+    cy.get("[data-cy=pack-weight-lbs]").should("contain", "0.00 Lbs")
     cy.get("[data-cy=statistics-box]").should("not.contain", "navigation"); 
   });
   

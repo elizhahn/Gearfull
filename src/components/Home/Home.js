@@ -23,7 +23,7 @@ class Home extends Component {
     return (
       <section className="home-background">
         <div className="home-container" data-cy="user-portal">
-          <h1>Cool title here</h1>
+          <h1>Gearfull</h1>
           <input 
           className="home-name-input"
           type="text" 

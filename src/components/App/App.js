@@ -23,7 +23,7 @@ class App extends Component {
       </Route>
       <Route path="/dashboard">
         <header className="header">
-          <h1 className="header-title" data-cy="dashboard-title">Cool Title Here</h1>
+          <h1 className="header-title" data-cy="dashboard-title">Gearfull</h1>
           <p className="header-greeting" data-cy="greeting"><span className="header-greeting-green">Welcome </span>{this.state.user}</p>
           <button className="header-mountain-btn"><GiMountains className="header-mountain-icon" /></button>
         </header>
