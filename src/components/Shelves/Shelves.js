@@ -43,7 +43,7 @@ class Shelves extends Component {
     createShelf(shelfName)
     .then(data => {
       const updatedShelves = [{[shelfName]: "0.00"}].concat(this.state.shelves)
-      this.setState({shelves: updatedShelves, shelvesEmpty: false})
+      this.setState({items: {...this.state.items, [shelfName]: {}} ,shelves: updatedShelves, shelvesEmpty: false})
     }) 
     .catch(error => console.log(error))
   }
@@ -102,6 +102,7 @@ class Shelves extends Component {
       deleteShelf={this.deleteShelf}
     />
   })
+  
   return (
     <main className="shelves">
       <section className="shelves-container" data-cy="shelves" >
