@@ -5,7 +5,7 @@ describe ("Landing Page", () => {
   })
   it("should display a user form to access dashboard", () => {
     cy.get("[data-cy=user-portal]").should("contain", "Gearfull")
-    cy.get("[data-cy=user-portal]").type("Elizabeth");
+    cy.get("[data-cy=user-portal-input]").type("Elizabeth");
     cy.get("[data-cy=user-portal-btn]").click();
     cy.url().should('include', '/dashboard');
   })
@@ -17,7 +17,7 @@ describe("User Dashboard", () => {
     cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"})
     cy.intercept(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation`, {fixture: "item1.json"})
     cy.visit("http://localhost:3000/")
-    cy.get("[data-cy=user-portal]").type("Elizabeth");
+    cy.get("[data-cy=user-portal-input]").type("Elizabeth");
     cy.get("[data-cy=user-portal-btn]").click();
   
   });
@@ -27,8 +27,9 @@ describe("User Dashboard", () => {
     cy.get("[data-cy=shelves-intro]").contains("Here are some shelves to get you started...")
     cy.get("[data-cy=add-shelf-form]").should("exist");
     cy.get("[data-cy=add-shelf-btn]").contains("add a shelf");
-    cy.get("[data-cy=statistics-box]").should("contain", "Base Weight")
-      .and("contain","The Breakdown");
+    cy.get("[data-cy=statistics-box]").should("contain", "40.00 Oz")
+      .and("contain","2.50 Lbs")
+      .and("contain", "The Breakdown");
   });
 
   it("should display a user's saved gear and weight totals on load", () => {
