@@ -24,11 +24,12 @@ class App extends Component {
       <Route path="/dashboard">
         <header className="header">
           <h1 className="header-title" data-cy="dashboard-title">Gearfull</h1>
-          <p 
+          <h2 
             className="header-greeting" 
             data-cy="greeting"><span className="header-greeting-green">Welcome </span>{this.state.user}
-          </p>
+          </h2>
           <Link to="/"
+            aria-label="go to home page"
             className="header-mountain-btn"
             data-cy="home-link"
           >

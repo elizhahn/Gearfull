@@ -26,21 +26,22 @@ class Home extends Component {
         <div className="home-container" data-cy="user-portal">
           <h1 className="home-title">Gearfull</h1>
           <input 
-          className="home-name-input"
-          type="text" 
-          name="name" 
-          placeholder="Enter your name here"
-          value={this.state.value} 
-          onChange={this.handleChange}
-          aria-label="enter name"
-          data-cy="user-portal-input"/>
+            className="home-name-input"
+            type="text" 
+            name="name" 
+            placeholder="Enter your name here"
+            value={this.state.value} 
+            onChange={this.handleChange}
+            aria-label="enter name"
+            data-cy="user-portal-input"
+          />
           <Link to="/dashboard">
             <button 
+              aria-label="get started"
               className="home-start-btn" 
               onClick={() => this.updateName(this.state.name)}
               data-cy="user-portal-btn"
             >Get started
-            
             </button>
           </Link>
         </div>

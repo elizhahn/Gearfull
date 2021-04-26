@@ -10,12 +10,14 @@ const RemoveModal = ({ shelfName, handleModal, handleRemoveShelf }) => {
         <p data-cy="modal-warning-msg-2">This will delete the shelf and all it's contents</p>
         <div className="remove-modal-options">
           <button 
+            aria-label="yes remove please"
             className="remove-modal-btn" 
             onClick={() => handleRemoveShelf(shelfName)} data-cy="modal-remove-btn"
             >
               Yes remove please
           </button>
           <button 
+            aria-label="no take me back"
             className="remove-modal-btn" 
             onClick={handleModal}
             data-cy="modal-return-btn"

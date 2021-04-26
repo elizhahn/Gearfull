@@ -36,6 +36,7 @@ class AddShelfForm extends Component {
     return (
       <form className="form-add-shelf-container" onSubmit={this.handleSubmit} data-cy="add-shelf-form">
         <button 
+        aria-label="add shelf"
         className="form-add-shelf-btn"
         type="submit"
         data-cy="add-shelf-btn"
@@ -43,6 +44,7 @@ class AddShelfForm extends Component {
           add a shelf
       </button>
       <input
+        aria-label="enter shelf name"
         className="form-add-shelf-input"
         type="text"
         value={this.state.newShelf}
