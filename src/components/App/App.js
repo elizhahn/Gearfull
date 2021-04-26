@@ -28,18 +28,16 @@ class App extends Component {
             className="header-greeting" 
             data-cy="greeting"><span className="header-greeting-green">Welcome </span>{this.state.user}
           </p>
-          
-            <Link to="/"
-              className="header-mountain-btn">
-                <GiMountains className="header-mountain-icon" />
-            </Link>
-          
+          <Link to="/"
+            className="header-mountain-btn">
+              <GiMountains className="header-mountain-icon" />
+          </Link>
         </header>
         <Shelves/>
       </Route>
     </div>
   );
-}
+ }
 }
 
 export default App;
