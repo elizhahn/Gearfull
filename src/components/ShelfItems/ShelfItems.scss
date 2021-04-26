@@ -1,40 +1,60 @@
 .shelf-item-list {
+  position: relative; 
   list-style-type: none;
   padding: 0px; 
   margin: 0; 
 }
 
 .shelf-item {
+  display: flex;
   border-bottom: thin solid $lime-green;
   padding-left: 20px;  
 }
 
-.shelf-item::marker{
-  color: $lime-green;
-  font-size: 1.2em;  
-}
-
 .shelf-item-name {
-  display: inline-block;
-  width: 66%;
+  width: 50%;
   font-weight: 600; 
   font-size: 1.2em;  
 }
 
+.shelf-item-quantity-container {
+  @include flexStyle(flex, row, justify-content, flex-start); 
+  width: 50%; 
+}
+
 .shelf-item-quantity {
   display: inline-block; 
-  width: 15%; 
+  width: 80%; 
   font-size: 1.2em;
 }
 
 .shelf-item-remove-btn {
   @include removeButtonDefault();
+  position: absolute; 
+  right: 20px;
+  top: 10px;  
   width: 3%;
   height: 5%;  
 }
 
 .shelf-item-remove-icon {
-  height: 80%; 
-  width: 80%; 
+  height: 40px; 
+  width: 30px; 
+}
+
+@media screen and (max-width: 700px) {
+
+.shelf-item {
+  flex-direction: column;   
+}
+
+.shelf-item-name {
+  width: 40%; 
+}
+
+.shelf-item-quantity-container {
+  width: 60%; 
+}
+
 }
 
