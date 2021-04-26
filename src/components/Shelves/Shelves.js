@@ -1,6 +1,6 @@
 import { React, Component } from "react";
 import { addItem, createShelf, getItems, getShelves, removeItem, deleteCurrentShelf } from "../../ApiCalls";
-import { calculatePackWeight, createItemList, updateShelfItems, calcItemWeight, calcShelfWeights, removeShelf, updateShelfWeight } from "../../utility";
+import { calculatePackWeight, createItemList, updateShelfItems, calcItemWeight, calcShelfWeights, removeShelf, updateShelfWeight, updateItemList } from "../../utility";
 import ShelfCard from "../ShelfCard/ShelfCard";
 import PackStatistics from "../PackStatistics/PackStatistics";
 import AddShelfForm from "../AddShelfForm/AddShelfForm";
@@ -53,10 +53,11 @@ class Shelves extends Component {
     .then(data => {
       const newShelfList = removeShelf(shelfName, this.state.shelves);
       const newPackWeight = calculatePackWeight(newShelfList);
+      const newItemList = updateItemList(this.state.items, shelfName)
       if(!newShelfList.length) {
-        this.setState({shelves: newShelfList, totalWeight: newPackWeight, shelvesEmpty: true})
+        this.setState({items: {}, shelves: newShelfList, totalWeight: newPackWeight, shelvesEmpty: true})
     } else {
-        this.setState({shelves: newShelfList, totalWeight: newPackWeight})
+        this.setState({items: newItemList, shelves: newShelfList, totalWeight: newPackWeight})
     }
     })
   }
