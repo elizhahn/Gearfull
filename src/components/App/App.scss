@@ -6,39 +6,52 @@
 
 .header {
   @include flexStyle(flex, row, justify-content, flex-start);
+  position: relative; 
   align-items: center; 
   padding: 20px;
   background-color: $dark-grey; 
 }
 
 .header-mountain-btn {
+  position: absolute;
+  right: 20px;  
   background: none;
-  border: none;
-  width: 8%;  
+  border: none; 
 }
 
 .header-mountain-icon {
-  width: 100%;
-  height: 100%; 
+  width: 90px;
+  height: 90px; 
   color: $lime-green; 
 }
 
 .header-mountain-icon:hover {
-  color:aliceblue;
+  color: $white-blue;
 }
 
 .header-title {
-  color: aliceblue;
-  font-size: 3.4rem;  
+  color: $white-blue;
+  font-size: 4.0rem;  
 }
 
 .header-greeting { 
   font-size: 2.4rem; 
-  color: aliceblue;
+  color: $white-blue;
   flex: 1;
   margin-left: 30px;   
 }
 
 .header-greeting-green {
   color: $lime-green
+}
+
+@media screen and (max-width: 700px) {
+  .header {
+    flex-direction: column; 
+    align-items: flex-start; 
+  }
+
+  .header-greeting {
+    margin-left: 0px; 
+  }
 }
