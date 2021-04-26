@@ -98,6 +98,7 @@ Gearfull is a backpacking gear and weight tracker. This application helps people
  - Add a data pie chart that represents Each shelf with a color. The color will correspond to the breakdown of weight per shelf list
  - Allow users to drag and drop their shelf in a different order
  - Allow users to save gear lists to cater a gear list for different types of backpacking trips
+ - Have a user sign in that sets people up with their own database of information
 
 
 ## Project Reflections
