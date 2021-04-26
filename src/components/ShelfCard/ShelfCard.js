@@ -68,6 +68,7 @@ class ShelfCard extends Component {
       <article className="shelf-card" data-cy="shelf">
         <div className="shelf-category-container">
           <button 
+            aria-label="delete shelf"
             className="shelf-remove-category-btn"
             onClick={this.handleModal}
             data-cy="remove-category"
@@ -76,6 +77,7 @@ class ShelfCard extends Component {
           </button>
           <h2 className="shelf-category">{shelfName}</h2>
           <button 
+            aria-label="open shelf"
             className="shelf-expand-btn" 
             aria-expanded="false"
             onClick={this.expandShelf}
@@ -130,6 +132,7 @@ class ShelfCard extends Component {
               </label>
             </div>
             <button
+              aria-label="submit item"
               type="submit"
               className="form-add-item-btn"
               data-cy="item-add-btn"
