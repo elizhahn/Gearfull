@@ -46,7 +46,7 @@ describe("User Dashboard", () => {
     cy.get("[data-cy=shelf-weight-lb]").contains("2.50 Lbs");
   });
 
-  it.only("should take a user back to the landing page", () => {
+  it("should take a user back to the landing page", () => {
     cy.get("[data-cy=home-link]").click();
     cy.url().should('include', '/');
     cy.get("[data-cy=user-portal]").should("contain", "Gearfull");
@@ -121,6 +121,15 @@ describe("Adding an item", () => {
     cy.get("[data-cy=item-add-btn]").first().click();
     cy.get("[data-cy=form-error-msg]").contains("Please fill out all the fields");
     cy.get("[data-cy=added-item]").eq(1).should("not.exist");
+  });
+
+  it("should give the user an error message if they add a duplicate item", () => {
+    cy.get("[data-cy=expand-shelf-btn]").first().click();
+    cy.get("[data-cy=item-name-input]").first().type("garmin");
+    cy.get("[data-cy=item-weight-input]").first().type("34.6");
+    cy.get("[data-cy=item-amount-input]").first().type("1");
+    cy.get("[data-cy=item-add-btn]").first().click();
+    cy.get("[data-cy=form-error-msg]").contains("This item already exists"); 
   });
 
   it("should hide the form error message if successful submission was made", () => {
