@@ -1,7 +1,7 @@
 .statistics-shelf-container {
   flex: 1;
   margin: 10px;
-  max-height: 400px; 
+  min-height: 300px; 
   overflow: scroll;    
 }
 
@@ -43,13 +43,11 @@
   .statistics-shelf {
     @include flexStyle(flex, row, justify-content, space-between)  
   }
-}
-
-@media screen and (max-width: 700px) {
 
   .statistics-shelf-container {
-    max-height: 250px; 
+    max-height: 300px; 
   }
 }
+
 
 

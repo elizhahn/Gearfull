@@ -12,7 +12,7 @@
   @include flexStyle(flex, column, justify-content, center); 
   position: relative; 
   flex: 1; 
-  min-height: 400px;   
+  min-height: 300px;   
   
   &::before {
     @extend .statistics-totals-container; 
@@ -56,8 +56,9 @@
   }
 
   .statistics-container {
-    flex-direction: row; 
+    flex-direction: row;
   }
+
 }
 
 
@@ -65,10 +66,6 @@
 
   .statistics-container {
     flex-direction: column; 
-  }
-
-  .statistics-totals-container{
-    min-height: 300px; 
   }
 
 }
