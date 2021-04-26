@@ -14,7 +14,8 @@ class Shelves extends Component {
       shelves: [],
       items: {},
       totalWeight: 0,
-      error: ""
+      error: "",
+      shelvesEmpty: false
     }
   }
 
@@ -26,7 +27,11 @@ class Shelves extends Component {
         const itemsList = createItemList(items, shelves.baskets);
         const updatedShelves = calcShelfWeights(items, shelves.baskets);
         const packWeight = calculatePackWeight(updatedShelves);
-        this.setState({shelves: updatedShelves, items: itemsList, totalWeight: packWeight})
+        if(!updatedShelves.length) {
+          this.setState({shelves: updatedShelves, items: itemsList, totalWeight: packWeight, shelvesEmpty: true})
+      } else {
+          this.setState({shelves: updatedShelves, items: itemsList, totalWeight: packWeight, shelvesEmpty: false})
+      }
       })
      .catch(error => {
        this.setState({error: "We can't load your shelves right now, please try again later"})
@@ -38,7 +43,7 @@ class Shelves extends Component {
     createShelf(shelfName)
     .then(data => {
       const updatedShelves = [{[shelfName]: "0.00"}].concat(this.state.shelves)
-      this.setState({shelves: updatedShelves})
+      this.setState({shelves: updatedShelves, shelvesEmpty: false})
     }) 
     .catch(error => console.log(error))
   }
@@ -46,14 +51,17 @@ class Shelves extends Component {
   deleteShelf = (shelfName) => {
     deleteCurrentShelf(shelfName)
     .then(data => {
-      console.log(data)
       const newShelfList = removeShelf(shelfName, this.state.shelves);
-      const newPackWeight = calculatePackWeight(newShelfList); 
-      this.setState({shelves: newShelfList, totalWeight: newPackWeight})
+      const newPackWeight = calculatePackWeight(newShelfList);
+      if(!newShelfList.length) {
+        this.setState({shelves: newShelfList, totalWeight: newPackWeight, shelvesEmpty: true})
+    } else {
+        this.setState({shelves: newShelfList, totalWeight: newPackWeight})
+    }
     })
   }
 
-  updateItems = (shelfName, itemAdded, itemName, weight, amount) => {
+  updateItems = (shelfName, itemAdded, weight, amount) => {
     const updatedShelves = updateShelfWeight(this.state.shelves, shelfName, weight, amount, true); 
     const itemWeight = calcItemWeight(weight, amount)
     addItem(shelfName, itemAdded)
@@ -80,7 +88,6 @@ class Shelves extends Component {
   }
 
   render() {
-  
     const shelfNames = this.state.shelves.map(shelf => {
       return Object.keys(shelf); 
     })
@@ -104,7 +111,8 @@ class Shelves extends Component {
           shelves={this.state.shelves}
         />
         {this.state.error && <p className="shelves-loading-msg" data-cy="loading-msg">{this.state.error}</p>}
-        {!this.state.error && !this.state.shelves.length && <p className="shelves-loading-msg">Loading shelves...</p>}
+        {!this.state.error && !this.state.shelves.length && !this.state.shelvesEmpty && <p className="shelves-loading-msg">Loading shelves...</p>}
+        {this.state.shelvesEmpty && <p className="shelves-loading-msg">Your shelves are empty</p>}
         {shelves}
       </section>
       <PackStatistics 

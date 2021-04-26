@@ -36,7 +36,7 @@ class ShelfCard extends Component {
       this.setState({error: "Please fill out all the fields"})
   } else {
     this.setState({error: ""});
-    this.props.updateItems(shelfName, itemAdded,this.state.itemName, this.state.weight, this.state.amount)
+    this.props.updateItems(shelfName, itemAdded, this.state.weight, this.state.amount)
     this.clearInputs(); 
   }
   }
