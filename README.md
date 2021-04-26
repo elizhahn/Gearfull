@@ -1,70 +1,114 @@
-# Getting Started with Create React App
+# Gearfull
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a Mod 3 [Front-End Project](https://frontend.turing.edu/projects/module-3/niche-audience.html) by [Elizabeth Hahn](https://github.com/elizhahn)
 
-## Available Scripts
+### Deployed App: [Gearfull]()
 
-In the project directory, you can run:
+## Outline
 
-### `npm start`
+1. [Project Overview](#project-overview)
+2. [App Overview](#app-overview)
+3. [Learning Goals](#learning-goals)
+4. [Tech Stack](#tech-stack)
+5. [Features](#features)
+6. [Instructions for Installation](#instructions-for-installation)
+7. [Future Iterations](#future-iterations)
+8. [Project Reflections](#project-reflections)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Project Overview
 
-### `npm test`
+The goal of this project was to confirm my skills using React, React-Router, Asynchronous Javascript, and Cypress to build an application that solves a problem for a small niche audience. Github project board was utilized to organzize user stories, personas, wireframes, and acceptance criteria.  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## App Overview
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Gearfull is a backpacking gear and weight tracker. This application helps people track their backpack weights so they can attempt to lighten their load and become a more lightweight backpacker. Hikers can utilize the dashboard to add "shelves" which represent a category of gear they own. After adding a shelf, they can fill their shelves with gear items, the weight, and amount of that gear item. Their dashboard will also display the weight total of all their gear as they add/remove items. Additionally, the weights of each shelf is provided so hikers can see where most of the weight is accumulating. 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Learning Goals
+ 
+ - Establish my skills with React and build a more robust application that showcases my knowledge
+ - Building an application that tracks multiple API calls 
+ - Strategic component architecture that makes sense for the application
+  
+## Tech Stack
 
-### `npm run eject`
+### Front-End:
+- JavaScript ECMA6
+  - React (create-react-app)
+  - React Router
+- HTML5
+- CSS3
+  - SASS / SCSS
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Testing:
+- Cypress
+  - Mocha
+  - Chai
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Features
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Homepage
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![](https://media.giphy.com/media/2tqt97Htn7HIf1Gjq3/giphy.gif)
 
-## Learn More
+### Dashboard
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Adding a shelf
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![](https://media.giphy.com/media/Rod8eyQ3UGnXLID11K/giphy.gif)
 
-### Code Splitting
+### Adding items to a shelf
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![](https://media.giphy.com/media/NrrJSXX1ntt8n3VIIW/giphy.gif)
 
-### Analyzing the Bundle Size
+### Removing items from a shelf
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+![](https://media.giphy.com/media/qpvTEMdnNXPvwBzXdN/giphy.gif)
 
-### Making a Progressive Web App
+### Deleting a shelf
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+![](https://media.giphy.com/media/GbcERaVPJogWdsGAnY/giphy.gif)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Responsive Design
 
-### Deployment
+![](https://media.giphy.com/media/KzOXOIruLdhqMBAHwt/giphy.gif)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Accessibility
 
-### `npm run build` fails to minify
+![](https://media.giphy.com/media/3CIRTpHPjFaQBlKVQY/giphy.gif)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Instructions for Installation
+
+  - To run this application on your local machine, clone down this repo, change into the root directory from the command line, and run `npm install`. 
+    
+  - Then run `npm   start` to open the application locally. If you aren't taken there, visit `http://localhost:3000/`
+    
+  - To run the test suite locally, you will also need to run the command `npm i -D cypress` from the command line.
+    
+  - Once it  has installed, run `npx cypress open`, then select the `app_spec.js` test file. 
+    
+  - Note: you will need to run the application locally (start the server with `npm start` from the root directory on the command line) in order to run the automated tests.
+
+## Future Iterations
+
+ - Add a data pie chart that represents Each shelf with a color. The color will correspond to the breakdown of weight per shelf list
+ - Allow users to drag and drop their shelf in a different order
+ - Allow users to save gear lists to cater a gear list for different types of backpacking trips
+
+
+## Project Reflections
+
+### Challenges
+
+  - Stubbing the API calls in the testing suite proved challenging, and took some time to figure out the correct timing and fixtures to load
+  - Managing state with the multiple API calls that were being made throughout the app, and making sure that state matched up with the stored data
+
+### Wins
+
+  - Building an application that utilized 4 API calls allowing a user a multitude of actions to take
+  - Problem solving how to "delete" an item, when the API did not allow for a direct item deletion
+  - Creating a useable application applicable to my passions
