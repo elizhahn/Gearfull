@@ -99,30 +99,32 @@ class ShelfCard extends Component {
               data-cy="item-name-input"
             />
             </label>
-            <label className="form-quantity-label"> weight
-            <input
-              className="form-quantity-input"
-              type="number"
-              min="0"
-              step="any"
-              name="weight"
-              value={this.state.weight}
-              onChange={this.handleChange}
-              data-cy="item-weight-input"
-            /> oz
-            </label>
-            <label className="form-quantity-label"> amount
-            <input
-              className="form-quantity-input"
-              type="number"
-              min="0"
-              step="any"
-              name="amount"
-              value={this.state.amount}
-              onChange={this.handleChange}
-              data-cy="item-amount-input"
-            /> 
-            </label>
+            <div className="quantity-input-container">
+              <label className="form-quantity-label"> weight
+              <input
+                className="form-quantity-input"
+                type="number"
+                min="0"
+                step="any"
+                name="weight"
+                value={this.state.weight}
+                onChange={this.handleChange}
+                data-cy="item-weight-input"
+              /> oz
+              </label>
+              <label className="form-quantity-label"> amount
+              <input
+                className="form-quantity-input"
+                type="number"
+                min="0"
+                step="any"
+                name="amount"
+                value={this.state.amount}
+                onChange={this.handleChange}
+                data-cy="item-amount-input"
+              /> 
+              </label>
+            </div>
             <button
               type="submit"
               className="form-add-item-btn"

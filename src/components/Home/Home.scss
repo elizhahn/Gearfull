@@ -10,12 +10,19 @@
   @include flexStyle(flex, column, justify-content, space-around); 
   align-items: center; 
   height: 50%;   
-  width: 40%;
+  width: 45%;
   background: rgba(54,54,54, 0.5);
   border-radius: 5px; 
 }
 
+.home-title {
+  font-size: 5.0rem;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 5px $white-blue;   
+}
+
 .home-name-input {
+  font-size: 1.8rem; 
   height: 9%; 
   width: 50%;
   border:none; 
@@ -25,10 +32,28 @@
 }
 
 .home-start-btn {
-  @include buttonStyle( rgb(54,54,54), rgb(252, 252, 252));
+  @include buttonStyle( $dark-grey, $white-blue);
+  font-size: 1.8em;
   padding: 10px; 
+
+  &:hover {
+    @extend .home-start-btn; 
+    color: $lime-green; 
+  }
 }
 
-.home-start-btn:hover {
-  color: $lime-green; 
+@media screen and (max-width: 1000px) {
+  .home-container {
+    width: 70%; 
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .home-container {
+    width: 90%; 
+  }
+
+  .home-name-input {
+    width: 90%; 
+  }
 }

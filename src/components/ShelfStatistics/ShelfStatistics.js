@@ -7,19 +7,27 @@ const ShelfStatistics = ({ shelves }) => {
     return (
       <li 
         key={i}
-        className="statistics-category"
+        className="statistics-shelf"
         data-cy="shelf-weight-name"
       >
-          <span className="statistics-category-name">{shelfWeightInfoOz[0]}:</span>
-          <span className="statistics-category-oz" data-cy="shelf-weight-oz">{shelfWeightInfoOz[1]} Oz</span> | 
-          <span className="statistics-category-lbs" data-cy="shelf-weight-lb">  {shelfWeightInfoLbs} Lbs </span>
+        <span 
+          className="statistics-shelf-name">{shelfWeightInfoOz[0]}:
+        </span>
+        <span 
+          className="statistics-shelf-oz" data-cy="shelf-weight-oz">
+            {shelfWeightInfoOz[1]} Oz
+        </span>  
+        <span 
+          className="statistics-shelf-lbs" data-cy="shelf-weight-lb">  
+          {shelfWeightInfoLbs} Lbs 
+        </span>
       </li>
     )
   })
   return (
-    <div className="statistics-category-container">
-      <h2 className="statistics-category-title">The Breakdown</h2>
-      <ul className="statistics-category-list">
+    <div className="statistics-shelf-container">
+      <h2 className="statistics-shelf-title">The Breakdown</h2>
+      <ul className="statistics-shelf-list">
         {shelfWeights}
       </ul>
     </div>

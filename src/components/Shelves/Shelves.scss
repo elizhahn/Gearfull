@@ -5,7 +5,7 @@
 }
 
 .shelves-container {
-  width: 70%;  
+  width: 65%;  
 }
 
 .shelves-intro {
@@ -20,6 +20,14 @@
   font-size: 1.8em; 
 }
 
+@media screen and (max-width: 1000px) {
+  .shelves {
+    flex-direction: column-reverse; 
+  }
 
+  .shelves-container {
+    width: 100%; 
+  }
+}
 
 
