@@ -46,25 +46,37 @@ describe("User Dashboard", () => {
     cy.get("[data-cy=shelf-weight-lb]").contains("2.50 Lbs");
   });
 
-  it.only("should take a user back to the landing page", () => {
+  it("should take a user back to the landing page", () => {
     cy.get("[data-cy=home-link]").click();
     cy.url().should('include', '/');
     cy.get("[data-cy=user-portal]").should("contain", "Gearfull");
 
-  })
+  });
 });
 
-describe("Loading messages", () => {
+describe.only("Loading messages", () => {
   it("should show an error message if shelves can't be loaded", () => {
-    cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"});
+
+    cy.intercept({
+      method: 'GET',
+      url: 'https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation'
+    },
+    {
+      statusCode: 500,
+      body: { 
+        message: `Shelves can't be loaded at this time` 
+      }
+    })
+    cy.intercept("https://getpantry.cloud/apiv1/pantry/shelferror", {fixture:"shelves.json"});
     cy.visit("http://localhost:3000/dashboard");
     cy.get("[data-cy=loading-error-msg]").contains("We can't load your shelves right now, please try again later");
   });
 
   it("should show a loading message if shelves are loading", () => {
-    cy.intercept(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation`, {fixture: "item1.json"});
+
     cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"});
-    cy.visit("http://localhost:3000/dashboard");
+    cy.intercept(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation`, {fixture: "item1.json"});
+    cy.visit("http://localhost:3000/dashboard")
     cy.contains('Loading shelves...');
 
   });
@@ -74,8 +86,8 @@ describe("Loading messages", () => {
     cy.visit("http://localhost:3000/dashboard");
     cy.contains("Your shelves are empty");
 
-  })
-})
+  });
+});
 
 describe("Adding an item", () => {
   beforeEach(() => {
@@ -121,6 +133,15 @@ describe("Adding an item", () => {
     cy.get("[data-cy=item-add-btn]").first().click();
     cy.get("[data-cy=form-error-msg]").contains("Please fill out all the fields");
     cy.get("[data-cy=added-item]").eq(1).should("not.exist");
+  });
+
+  it("should give the user an error message if they add a duplicate item", () => {
+    cy.get("[data-cy=expand-shelf-btn]").first().click();
+    cy.get("[data-cy=item-name-input]").first().type("garmin");
+    cy.get("[data-cy=item-weight-input]").first().type("34.6");
+    cy.get("[data-cy=item-amount-input]").first().type("1");
+    cy.get("[data-cy=item-add-btn]").first().click();
+    cy.get("[data-cy=form-error-msg]").contains("This item already exists"); 
   });
 
   it("should hide the form error message if successful submission was made", () => {

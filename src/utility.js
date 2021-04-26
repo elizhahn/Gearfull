@@ -73,7 +73,6 @@ export const checkShelves = (shelves, shelfName) => {
     return true;
   }
   return false; 
-
 }
 
 export const removeShelf = (shelfName, shelves) => {
