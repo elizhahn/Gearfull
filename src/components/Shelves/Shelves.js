@@ -110,14 +110,31 @@ class Shelves extends Component {
           addShelf={this.addShelf}
           shelves={this.state.shelves}
         />
-        {this.state.error && <p className="shelves-loading-msg" data-cy="loading-msg">{this.state.error}</p>}
-        {!this.state.error && !this.state.shelves.length && !this.state.shelvesEmpty && <p className="shelves-loading-msg">Loading shelves...</p>}
-        {this.state.shelvesEmpty && <p className="shelves-loading-msg">Your shelves are empty</p>}
+        {this.state.error &&
+        <p 
+          className="shelves-loading-msg" 
+          data-cy="loading-error-msg">
+            {this.state.error}
+        </p>}
+        {!this.state.error && 
+        !this.state.shelves.length && 
+        !this.state.shelvesEmpty && 
+        <p 
+          className="shelves-loading-msg" 
+          data-cy="loading-msg">
+            Loading shelves...
+        </p>}
+        {this.state.shelvesEmpty && 
+        <p 
+          className="shelves-loading-msg" 
+          data-cy="shelves-msg">
+            Your shelves are empty
+        </p>}
         {shelves}
       </section>
       <PackStatistics 
-      packWeight={this.state.totalWeight} 
-      shelves={this.state.shelves}
+        packWeight={this.state.totalWeight} 
+        shelves={this.state.shelves}
       />
     </main>
 
