@@ -29,7 +29,9 @@ class App extends Component {
             data-cy="greeting"><span className="header-greeting-green">Welcome </span>{this.state.user}
           </p>
           <Link to="/"
-            className="header-mountain-btn">
+            className="header-mountain-btn"
+            data-cy="home-link"
+          >
               <GiMountains className="header-mountain-icon" />
           </Link>
         </header>

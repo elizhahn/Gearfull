@@ -24,6 +24,7 @@ describe("User Dashboard", () => {
   it("should display a user's name and main dashboard features upon load", () => {
     cy.get("[data-cy=dashboard-title]").contains("Gearfull");
     cy.get("[data-cy=greeting]").contains("Welcome Elizabeth");
+    cy.get("[data-cy=home-link]").should("exist");
     cy.get("[data-cy=shelves-intro]").contains('Create some shelves here like "navigation" or "cook system"...');
     cy.get("[data-cy=add-shelf-form]").should("exist");
     cy.get("[data-cy=add-shelf-btn]").contains("add a shelf");
@@ -44,6 +45,13 @@ describe("User Dashboard", () => {
     cy.get("[data-cy=shelf-weight-oz]").contains("40.00 Oz");
     cy.get("[data-cy=shelf-weight-lb]").contains("2.50 Lbs");
   });
+
+  it.only("should take a user back to the landing page", () => {
+    cy.get("[data-cy=home-link]").click();
+    cy.url().should('include', '/');
+    cy.get("[data-cy=user-portal]").should("contain", "Gearfull");
+
+  })
 });
 
 describe("Loading messages", () => {
