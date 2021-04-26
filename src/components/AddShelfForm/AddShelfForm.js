@@ -1,4 +1,5 @@
 import  { React, Component } from "react";
+import PropTypes from "prop-types";
 import { checkShelves } from "../../utility";
 
 class AddShelfForm extends Component {
@@ -56,3 +57,8 @@ class AddShelfForm extends Component {
 }
 
 export default AddShelfForm;
+
+AddShelfForm.propTypes = {
+  addShelf: PropTypes.func.isRequired,
+  shelves: PropTypes.array.isRequired
+}

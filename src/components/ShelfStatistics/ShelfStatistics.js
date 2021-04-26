@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const ShelfStatistics = ({ shelves }) => {
   const shelfWeights = shelves.map((shelf, i) => {
@@ -35,3 +36,7 @@ const ShelfStatistics = ({ shelves }) => {
 }
 
 export default ShelfStatistics; 
+
+ShelfStatistics.propTypes = {
+  shelves: PropTypes.array.isRequired
+}
