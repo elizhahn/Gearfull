@@ -24,7 +24,7 @@ describe("User Dashboard", () => {
   it("should display a user's name and main dashboard features upon load", () => {
     cy.get("[data-cy=dashboard-title]").contains("Gearfull");
     cy.get("[data-cy=greeting]").contains("Welcome Elizabeth");
-    cy.get("[data-cy=shelves-intro]").contains("Here are some shelves to get you started...")
+    cy.get("[data-cy=shelves-intro]").contains('Create some shelves here like "navigation" or "cook system"...')
     cy.get("[data-cy=add-shelf-form]").should("exist");
     cy.get("[data-cy=add-shelf-btn]").contains("add a shelf");
     cy.get("[data-cy=statistics-box]").should("contain", "40.00 Oz")
@@ -70,6 +70,37 @@ describe("Adding an item", () => {
     .and("contain", "4.66 Lbs");
     cy.get("[data-cy=shelf-weight-oz]").first().contains("74.60 Oz")
     cy.get("[data-cy=shelf-weight-lb]").first().contains("4.66 Lbs")
+  });
+
+  it("should give the user an error message if any form fields are empty", () => {
+    cy.get("[data-cy=expand-shelf-btn]").first().click();
+    cy.get("[data-cy=item-add-btn]").first().click();
+    cy.get("[data-cy=form-error-msg]").contains("Please fill out all the fields");
+    cy.get("[data-cy=added-item]").eq(1).should("not.exist");
+    cy.get("[data-cy=item-name-input]").first().type("pocket rocket stove");
+    cy.get("[data-cy=item-add-btn]").first().click();
+    cy.get("[data-cy=form-error-msg]").contains("Please fill out all the fields");
+    cy.get("[data-cy=added-item]").eq(1).should("not.exist");
+    cy.get("[data-cy=item-name-input]").first().clear();
+    cy.get("[data-cy=item-weight-input]").first().type("2");
+    cy.get("[data-cy=item-add-btn]").first().click();
+    cy.get("[data-cy=form-error-msg]").contains("Please fill out all the fields");
+    cy.get("[data-cy=added-item]").eq(1).should("not.exist");
+    cy.get("[data-cy=item-weight-input]").clear();
+    cy.get("[data-cy=item-amount-input]").first().type("1");
+    cy.get("[data-cy=item-add-btn]").first().click();
+    cy.get("[data-cy=form-error-msg]").contains("Please fill out all the fields");
+    cy.get("[data-cy=added-item]").eq(1).should("not.exist");
+  });
+
+  it.only("should hide the form error message if successful submission was made", () => {
+    cy.get("[data-cy=expand-shelf-btn]").first().click();
+    cy.get("[data-cy=item-add-btn]").first().click();
+    cy.get("[data-cy=item-name-input]").first().type("pocket rocket stove");
+    cy.get("[data-cy=item-weight-input]").first().type("34.6");
+    cy.get("[data-cy=item-amount-input]").first().type("1");
+    cy.get("[data-cy=item-add-btn]").first().click();
+    cy.get("[data-cy=form-error-msg]").should("not.exist");
   });
 });
 

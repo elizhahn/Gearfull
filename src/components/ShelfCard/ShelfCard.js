@@ -87,7 +87,7 @@ class ShelfCard extends Component {
           />}
         </div>
         <div className="shelf-expand-container">
-          {this.state.error && <p className="form-error-msg">{this.state.error}</p>}
+          {this.state.error && <p className="form-error-msg" data-cy="form-error-msg">{this.state.error}</p>}
           <form className={`form-add-item ${this.state.expanded}`} onSubmit={(event) => this.handleSubmit(event, shelfName)}>
             <label className="form-item-label">gear name
             <input

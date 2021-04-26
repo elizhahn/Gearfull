@@ -105,7 +105,7 @@ class Shelves extends Component {
   return (
     <main className="shelves">
       <section className="shelves-container" data-cy="shelves" >
-        <p className="shelves-intro" data-cy="shelves-intro">Here are some shelves to get you started...</p>
+        <p className="shelves-intro" data-cy="shelves-intro">Create some shelves here like "navigation" or "cook system"...</p>
         <AddShelfForm 
           addShelf={this.addShelf}
           shelves={this.state.shelves}
