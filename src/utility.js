@@ -50,6 +50,15 @@ export const updateShelfItems = (shelfName, itemId, itemList) => {
   return items; 
 }
 
+export const updateItemList = (items, shelfName) => {
+  for( const item in items) {
+    if(item === shelfName) {
+      delete items[item]
+    }
+  }
+  return items
+}
+
 export const calculatePackWeight = (shelves) => {
   const packWeight = shelves.reduce((totalWeight, shelf) => {
     const shelfWeight = parseFloat(Object.values(shelf).flat()[0]); 
