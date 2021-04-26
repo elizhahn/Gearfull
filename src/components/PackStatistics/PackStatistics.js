@@ -1,4 +1,5 @@
 import  React from "react";
+import PropTypes from "prop-types";
 import ShelfStatistics from "../ShelfStatistics/ShelfStatistics";
 
 
@@ -32,3 +33,8 @@ const PackStatistics = ({ packWeight, shelves }) => {
  
 
 export default PackStatistics
+
+PackStatistics.propTypes = {
+  packWeight: PropTypes.number.isRequired, 
+  shelves: PropTypes.array.isRequired
+}

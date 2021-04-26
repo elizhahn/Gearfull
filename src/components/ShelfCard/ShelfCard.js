@@ -1,4 +1,5 @@
 import { React, Component } from "react";
+import PropTypes from 'prop-types';
 import ShelfItems from "../ShelfItems/ShelfItems";
 import { MdAdd, MdExpandMore } from "react-icons/md";
 import { IoMdRemoveCircle } from "react-icons/io";
@@ -12,7 +13,7 @@ class ShelfCard extends Component {
       weight: "",
       amount: "",
       error: "",
-      expanded: "collapsed", // use boolean here
+      expanded: "collapsed", 
       modalOpen: false
     }
   }
@@ -148,3 +149,12 @@ class ShelfCard extends Component {
 }
 
 export default ShelfCard;
+
+ShelfCard.propTypes = { 
+  id: PropTypes.number.isRequired, 
+  shelfName: PropTypes.string.isRequired, 
+  shelfItems: PropTypes.object.isRequired, 
+  updateItems: PropTypes.func.isRequired, 
+  deleteItem: PropTypes.func.isRequired, 
+  deleteShelf: PropTypes.func.isRequired, 
+}

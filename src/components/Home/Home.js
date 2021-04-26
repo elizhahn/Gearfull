@@ -1,4 +1,5 @@
 import { React, Component } from "react";
+import PropTypes from 'prop-types'; 
 import { Link } from "react-router-dom";
 
 class Home extends Component {
@@ -49,3 +50,7 @@ class Home extends Component {
 }
 
 export default Home 
+
+Home.propTypes = {
+ displayName: PropTypes.func.isRequired
+};

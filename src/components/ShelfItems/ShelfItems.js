@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { MdClear } from "react-icons/md";
 
 const ShelfItems = ({ shelfItems, deleteItem, shelfName }) => {
@@ -35,3 +36,9 @@ const ShelfItems = ({ shelfItems, deleteItem, shelfName }) => {
 }
 
 export default ShelfItems
+
+ShelfItems.propTypes = {
+  shelfItems: PropTypes.object.isRequired,
+  deleteItem: PropTypes.func.isRequired, 
+  shelfName: PropTypes.string.isRequired
+}

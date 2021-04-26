@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ReactDOM from "react-dom"; 
 
 const RemoveModal = ({ shelfName, handleModal, handleRemoveShelf }) => {
@@ -28,3 +29,9 @@ const RemoveModal = ({ shelfName, handleModal, handleRemoveShelf }) => {
 }
 
 export default RemoveModal; 
+
+RemoveModal.propTypes = {
+  shelfName: PropTypes.string.isRequired, 
+  handleModal: PropTypes.func.isRequired, 
+  handleRemoveShelf: PropTypes.func.isRequired
+}
