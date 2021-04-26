@@ -31,6 +31,7 @@ class ShelfCard extends Component {
     const itemAdded = {
       [itemName]: {id: Date.now(), weight: this.state.weight, amount: this.state.amount}
     }
+    console.log(this.props.shelfItems)
     event.preventDefault()
     if(!this.state.itemName || !this.state.weight || !this.state.amount) {
       this.setState({error: "Please fill out all the fields"})
