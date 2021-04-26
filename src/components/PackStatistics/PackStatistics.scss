@@ -42,11 +42,11 @@
 }
 
 .total-ozs {
-  color :rgb(7, 80, 75);
+  color :$dark-green-blue;
 }
 
 .total-lbs {
-  color: rgb(66, 13, 69);
+  color: $dark-purple;
 }
 
 @media screen and (max-width: 1000px) {

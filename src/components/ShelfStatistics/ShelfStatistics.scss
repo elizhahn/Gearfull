@@ -30,12 +30,12 @@
 
 .statistics-shelf-oz {
   width: 25%; 
-  color: rgb(176, 24, 199);
+  color: $dark-green-blue;
 }
 
 .statistics-shelf-lbs {
   width: 25%; 
-  color: rgb(255, 89, 0);
+  color: $dark-purple;
 }
 
 @media screen and (max-width: 1000px) {
