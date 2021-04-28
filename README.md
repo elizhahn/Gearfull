@@ -3,6 +3,8 @@
 This is a Mod 3 [Front-End Project](https://frontend.turing.edu/projects/module-3/niche-audience.html) by [Elizabeth Hahn](https://github.com/elizhahn)
 
 ### Deployed App: [Gearfull](https://gearfull.herokuapp.com/)
+ 
+ https://gearfull.herokuapp.com/
 
 ## Outline
 
@@ -78,7 +80,7 @@ Gearfull is a backpacking gear and weight tracker. This application helps people
 
 ### Accessibility
 
-![](https://media.giphy.com/media/3CIRTpHPjFaQBlKVQY/giphy.gif)
+![](https://media.giphy.com/media/KpuMhkRMQvFwt9hZ6e/giphy.gif)
 
 
 ## Instructions for Installation
