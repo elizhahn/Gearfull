@@ -3,6 +3,8 @@
 This is a Mod 3 [Front-End Project](https://frontend.turing.edu/projects/module-3/niche-audience.html) by [Elizabeth Hahn](https://github.com/elizhahn)
 
 ### Deployed App: [Gearfull](https://gearfull.herokuapp.com/)
+ 
+ https://gearfull.herokuapp.com/
 
 ## Outline
 
