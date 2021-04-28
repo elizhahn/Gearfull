@@ -21,8 +21,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "start-server-and-test start http://localhost:3000 cy:run",
+    "eject": "react-scripts eject",
+    "cypress": "npx cypress open",
+    "cy:run": "cypress run"
   },
   "eslintConfig": {
     "extends": [
@@ -45,6 +47,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-object-rest-spread": "^7.13.8",
     "@babel/register": "^7.13.16",
-    "cypress": "^7.1.0"
+    "cypress": "^7.1.0",
+    "start-server-and-test": "^1.12.1"
   }
 }

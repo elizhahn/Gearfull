@@ -54,7 +54,7 @@ describe("User Dashboard", () => {
   });
 });
 
-describe.only("Loading messages", () => {
+describe("Loading messages", () => {
   it("should show an error message if shelves can't be loaded", () => {
 
     cy.intercept({
@@ -67,7 +67,7 @@ describe.only("Loading messages", () => {
         message: `Shelves can't be loaded at this time` 
       }
     })
-    cy.intercept("https://getpantry.cloud/apiv1/pantry/shelferror", {fixture:"shelves.json"});
+    cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"});
     cy.visit("http://localhost:3000/dashboard");
     cy.get("[data-cy=loading-error-msg]").contains("We can't load your shelves right now, please try again later");
   });
