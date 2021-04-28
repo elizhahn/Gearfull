@@ -2,6 +2,15 @@ language: node_js
 
 node_js:
 - "12"
+notifications: 
+  email: false
 
 script: 
   - npm run build
+
+deploy: 
+  provider: heroku
+  api_key:
+    secure: 2c64e8c1-856c-477c-a4e8-96047b3a5d8e
+  app: gearfull
+  skip_cleanup: true
