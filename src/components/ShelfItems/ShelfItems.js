@@ -17,7 +17,8 @@ const ShelfItems = ({ shelfItems, deleteItem, shelfName }) => {
                   <p className="shelf-item-quantity">weight: {shelfItems[item].weight}</p>
                   <p className="shelf-item-quantity">amount: {shelfItems[item].amount}</p>
                 </div>
-                <button 
+                <button
+                 aria-label="delete item"
                  className="shelf-item-remove-btn"
                  onClick={() => deleteItem(shelfName, shelfItems[item].id, shelfItems[item].weight, shelfItems[item].amount)}
                  data-cy="delete-item-btn"
