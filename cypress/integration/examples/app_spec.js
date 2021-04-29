@@ -205,7 +205,7 @@ describe("Adding a shelf", () => {
 describe("Deleting a shelf", () => {
   beforeEach(() => {
    
-    cy.intercept("DELETE", "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/cooking", {fixture: ""});
+    cy.intercept("DELETE", "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/cooking", {fixture: ""}).as("deleteItem");
     cy.intercept(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation`, {fixture: "item1.json"});
     cy.intercept("POST", "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/cooking", {fixture: "item3.json"});
     cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"})  
@@ -236,6 +236,7 @@ describe("Deleting a shelf", () => {
     cy.get("[data-cy=add-shelf-btn]").click();
     cy.get("[data-cy=remove-category]").eq(0).click();
     cy.get("[data-cy=modal-remove-btn]").click();
+    cy.wait("@deleteItem");
     cy.get("[data-cy=shelf]").eq(1).should("not.exist"); 
     cy.get("[data-cy=shelves]").should("contain", "navigation")
       .and("not.contain", "cooking"); 
