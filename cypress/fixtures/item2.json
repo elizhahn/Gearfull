@@ -1,3 +1,4 @@
-{
-  "pocket rocket stove": {"id": 1, "weight": "34.6", "amount": "1"}
+{  
+  "garmin": {"id": 1, "weight": "40", "amount": "1"},
+  "test test item": {"id": 2, "weight": "34.6", "amount": "1"}
 }

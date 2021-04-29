@@ -93,18 +93,19 @@ describe("Adding an item", () => {
   beforeEach(() => {
 
     cy.intercept(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation`, {fixture: "item1.json"});
-    cy.intercept("PUT", "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation", {fixture: "item2.json"});
+    cy.intercept("PUT", "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation", {fixture: "item2.json"}).as("addedItem")
     cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"}); 
     cy.visit("http://localhost:3000/dashboard");
 
   });
-  it("should let a user add items to their shelf and update the dashboard", () => {
+  it.only("should let a user add items to their shelf and update the dashboard", () => {
     cy.get("[data-cy=expand-shelf-btn]").first().click();
     cy.get("[data-cy=expand-icon]").should("have.class", "expanded"); 
     cy.get("[data-cy=item-name-input]").first().type("pocket rocket stove");
     cy.get("[data-cy=item-weight-input]").first().type("34.6");
     cy.get("[data-cy=item-amount-input]").first().type("1");
     cy.get("[data-cy=item-add-btn]").first().click();
+    cy.wait("@addedItem")
     cy.get("[data-cy=added-item]").eq(1).should("contain", "pocket rocket stove")
     .and("contain", "weight: 34.6")
     .and("contain", "amount: 1");
