@@ -98,7 +98,7 @@ describe("Adding an item", () => {
     cy.visit("http://localhost:3000/dashboard");
 
   });
-  it("should let a user add items to their shelf and update the dashboard", () => {
+  it.only("should let a user add items to their shelf and update the dashboard", () => {
     cy.get("[data-cy=expand-shelf-btn]").first().click();
     cy.get("[data-cy=expand-icon]").should("have.class", "expanded"); 
     cy.get("[data-cy=item-name-input]").first().type("pocket rocket stove");
@@ -106,6 +106,7 @@ describe("Adding an item", () => {
     cy.get("[data-cy=item-amount-input]").first().type("1");
     cy.get("[data-cy=item-add-btn]").first().click();
     cy.wait("@addedItem")
+    cy.wait(1000);
     cy.get("[data-cy=added-item]").eq(1).should("contain", "pocket rocket stove")
     .and("contain", "weight: 34.6")
     .and("contain", "amount: 1");
