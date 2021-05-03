@@ -72,10 +72,10 @@ describe("Loading messages", () => {
     cy.get("[data-cy=loading-error-msg]").contains("We can't load your shelves right now, please try again later");
   });
 
-  it("should show a loading message if shelves are loading", () => {
+  it.only("should show a loading message if shelves are loading", () => {
 
-    cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"});
-    cy.intercept(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation`, {fixture: "item1.json"});
+    cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {delay: 1000, fixture:"shelves.json"});
+    cy.intercept(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation`, {delay: 1000, fixture: "item1.json"});
     cy.visit("http://localhost:3000/dashboard")
     cy.contains('Loading shelves...');
 
