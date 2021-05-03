@@ -74,8 +74,8 @@ describe("Loading messages", () => {
 
   it("should show a loading message if shelves are loading", () => {
 
-    cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"});
-    cy.intercept(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation`, {fixture: "item1.json"});
+    cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {delay: 1000, fixture:"shelves.json"});
+    cy.intercept(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation`, {delay: 1000, fixture: "item1.json"});
     cy.visit("http://localhost:3000/dashboard")
     cy.contains('Loading shelves...');
 
@@ -106,6 +106,7 @@ describe("Adding an item", () => {
     cy.get("[data-cy=item-amount-input]").first().type("1");
     cy.get("[data-cy=item-add-btn]").first().click();
     cy.wait("@addedItem")
+    cy.wait(1000);
     cy.get("[data-cy=added-item]").eq(1).should("contain", "pocket rocket stove")
     .and("contain", "weight: 34.6")
     .and("contain", "amount: 1");
@@ -205,7 +206,7 @@ describe("Adding a shelf", () => {
 describe("Deleting a shelf", () => {
   beforeEach(() => {
    
-    cy.intercept("DELETE", "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/cooking", {fixture: ""}).as("deleteItem");
+    cy.intercept("DELETE", "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/cooking", {fixture: ""})
     cy.intercept(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation`, {fixture: "item1.json"});
     cy.intercept("POST", "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/cooking", {fixture: "item3.json"});
     cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"})  
@@ -236,7 +237,6 @@ describe("Deleting a shelf", () => {
     cy.get("[data-cy=add-shelf-btn]").click();
     cy.get("[data-cy=remove-category]").eq(0).click();
     cy.get("[data-cy=modal-remove-btn]").click();
-    cy.wait("@deleteItem");
     cy.get("[data-cy=shelf]").eq(1).should("not.exist"); 
     cy.get("[data-cy=shelves]").should("contain", "navigation")
       .and("not.contain", "cooking"); 
