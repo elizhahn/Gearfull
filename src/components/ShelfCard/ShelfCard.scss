@@ -59,7 +59,7 @@
   align-items: center; 
   background-color: $dark-grey;
   padding: 10px 0px 10px 30px; 
-  margin-top: -100%;
+  margin-top: -120%;
   transition: all .5s; 
 }
 
@@ -117,7 +117,11 @@
 @media screen and (max-width: 700px) {
 
   .shelf-expand-btn {
-    width: 10%; 
+    width: 50px; 
+  }
+
+  .shelf-remove-category-btn {
+    width: 25px; 
   }
   
   .form-add-item {
