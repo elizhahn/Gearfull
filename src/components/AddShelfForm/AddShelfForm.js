@@ -34,26 +34,28 @@ class AddShelfForm extends Component {
 
   render() {
     return (
+      <>
+      {this.state.error && <p className="form-add-shelf-error" data-cy="add-shelf-msg">{this.state.error}</p>}
       <form className="form-add-shelf-container" onSubmit={this.handleSubmit} data-cy="add-shelf-form">
         <button 
-        aria-label="add shelf"
-        className="form-add-shelf-btn"
-        type="submit"
-        data-cy="add-shelf-btn"
-        >
-          add a shelf
-      </button>
-      <input
-        aria-label="enter shelf name"
-        className="form-add-shelf-input"
-        type="text"
-        value={this.state.newShelf}
-        name="newShelf"
-        onChange={this.handleChange}
-        data-cy="add-shelf-input"
-      />
-      {this.state.error && <p className="form-add-shelf-error" data-cy="add-shelf-msg">{this.state.error}</p>}
-    </form>
+          aria-label="add shelf"
+          className="form-add-shelf-btn"
+          type="submit"
+          data-cy="add-shelf-btn"
+          >
+            add a shelf
+        </button>
+        <input
+          aria-label="enter shelf name"
+          className="form-add-shelf-input"
+          type="text"
+          value={this.state.newShelf}
+          name="newShelf"
+          onChange={this.handleChange}
+          data-cy="add-shelf-input"
+        />
+      </form>
+    </>
     )
   }
 }
