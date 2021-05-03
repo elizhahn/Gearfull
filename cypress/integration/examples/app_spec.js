@@ -98,7 +98,7 @@ describe("Adding an item", () => {
     cy.visit("http://localhost:3000/dashboard");
 
   });
-  it.only("should let a user add items to their shelf and update the dashboard", () => {
+  it("should let a user add items to their shelf and update the dashboard", () => {
     cy.get("[data-cy=expand-shelf-btn]").first().click();
     cy.get("[data-cy=expand-icon]").should("have.class", "expanded"); 
     cy.get("[data-cy=item-name-input]").first().type("pocket rocket stove");
