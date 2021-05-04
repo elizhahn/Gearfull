@@ -204,9 +204,7 @@ describe("Adding a shelf", () => {
 });
 
 describe("Deleting a shelf", () => {
-  beforeEach(() => {
-   
-    // cy.intercept("DELETE", "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/cooking", {fixture: ""}).as("deleteShelf")
+    cy.intercept("DELETE", "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/cooking", {fixture: ""});
     cy.intercept(`https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/navigation`, {fixture: "item1.json"});
     cy.intercept("POST", "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/cooking", {fixture: "item3.json"});
     cy.intercept("https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d", {fixture:"shelves.json"})  
@@ -232,24 +230,11 @@ describe("Deleting a shelf", () => {
     cy.get("[data-cy=modal]").should("not.exist"); 
   });
 
-  it("Allows a user to delete a shelf after being warned", () => {
-    cy.intercept({
-      method: 'DELETE',
-      url: "https://getpantry.cloud/apiv1/pantry/929de230-c666-4f11-9602-b7c818abee8d/basket/cooking"
-    },
-    {
-      body: {
-        message: "shelf deleted"
-      },
-    }).as("deleteShelf");
+  it.only("Allows a user to delete a shelf after being warned", () => {
     cy.get("[data-cy=add-shelf-input]").type("cooking");
     cy.get("[data-cy=add-shelf-btn]").click();
     cy.get("[data-cy=remove-category]").eq(0).click();
     cy.get("[data-cy=modal-remove-btn]").click();
-    cy.wait("@deleteShelf").then((response) => {
-      cy.log(response)
-      expect(response.request.body).to.contain("");
-    })
     cy.get("[data-cy=modal]").should("not.exist"); 
     cy.get("[data-cy=shelf]").eq(1).should("not.exist"); 
     cy.get("[data-cy=shelves]").should("contain", "navigation")
