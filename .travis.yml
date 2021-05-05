@@ -1,25 +1,20 @@
 language: node_js
-
 node_js:
-- "12"
-
+- '12'
 addons:
   apt:
     packages:
-      - libgconf-2-4
-
-notifications: 
+    - libgconf-2-4
+notifications:
   email: false
-
 script:
-  - npm test 
-  - npm run build
-
-deploy: 
+- npm test
+- npm run build
+deploy:
   provider: heroku
-  api_key: 2c64e8c1-856c-477c-a4e8-96047b3a5d8e
+  api_key:
+    secure: ykooiUkLdKsHfGBUM4UMm1R3Hor/AWRGD630sOxUSyTbF4tXL3TdiXO7EZt5fkDTKzVoW7Z3swG4zS/jbwIUy6bQUyhSXGmH1qx/Uf7GdAn8PtsTzZNW9A5xW+8w5e5gdgNXk4jH1f8WZDSnpTbSl7Dg/MOyLWWlNtExxlEuGtNv8UmnDg28gNRGXjzpslUfRjgS03HUuBb+z44YO5sgV36k1ELe5e8WjimfARaFV1W4kbceSgNWHvKqrkFP+DVEMELi/GFwArxLeGsPvGIYc1uwaFqq457iNmt76VX3Xde4Wzc+41thjWMCt+Zhm6GFh5ILRNUkOj/8Zz6IwskEZwmWuEC87cD5sfrhX4eaduy9D2KNwl2Ur8yrZUV7xB8G1ioB/VhD2pfntQYZt8V9KMSGu5HdlB78cxNq0Mz365ErRCVBPmd3c8AmNt0NkgOAXO88mXafN4qDZ4RA/vS25t2V0+mIifE3mRPcRcV4ERBe4ybvfr5cZKEuqGdAfslmJOtbqMG2hlNwPI20FgJknQQz40aPQBmeh96ctCWUGXrXy1cf2iS5SP6IqWillOv8EJyxnb59NO9DKULa0Wsi3WxhWwd6hkDGyYph1g68ZMMMOQQvJHrbifAWMyZCXvE09JhDgEWfNHLWEdRzWprC0pCekwqbBd4BKSirc8nfoas=
   app: gearfull
-  on: 
+  on:
     branch: main
   skip_cleanup: true
-  
